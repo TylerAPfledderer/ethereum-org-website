@@ -4,7 +4,7 @@ import {
   defineStyle,
 } from "@chakra-ui/react"
 import { tagAnatomy } from "@chakra-ui/anatomy"
-import { $badgeColor, STATUS_COLORS } from "./utils"
+import { $badgeColor, FOCUS_HOVER, STATUS_COLORS } from "./utils"
 import { defineMergeStyles } from "../components.utils"
 
 const { definePartsStyle, defineMultiStyleConfig } =
@@ -46,9 +46,8 @@ const baseStyleCloseButton = defineStyle({
   m: 0,
   // Clear default
   _focusVisible: null,
-  "&:focus-visible, &:hover": {
-    outline: "3px solid",
-    outlineOffset: "-2px",
+  [FOCUS_HOVER]: {
+    opacity: "initial",
   },
 })
 
@@ -59,23 +58,26 @@ const baseStyle = definePartsStyle({
 })
 
 const getStatusStyles = (status: string, variant: string) => {
-  const statusStyles = STATUS_COLORS[status][variant]
-
-  return {
-    container: statusStyles,
-  }
+  return STATUS_COLORS[status][variant]
 }
 
 const variantSubtle = definePartsStyle((props) => {
   const { status = "normal" } = props
   const defaultStyles = tagTheme.variants?.subtle(props)
   const statusStyles = getStatusStyles(status, "subtle")
+  console.log(
+    "🚀 ~ file: index.ts:69 ~ variantSubtle ~ statusStyles:",
+    statusStyles
+  )
   return {
     container: {
       ...defaultStyles?.container,
       // Remove default dark mode styles
       _dark: {},
       ...statusStyles.container,
+    },
+    closeButton: {
+      ...statusStyles.closeButton,
     },
   }
 })
@@ -90,6 +92,9 @@ const variantSolid = definePartsStyle((props) => {
       // Remove default dark mode styles
       _dark: {},
       ...statusStyles.container,
+    },
+    closeButton: {
+      ...statusStyles.closeButton,
     },
   }
 })
@@ -106,6 +111,9 @@ const variantOutline = definePartsStyle((props) => {
       // Remove default dark mode styles
       _dark: {},
       ...statusStyles.container,
+    },
+    closeButton: {
+      ...statusStyles.closeButton,
     },
   }
 })
