@@ -8,7 +8,6 @@ import {
   type FlexProps,
   Icon,
   List,
-  ListItem,
   Text,
   useToken,
 } from "@chakra-ui/react"
@@ -39,7 +38,7 @@ import { getLocaleTimestamp } from "@/lib/utils/time"
 
 import { MAIN_CONTENT_ID } from "@/lib/constants"
 
-const Page = (props: FlexProps) => <MdPage sx={{}} {...props} />
+const Page = (props: FlexProps) => <MdPage css={{}} {...props} />
 
 const Title = (props: ChildOnlyProp) => (
   <OldHeading
@@ -183,11 +182,11 @@ export const UpgradeLayout = ({
           <Breadcrumbs slug={slug} startDepth={1} mt={2} mb="8" />
           <Title>{frontmatter.title}</Title>
           <Box>
-            <List listStyleType="disc">
+            <List.Root listStyleType="disc">
               {summaryPoints.map((point, idx) => (
-                <ListItem key={idx}>{point}</ListItem>
+                <List.Item key={idx}>{point}</List.Item>
               ))}
-            </List>
+            </List.Root>
           </Box>
           {lastUpdatedDate && (
             <LastUpdated>

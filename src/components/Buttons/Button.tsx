@@ -1,7 +1,7 @@
+import { forwardRef } from "react"
 import {
   Button as ChakraButton,
   ButtonProps as ChakraButtonProps,
-  forwardRef,
 } from "@chakra-ui/react"
 
 import { type MatomoEventOptions, trackCustomEvent } from "@/lib/utils/matomo"
@@ -38,27 +38,28 @@ export type ButtonProps = ChakraButtonProps & {
   customEventOptions?: MatomoEventOptions
 }
 
-const Button = forwardRef<ButtonProps, "button">(
-  ({ toId, onClick, isSecondary, customEventOptions, ...props }, ref) => {
-    const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-      toId && scrollIntoView(toId)
-      customEventOptions && trackCustomEvent(customEventOptions)
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
+  { toId, onClick, isSecondary, customEventOptions, ...props },
+  ref
+) {
+  const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    toId && scrollIntoView(toId)
+    customEventOptions && trackCustomEvent(customEventOptions)
 
-      onClick?.(e)
-    }
-
-    return (
-      <ChakraButton
-        ref={ref}
-        onClick={handleOnClick}
-        {...checkIsSecondary({
-          variant: props.variant?.toString(),
-          isSecondary,
-        })}
-        {...props}
-      />
-    )
+    onClick?.(e)
   }
-)
+
+  return (
+    <ChakraButton
+      ref={ref}
+      onClick={handleOnClick}
+      {...checkIsSecondary({
+        variant: props.variant?.toString(),
+        isSecondary,
+      })}
+      {...props}
+    />
+  )
+})
 
 export default Button

@@ -1,15 +1,5 @@
 import { useTranslation } from "next-i18next"
-import {
-  Drawer,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerOverlay,
-  Flex,
-  Heading,
-  Hide,
-  Stack,
-  Text,
-} from "@chakra-ui/react"
+import { Box, Drawer, Flex, Heading, Stack, Text } from "@chakra-ui/react"
 
 import Card from "@/components/Card"
 
@@ -41,7 +31,7 @@ const Trilemma = () => {
       rowGap="8"
     >
       <Stack
-        spacing="8"
+        gap="8"
         mt={{ base: "16", md: "20" }}
         mb={{ lg: "20" }}
         ms={{ md: "12" }}
@@ -63,19 +53,19 @@ const Trilemma = () => {
         </Flex>
         <Card {...cardDetail} minH="300px" hideBelow="lg" mt="6" />
       </Stack>
-      <Hide above="lg">
-        <Drawer
-          isOpen={mobileModalOpen}
-          onClose={handleModalClose}
+      <Box hideFrom="lg">
+        <Drawer.Root
+          open={mobileModalOpen}
+          onOpenChange={handleModalClose}
           placement="bottom"
         >
-          <DrawerOverlay background="rgba(0,0,0,0.3)" />
-          <DrawerContent borderTopRadius="2xl" background="background.base">
+          <Drawer.Backdrop background="rgba(0,0,0,0.3)" />
+          <Drawer.Content borderTopRadius="2xl" background="background.base">
             <Card {...cardDetail} background="none" border="none" my="8" />
-            <DrawerCloseButton top="6" insetInlineEnd="6" />
-          </DrawerContent>
-        </Drawer>
-      </Hide>
+            <Drawer.CloseTrigger top="6" insetInlineEnd="6" />
+          </Drawer.Content>
+        </Drawer.Root>
+      </Box>
       <TriangleSVG {...triangleSVGProps} />
     </Flex>
   )

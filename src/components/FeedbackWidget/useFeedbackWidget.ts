@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from "react"
 import { useRouter } from "next/router"
-import { useDisclosure } from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/hooks"
 
 import { trackCustomEvent } from "@/lib/utils/matomo"
 
@@ -12,9 +12,7 @@ export const useFeedbackWidget = () => {
   const [isExpanded, setIsExpanded] = useState(false)
   const [feedbackSubmitted, setFeedbackSubmitted] = useState(false)
 
-  const { getButtonProps, isOpen, onClose, onOpen } = useDisclosure()
-
-  const cancelRef = useRef<HTMLButtonElement>(null)
+  const { getButtonProps, open, onClose, onOpen } = useDisclosure()
 
   useEffect(() => {
     // Reset component state when path (asPath) changes
@@ -81,7 +79,6 @@ export const useFeedbackWidget = () => {
 
   return {
     bottomOffset,
-    cancelRef,
     feedbackSubmitted,
     getButtonProps,
     handleClose,
@@ -89,6 +86,6 @@ export const useFeedbackWidget = () => {
     handleSubmit,
     handleSurveyOpen,
     isExpanded,
-    isOpen,
+    open,
   }
 }

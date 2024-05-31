@@ -1,5 +1,6 @@
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
+import { useTheme } from "next-themes"
 import {
   BsBook,
   BsBuildings,
@@ -18,11 +19,7 @@ import {
   BsUiChecksGrid,
 } from "react-icons/bs"
 import { PiFlask, PiUsersFourLight } from "react-icons/pi"
-import {
-  useColorMode,
-  useColorModeValue,
-  useDisclosure,
-} from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/hooks"
 
 import { EthereumIcon } from "@/components/icons/EthereumIcon"
 
@@ -34,11 +31,11 @@ import type { NavSections } from "./types"
 
 export const useNav = () => {
   const { asPath } = useRouter()
-  const { isOpen, onToggle } = useDisclosure()
+  const { open, onToggle } = useDisclosure()
+  const { theme, setTheme } = useTheme()
   const { t } = useTranslation("common")
 
-  const colorToggleEvent = useColorModeValue("dark mode", "light mode") // This will be inverted as the state is changing
-  const { toggleColorMode: chakraToggleColorMode } = useColorMode()
+  const colorToggleEvent = theme === "dark" ? "light mode" : "dark mode" // This will be inverted as the state is changing
 
   const linkSections: NavSections = {
     learn: {
@@ -477,7 +474,7 @@ export const useNav = () => {
       : ""
 
   const toggleColorMode = () => {
-    chakraToggleColorMode()
+    setTheme((value) => (value === "dark" ? "light" : "dark"))
     trackCustomEvent({
       eventCategory: "nav bar",
       eventAction: "click",
@@ -487,7 +484,7 @@ export const useNav = () => {
 
   const mobileNavProps = {
     fromPageParameter,
-    isOpen,
+    open,
     toggleColorMode,
     onToggle,
   }

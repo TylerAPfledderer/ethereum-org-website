@@ -2,15 +2,8 @@ import { useRouter } from "next/router"
 import { GetStaticProps } from "next/types"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import {
-  Box,
-  BoxProps,
-  Flex,
-  HeadingProps,
-  List,
-  ListItem,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Box, BoxProps, Flex, HeadingProps, List } from "@chakra-ui/react"
 
 import { BasePageProps } from "@/lib/types"
 
@@ -66,14 +59,13 @@ export const getStaticProps = (async ({ locale }) => {
 
 const TranslatorAcknowledgements = () => {
   const router = useRouter()
+  const { theme } = useTheme()
   const { t } = useTranslation(
     "page-contributing-translation-program-acknowledgements"
   )
 
-  const themedCertificateImage = useColorModeValue(
-    lightThemeCertificateImg,
-    darkThemeCertificateImg
-  )
+  const themedCertificateImage =
+    theme === "light" ? lightThemeCertificateImg : darkThemeCertificateImg
 
   return (
     <Flex direction="column" align="center" w="full">
@@ -194,20 +186,11 @@ const TranslatorAcknowledgements = () => {
           )}
         </Text>
         <Box
-          as={ActionCard}
-          to="/contributing/translation-program/contributors/"
-          title={t(
-            "page-contributing-translation-program-acknowledgements-our-translators-view-all"
-          )}
-          description={t(
-            "page-contributing-translation-program-acknowledgements-our-translators-cta"
-          )}
-          image={whatIsEthereumImg}
           display={{ base: "block", sm: "flex" }}
           flex="none"
           my={8}
           mx={0}
-          sx={{
+          css={{
             ".action-card-image-wrapper": {
               p: 4,
               minW: { sm: "260px" },
@@ -222,7 +205,19 @@ const TranslatorAcknowledgements = () => {
               mb: 0,
             },
           }}
-        />
+          asChild
+        >
+          <ActionCard
+            to="/contributing/translation-program/contributors/"
+            title={t(
+              "page-contributing-translation-program-acknowledgements-our-translators-view-all"
+            )}
+            description={t(
+              "page-contributing-translation-program-acknowledgements-our-translators-cta"
+            )}
+            image={whatIsEthereumImg}
+          />
+        </Box>
       </Content>
 
       <Content id="certificate">
@@ -278,8 +273,8 @@ const TranslatorAcknowledgements = () => {
           )}
         </ContentHeading>
 
-        <List as="ol" styleType="decimal">
-          <ListItem>
+        <List.Root as="ol" styleType="decimal">
+          <List.Item>
             {t(
               "page-contributing-translation-program-acknowledgements-how-to-claim-1"
             )}{" "}
@@ -288,23 +283,23 @@ const TranslatorAcknowledgements = () => {
                 "page-contributing-translation-program-acknowledgements-how-to-claim-1-discord"
               )}
             </InlineLink>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             {t(
               "page-contributing-translation-program-acknowledgements-how-to-claim-2"
             )}
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             {t(
               "page-contributing-translation-program-acknowledgements-how-to-claim-3"
             )}
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             {t(
               "page-contributing-translation-program-acknowledgements-how-to-claim-4"
             )}
-          </ListItem>
-        </List>
+          </List.Item>
+        </List.Root>
         <Text>
           {t("page-contributing-translation-program-acknowledgements-4")}
         </Text>

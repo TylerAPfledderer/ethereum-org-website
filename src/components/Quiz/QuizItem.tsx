@@ -33,7 +33,7 @@ const QuizItem = ({
       borderBottom="1px solid"
       borderColor="disabled"
       mb={0}
-      sx={{ counterIncrement: "list-counter" }}
+      css={{ counterIncrement: "list-counter" }}
     >
       <Flex
         justifyContent="space-between"

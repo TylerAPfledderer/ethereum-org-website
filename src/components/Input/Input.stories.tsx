@@ -18,7 +18,7 @@ type Story = StoryObj<InputType>
 
 export const Sizes: Story = {
   args: {
-    rightIcon: <BsSlashSquare />,
+    rightIcon: BsSlashSquare,
     placeholder: "Search",
   },
   render: (args) => (
@@ -34,10 +34,10 @@ export const ElementVariations: Story = {
     placeholder: "input text",
   },
   render: (args) => (
-    <VStack width="258px" spacing={4}>
+    <VStack width="258px" gap={4}>
       <Input {...args} />
-      <Input {...args} rightIcon={<BsSlashSquare />} />
-      <Input {...args} rightIcon={<BsSlashSquare />} isDisabled />
+      <Input {...args} rightIcon={BsSlashSquare} />
+      <Input {...args} rightIcon={BsSlashSquare} disabled />
     </VStack>
   ),
 }

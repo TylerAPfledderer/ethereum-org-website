@@ -1,6 +1,6 @@
 import { extname } from "path"
 
-import { Flex } from "@chakra-ui/react"
+import { Box, Flex } from "@chakra-ui/react"
 
 import { Image, type ImageProps } from "@/components/Image"
 import Link from "@/components/Link"
@@ -44,16 +44,17 @@ const MarkdownImage = ({
     // sometimes wraps images in `p` tags
     <Flex as="span" justify="center">
       <Link href={transformedSrc} target="_blank" rel="noopener" locale={false}>
-        <Image
-          alt={alt}
-          width={imageWidth}
-          height={imageHeight}
-          loading="lazy"
-          src={transformedSrc}
-          unoptimized={isAnimated}
-          h="auto"
-          {...rest}
-        />
+        <Box h="auto" asChild>
+          <Image
+            alt={alt}
+            width={imageWidth}
+            height={imageHeight}
+            loading="lazy"
+            src={transformedSrc}
+            unoptimized={isAnimated}
+            {...rest}
+          />
+        </Box>
       </Link>
     </Flex>
   )

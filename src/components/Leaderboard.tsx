@@ -1,4 +1,5 @@
 import { useTranslation } from "next-i18next"
+import { useTheme } from "next-themes"
 import {
   Avatar,
   Box,
@@ -7,7 +8,6 @@ import {
   LinkOverlay,
   List,
   ListItem,
-  useColorModeValue,
   VisuallyHidden,
 } from "@chakra-ui/react"
 
@@ -31,23 +31,19 @@ type LeaderboardProps = {
 
 const Leaderboard = ({ content, limit = 100 }: LeaderboardProps) => {
   const { flipForRtl } = useRtlFlip()
-  const colorModeStyles = useColorModeValue(
-    {
-      listBoxShadow: "tableBox.light",
-      linkBoxShadow: "tableItemBox.light",
-      scoreColor: "blackAlpha.700",
-    },
-    {
-      listBoxShadow: "tableBox.dark",
-      linkBoxShadow: "tableItemBox.dark",
-      scoreColor: "whiteAlpha.600",
-    }
-  )
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
+
+  const colorModeStyles = {
+    listBoxShadow: !isDark ? "tableBox.light" : "tableBox.dark",
+    linkBoxShadow: !isDark ? "tableItemBox.light" : "tableItemBox.dark",
+    scoreColor: !isDark ? "blackAlpha.700" : "whiteAlpha.600",
+  }
 
   const { t } = useTranslation("page-bug-bounty")
 
   return (
-    <List
+    <List.Root
       bgColor="background.base"
       boxShadow={colorModeStyles.listBoxShadow}
       w="100%"
@@ -72,7 +68,7 @@ const Leaderboard = ({ content, limit = 100 }: LeaderboardProps) => {
           }
 
           return (
-            <ListItem key={username} mb={0}>
+            <List.Item key={username} mb={0}>
               <LinkBox
                 key={idx}
                 display="flex"
@@ -92,29 +88,29 @@ const Leaderboard = ({ content, limit = 100 }: LeaderboardProps) => {
                 <Box me={4} opacity="0.4">
                   {idx + 1}
                 </Box>
-                <Avatar
-                  src={avatarImg}
-                  name={avatarAlt}
+                <Avatar.Root
                   me={4}
                   h={10}
                   w={10}
-                  display={{ base: "none", xs: "block" }}
-                />
+                  display={{ base: "none", sm: "block" }}
+                >
+                  <Avatar.Image src={avatarImg} />
+                  <Avatar.Fallback name={avatarAlt} />
+                </Avatar.Root>
                 <Flex flex="1 1 75%" direction="column" me={8}>
-                  <LinkOverlay
-                    as={BaseLink}
-                    href={hasGitHub ? `${GITHUB_URL}${username}` : "#"}
-                    textDecor="none"
-                    color="text"
-                    hideArrow
-                  >
-                    <VisuallyHidden>{`In place number ${
-                      idx + 1
-                    } with ${score} points`}</VisuallyHidden>
-                    {name}{" "}
-                    {hasGitHub && (
-                      <VisuallyHidden>(See Github Profile)</VisuallyHidden>
-                    )}
+                  <LinkOverlay textDecor="none" color="text">
+                    <BaseLink
+                      href={hasGitHub ? `${GITHUB_URL}${username}` : "#"}
+                      hideArrow
+                    >
+                      <VisuallyHidden>{`In place number ${
+                        idx + 1
+                      } with ${score} points`}</VisuallyHidden>
+                      {name}{" "}
+                      {hasGitHub && (
+                        <VisuallyHidden>(See Github Profile)</VisuallyHidden>
+                      )}
+                    </BaseLink>
                   </LinkOverlay>
 
                   <Box fontSize="sm" color={colorModeStyles.scoreColor}>
@@ -133,10 +129,10 @@ const Leaderboard = ({ content, limit = 100 }: LeaderboardProps) => {
                   }}
                 />
               </LinkBox>
-            </ListItem>
+            </List.Item>
           )
         })}
-    </List>
+    </List.Root>
   )
 }
 

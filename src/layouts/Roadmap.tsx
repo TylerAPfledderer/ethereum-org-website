@@ -35,7 +35,7 @@ import TableOfContents from "@/components/TableOfContents"
 import RoadmapHubHeroImage from "@/public/heroes/roadmap-hub-hero.jpg"
 
 const CardGrid = (props: ChildOnlyProp) => (
-  <SimpleGrid columns={{ base: 1, md: 2 }} spacing={8} {...props} />
+  <SimpleGrid columns={{ base: 1, md: 2 }} gap={8} {...props} />
 )
 
 type HeroContainerProps = Pick<FlexProps, "children" | "dir">
@@ -149,7 +149,7 @@ export const RoadmapLayout = ({
             <Title>{frontmatter.title}</Title>
             <OldText>{frontmatter.description}</OldText>
             {frontmatter?.buttons && (
-              <Wrap spacing={2} marginBottom={4} sx={{ ul: { m: 0 } }}>
+              <Wrap gap="2" marginBottom="4" css={{ ul: { m: 0 } }}>
                 {frontmatter.buttons.map((button, idx) => {
                   if (button?.to) {
                     return (

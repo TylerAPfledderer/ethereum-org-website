@@ -1,6 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
-import { Button, useColorModeValue } from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Button } from "@chakra-ui/react"
 import { Box, Flex, Text } from "@chakra-ui/react"
 
 import { Image } from "@/components/Image"
@@ -14,7 +15,8 @@ import QRLight from "@/public/qr-code-ethereum-org-light.png"
 const MotionBox = motion(Box)
 
 export const ReceiveEther = () => {
-  const qrImage = useColorModeValue(QRLight, QRDark)
+  const { theme } = useTheme()
+  const qrImage = theme === "light" ? QRLight : QRDark
 
   const SPACING = { base: 3, md: 5 }
   const QR_SIZE = { base: "80px", md: "120px" }
@@ -44,17 +46,14 @@ export const ReceiveEther = () => {
       <NotificationPopover
         title="Example walkthrough"
         content="Share QR containing your address (public identifier) from your own wallet when finished here"
-        placement="top"
+        positioning={{
+          placement: "top",
+        }}
       >
         <Box w="fit-content" mx="auto" mb={SPACING} p={3} bg="background.base">
-          <Image
-            alt=""
-            src={qrImage}
-            maxW={QR_SIZE}
-            maxH={QR_SIZE}
-            p={3}
-            borderRadius="base"
-          />
+          <Box maxW={QR_SIZE} maxH={QR_SIZE} p="3" borderRadius="base" asChild>
+            <Image alt="" src={qrImage} />
+          </Box>
         </Box>
       </NotificationPopover>
       <Flex
@@ -81,7 +80,9 @@ export const ReceiveEther = () => {
         <NotificationPopover
           title="Example walkthrough"
           content="Share your address (public identifier) from your own wallet when finished here"
-          placement="top-start"
+          positioning={{
+            placement: "top-start",
+          }}
         >
           <Button
             fontSize="xs"

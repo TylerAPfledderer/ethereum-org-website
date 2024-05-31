@@ -14,7 +14,7 @@ export const RecoveryPhraseNotice = () => (
     h="full"
     bg="background.highlight"
     fontSize={{ base: "sm", md: "md" }}
-    sx={{ p: { mb: { base: 4, md: 6 } } }}
+    css={{ p: { mb: { base: 4, md: 6 } } }}
   >
     <Text fontSize={{ base: "xl", md: "2xl" }} lineHeight={8} fontWeight="bold">
       Recovery phrase

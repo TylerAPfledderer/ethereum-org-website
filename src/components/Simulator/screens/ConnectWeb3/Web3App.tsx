@@ -1,13 +1,7 @@
 import React from "react"
+import { useTheme } from "next-themes"
 import { GrMenu } from "react-icons/gr"
-import {
-  Box,
-  type BoxProps,
-  Flex,
-  Icon,
-  Text,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { Box, type BoxProps, Flex, Icon, Text } from "@chakra-ui/react"
 
 import { FAKE_DEMO_ADDRESS } from "../../constants"
 import { EthGlyphIcon } from "../../icons"
@@ -23,7 +17,8 @@ export const Web3App = ({
   children,
   ...boxProps
 }: Web3AppProps) => {
-  const bg = useColorModeValue("#e8e8e8", "#171717")
+  const { theme } = useTheme()
+  const bg = theme === "light" ? "#e8e8e8" : "#171717"
 
   return (
     <Box h="full" w="full" bg="background.highlight" {...boxProps}>
@@ -48,7 +43,9 @@ export const Web3App = ({
               </>
             )}
           </Box>
-          <Icon as={GrMenu} sx={{ path: { stroke: "body.base" } }} />
+          <Icon css={{ path: { stroke: "body.base" } }} asChild>
+            <GrMenu />
+          </Icon>
         </Flex>
       </NotificationPopover>
       {children}

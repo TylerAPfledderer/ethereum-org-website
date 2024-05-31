@@ -37,37 +37,36 @@ const HamburgerButton = ({
       isSecondary
       px={0}
       color="body.base"
-      icon={
-        <Icon
-          viewBox="0 0 24 40"
-          pointerEvents={isMenuOpen ? "none" : "auto"}
-          mx={0.5}
-          width={6}
-          height={10}
-          position="relative"
-          strokeWidth="2px"
-          _hover={{
-            color: "primary.base",
-            "& > path": {
-              stroke: "primary.base",
-            },
-          }}
-          sx={{
-            "& > path": {
-              stroke: "text",
-              fill: "none",
-            },
-          }}
-        >
-          <motion.path
-            variants={hamburgerVariants}
-            initial={false}
-            animate={isMenuOpen ? "open" : "closed"}
-          />
-        </Icon>
-      }
       {...props}
-    />
+    >
+      <Icon
+        viewBox="0 0 24 40"
+        pointerEvents={isMenuOpen ? "none" : "auto"}
+        mx={0.5}
+        width={6}
+        height={10}
+        position="relative"
+        strokeWidth="2px"
+        _hover={{
+          color: "primary.base",
+          "& > path": {
+            stroke: "primary.base",
+          },
+        }}
+        css={{
+          "& > path": {
+            stroke: "text",
+            fill: "none",
+          },
+        }}
+      >
+        <motion.path
+          variants={hamburgerVariants}
+          initial={false}
+          animate={isMenuOpen ? "open" : "closed"}
+        />
+      </Icon>
+    </IconButton>
   )
 }
 

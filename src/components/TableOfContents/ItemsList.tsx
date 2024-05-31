@@ -1,10 +1,10 @@
-import { ChakraProps, List, ListItem } from "@chakra-ui/react"
+import { type HTMLChakraProps, List } from "@chakra-ui/react"
 
 import type { ToCItem } from "@/lib/types"
 
 import ToCLink from "@/components/TableOfContents/TableOfContentsLink"
 
-export type ItemsListProps = ChakraProps & {
+export type ItemsListProps = HTMLChakraProps<typeof List.Item> & {
   items: Array<ToCItem>
   depth: number
   maxDepth: number
@@ -25,10 +25,10 @@ const ItemsList = ({
       {items.map((item, index) => {
         const { title, items } = item
         return (
-          <ListItem key={index} m={0} {...rest}>
+          <List.Item key={index} m={0} {...rest}>
             <ToCLink depth={depth} item={item} activeHash={activeHash} />
             {items && (
-              <List
+              <List.Root
                 key={title}
                 fontSize="sm"
                 lineHeight={1.6}
@@ -43,9 +43,9 @@ const ItemsList = ({
                   maxDepth={maxDepth}
                   activeHash={activeHash}
                 />
-              </List>
+              </List.Root>
             )}
-          </ListItem>
+          </List.Item>
         )
       })}
     </>

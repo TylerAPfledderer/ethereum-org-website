@@ -1,29 +1,23 @@
-import { ReactNode, useContext } from "react"
+import { forwardRef, ReactNode, useContext } from "react"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
 import { MdExpandLess, MdExpandMore } from "react-icons/md"
 import {
   Box,
-  ContainerProps,
   Flex,
   FlexProps,
-  forwardRef,
   Icon,
-  keyframes,
   SimpleGrid,
   SimpleGridProps,
   Stack,
   Table,
-  TableProps,
-  Td,
+  type TableRootProps,
   Text,
-  Th,
-  Tr,
 } from "@chakra-ui/react"
 
 import { ChildOnlyProp, WalletData, WalletFilter } from "@/lib/types"
 
-import { ButtonLink } from "@/components/Buttons"
+import ButtonLink from "@/components/Buttons/ButtonLink"
 import { WalletMoreInfo } from "@/components/FindWallet/WalletTable/WalletMoreInfo"
 import { DevicesIcon, LanguagesIcon } from "@/components/icons/wallets"
 import { Image } from "@/components/Image"
@@ -49,10 +43,10 @@ import { WalletEmptyState } from "./WalletEmptyState"
 import { WalletSupportedLanguageContext } from "@/contexts/WalletSupportedLanguageContext"
 import { useWalletTable } from "@/hooks/useWalletTable"
 
-const Container = (props: TableProps) => (
-  <Table
+const Container = (props: Table.RootProps) => (
+  <Table.Root
     w="full"
-    sx={{
+    css={{
       th: {
         fontWeight: "normal",
         p: {
@@ -64,7 +58,7 @@ const Container = (props: TableProps) => (
   />
 )
 
-const WalletContainer = (props: ChildOnlyProp & ContainerProps) => (
+const WalletContainer = (props: TableRootProps) => (
   <Container
     borderBottom="1px"
     borderColor="lightBorder"
@@ -73,20 +67,27 @@ const WalletContainer = (props: ChildOnlyProp & ContainerProps) => (
   />
 )
 
-const Grid = forwardRef<SimpleGridProps, "tr">((props, ref) => (
-  <SimpleGrid
-    as={Tr}
-    ref={ref}
-    templateColumns={{
-      base: "60% auto 0% 0% 5%",
-      md: "100% auto auto auto auto",
-    }}
-    w="full"
-    columnGap={2}
-    alignItems="center"
-    {...props}
-  />
-))
+const Grid = forwardRef<HTMLDivElement, SimpleGridProps>(function Grid(
+  props,
+  ref
+) {
+  return (
+    <SimpleGrid
+      ref={ref}
+      templateColumns={{
+        base: "60% auto 0% 0% 5%",
+        md: "100% auto auto auto auto",
+      }}
+      w="full"
+      columnGap={2}
+      alignItems="center"
+      {...props}
+      asChild
+    >
+      <Table.Row />
+    </SimpleGrid>
+  )
+})
 
 const WalletContentHeader = (props: ChildOnlyProp) => (
   <Grid
@@ -99,7 +100,7 @@ const WalletContentHeader = (props: ChildOnlyProp) => (
     position="sticky"
     top={NAV_BAR_PX_HEIGHT}
     zIndex={1}
-    sx={{
+    css={{
       th: {
         p: 0,
         borderBottom: "none",
@@ -123,36 +124,41 @@ const WalletContentHeader = (props: ChildOnlyProp) => (
   />
 )
 
-const Wallet = forwardRef<ChildOnlyProp, "tr">((props, ref) => (
-  <Grid
-    tabIndex={0}
-    ref={ref}
-    cursor="pointer"
-    py={4}
-    px={{ base: 4, lg: 1 }}
-    sx={{
-      p: {
-        m: 0,
-      },
-      td: {
-        padding: 0,
-        borderBottom: "none",
-        height: "full",
-      },
-      "td:nth-of-type(3), td:nth-of-type(4)": {
-        hideBelow: "md",
-      },
-    }}
-    templateColumns="auto"
-    {...props}
-  />
-))
+const Wallet = forwardRef<HTMLDivElement, SimpleGridProps>(function Waller(
+  props,
+  ref
+) {
+  return (
+    <Grid
+      tabIndex={0}
+      ref={ref}
+      cursor="pointer"
+      py={4}
+      px={{ base: 4, lg: 1 }}
+      css={{
+        p: {
+          m: 0,
+        },
+        td: {
+          padding: 0,
+          borderBottom: "none",
+          height: "full",
+        },
+        "td:nth-of-type(3), td:nth-of-type(4)": {
+          hideBelow: "md",
+        },
+      }}
+      templateColumns="auto"
+      {...props}
+    />
+  )
+})
 
 const FlexInfo = (props: FlexProps) => (
   <Flex
     gap={4}
     ps="0.3rem"
-    sx={{
+    css={{
       p: {
         p: 0,
         fontSize: "xl",
@@ -169,34 +175,16 @@ const FlexInfo = (props: FlexProps) => (
   />
 )
 
-const fadeIn = keyframes`
-  0% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
-  }
-`
-
-const fadeOut = keyframes`
-  0% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-`
-
 const FlexInfoCenter = (props: { children: ReactNode; className?: string }) => (
   <FlexInfo
-    animation={`${fadeIn} 0.375s`}
+    animation={`fade-in 0.375s`}
     cursor="pointer"
     justifyContent="center"
     height="full"
     mt={{ base: 10, md: 0 }}
-    sx={{
+    css={{
       "&.fade": {
-        animation: `${fadeOut} 0.375s`,
+        animation: `fade-out 0.375s`,
       },
     }}
     {...props}
@@ -243,7 +231,7 @@ const WalletTable = ({
   return (
     <Container>
       <WalletContentHeader>
-        <Th sx={{ textAlign: "start !important" }}>
+        <Table.ColumnHeader css={{ textAlign: "start !important" }}>
           <Flex justifyContent="space-between" px={{ base: 2.5, md: 0 }}>
             {/* Displayed on mobile only */}
             <Text
@@ -277,7 +265,7 @@ const WalletTable = ({
               </Text>
             )}
           </Flex>
-        </Th>
+        </Table.ColumnHeader>
       </WalletContentHeader>
       {filteredWallets.length === 0 && (
         <WalletEmptyState
@@ -346,7 +334,7 @@ const WalletTable = ({
                   showMoreInfo(wallet)
                 }}
               >
-                <Td lineHeight="revert">
+                <Table.Cell lineHeight="revert">
                   <Flex
                     justifyContent="space-between"
                     alignItems="center"
@@ -478,7 +466,7 @@ const WalletTable = ({
                       {t("page-find-wallet-visit-website")}
                     </ButtonLink>
                   </Box>
-                </Td>
+                </Table.Cell>
               </Wallet>
 
               {wallet.moreInfo && (

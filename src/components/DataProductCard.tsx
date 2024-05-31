@@ -67,15 +67,21 @@ const DataProductCard = ({
         minH="200px"
         bg={background}
       >
-        <Image
-          src={image}
-          objectFit="cover"
-          alt={alt ? alt : `${name} logo`}
+        <Box
           w={imgWidth}
           alignSelf="center"
           maxWidth={{ base: "311px", sm: "372px" }}
           maxHeight="257px"
-        />
+          asChild
+        >
+          <Image
+            src={image}
+            alt={alt ? alt : `${name} logo`}
+            style={{
+              objectFit: "cover",
+            }}
+          />
+        </Box>
       </Flex>
       <Flex
         textAlign="start"
@@ -93,7 +99,7 @@ const DataProductCard = ({
             mx={4}
             mb={4}
           >
-            <LinkOverlay href={url} isExternal>
+            <LinkOverlay href={url} external>
               {name}
             </LinkOverlay>
           </Heading>
@@ -124,13 +130,15 @@ const DataProductCard = ({
               >
                 <Flex alignItems="center">
                   {logo && (
-                    <Image
-                      src={logo}
-                      objectFit="cover"
-                      alt=""
-                      minWidth="24px"
-                      me={2}
-                    />
+                    <Box minWidth="24px" me={2} asChild>
+                      <Image
+                        src={logo}
+                        alt=""
+                        style={{
+                          objectFit: "cover",
+                        }}
+                      />
+                    </Box>
                   )}
                   {coin}
                 </Flex>

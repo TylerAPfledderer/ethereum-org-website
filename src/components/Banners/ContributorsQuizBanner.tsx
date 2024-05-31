@@ -24,16 +24,15 @@ function ContributorsQuizBanner(props: FlexProps) {
         minH={{ base: 200, md: "auto" }}
         px={{ base: 8, md: 0 }}
       >
-        <Image
-          position="absolute"
-          src={PeopleLearning}
-          alt="People learning about Ethereum"
-          w="full"
-          maxH="120%"
-          style={{
-            objectFit: "contain",
-          }}
-        />
+        <Box position="absolute" w="full" maxH="120%" asChild>
+          <Image
+            src={PeopleLearning}
+            alt="People learning about Ethereum"
+            style={{
+              objectFit: "contain",
+            }}
+          />
+        </Box>
         <Box hideFrom="md" borderBottom="1px solid #D3C5F1" w="full" />
       </Flex>
       <Flex

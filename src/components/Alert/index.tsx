@@ -1,17 +1,13 @@
-import * as React from "react"
+import { forwardRef } from "react"
 import {
   Alert as ChakraAlert,
-  AlertDescription,
-  AlertIcon,
-  AlertProps as ChakraAlertProps,
-  AlertStatus,
-  CloseButton,
-  forwardRef,
+  type AlertStatus,
+  CloseTrigger,
 } from "@chakra-ui/react"
 
 export type AlertStatusType = Exclude<AlertStatus, "loading">
 
-interface AlertProps extends Omit<ChakraAlertProps, "status"> {
+interface AlertProps extends Omit<ChakraAlert.RootProps, "status"> {
   /**
    * Should the alert icon show?
    *
@@ -31,7 +27,10 @@ interface AlertProps extends Omit<ChakraAlertProps, "status"> {
   onClose?: () => void
 }
 
-const Alert = forwardRef<AlertProps, "div">((props, ref) => {
+const Alert = forwardRef<HTMLDivElement, AlertProps>(function Alert(
+  props,
+  ref
+) {
   const {
     hasIcon = true,
     description,
@@ -52,19 +51,21 @@ const Alert = forwardRef<AlertProps, "div">((props, ref) => {
   }
 
   return (
-    <ChakraAlert ref={ref} position="relative" status={status} {...rest}>
+    <ChakraAlert.Root ref={ref} position="relative" status={status} {...rest}>
       <>
-        {hasIcon ? <AlertIcon ms={isCloseable ? "auto" : undefined} /> : null}
-        <AlertDescription>{description}</AlertDescription>
+        {hasIcon ? (
+          <ChakraAlert.Icon ms={isCloseable ? "auto" : undefined} />
+        ) : null}
+        <ChakraAlert.Description>{description}</ChakraAlert.Description>
         {isCloseable ? (
-          <CloseButton
+          <CloseTrigger
             onClick={onClose}
             ms="auto"
             {...closeButtonStateStyles}
           />
         ) : null}
       </>
-    </ChakraAlert>
+    </ChakraAlert.Root>
   )
 })
 

@@ -40,11 +40,11 @@ const Stat = ({ tooltipProps, value, label, isError }: StatProps) => {
 
   return (
     <Flex flexDirection="column-reverse">
-      <HStack lineHeight="initial" spacing="0.5" color="body.medium">
+      <HStack lineHeight="initial" gap="0.5" color="body.medium">
         <Text as="span">{label}</Text>
         {!!tooltipProps && (
           <Tooltip {...tooltipProps}>
-            <chakra.button display='flex' color="inherit">
+            <chakra.button display="flex" color="inherit">
               <Icon as={content.tooltipIcon} />
             </chakra.button>
           </Tooltip>

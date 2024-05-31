@@ -46,6 +46,6 @@ export const Tooltip: Story = {
 // for chromatic visual testing
 export const AlwaysOpen: Story = {
   args: {
-    isOpen: true,
+    open: true,
   },
 }

@@ -83,7 +83,7 @@ export const WordSelectorButtons = ({
             color="background.base"
             px={1}
             borderRadius="xl"
-            isDisabled={index !== wordsSelected}
+            disabled={index !== wordsSelected}
             _disabled={{
               bg: "body.light",
               color: "body.base",

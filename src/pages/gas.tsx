@@ -9,15 +9,8 @@ import {
   FlexProps,
   HeadingProps,
   Link,
-  ListItem,
+  List,
   Table,
-  TableCaption,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  Tr,
-  UnorderedList,
 } from "@chakra-ui/react"
 
 import { BasePageProps } from "@/lib/types"
@@ -181,11 +174,11 @@ const GasPage = () => {
         >
           <Box flex="60%" w="full" me={{ base: "auto", lg: 2 }}>
             <InfoBanner mb={8} title={t("page-gas-summary-title")}>
-              <UnorderedList>
-                <ListItem>{t("page-gas-summary-item-1")}</ListItem>
-                <ListItem>{t("page-gas-summary-item-2")}</ListItem>
-                <ListItem>{t("page-gas-summary-item-3")}</ListItem>
-              </UnorderedList>
+              <List.Root>
+                <List.Item>{t("page-gas-summary-item-1")}</List.Item>
+                <List.Item>{t("page-gas-summary-item-2")}</List.Item>
+                <List.Item>{t("page-gas-summary-item-3")}</List.Item>
+              </List.Root>
             </InfoBanner>
             <H2 id="what-is-gas" mt={0}>
               {t("page-gas-what-are-gas-fees-header")}
@@ -328,55 +321,67 @@ const GasPage = () => {
               </Pill>
             </Flex>
             <Text>{t("page-gas-how-is-gas-calculated-text-1")}</Text>
-            <UnorderedList ms={6} spacing={3}>
-              <ListItem>
+            <List.Root ms={6} gap={3}>
+              <List.Item>
                 <Translation id="page-gas:page-gas-how-is-gas-calculated-item-1" />
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Translation id="page-gas:page-gas-how-is-gas-calculated-item-2" />
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Translation id="page-gas:page-gas-how-is-gas-calculated-item-3" />
-                <UnorderedList ms={6} spacing={3} styleType="none">
-                  <ListItem color="body.medium" fontSize="sm">
+                <List.Root ms={6} gap={3} styleType="none">
+                  <List.Item color="body.medium" fontSize="sm">
                     <Translation id="page-gas:page-gas-how-is-gas-calculated-list-item-1" />
-                  </ListItem>
-                </UnorderedList>
-              </ListItem>
-            </UnorderedList>
+                  </List.Item>
+                </List.Root>
+              </List.Item>
+            </List.Root>
             <Text>
               <Translation id="page-gas:page-gas-how-is-gas-calculated-text-2" />
             </Text>
           </Box>
-          <Table maxW={"100%"} minW={"auto"}>
-            <TableCaption fontSize="sm">
+          <Table.Root maxW={"100%"} minW={"auto"}>
+            <Table.Caption fontSize="sm">
               <Translation id="page-gas:page-gas-table-figure" />
-            </TableCaption>
-            <Thead>
-              <Tr>
-                <Th>{t("page-gas-table-header-1")}</Th>
-                <Th>{t("page-gas-table-header-2")}</Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              <Tr>
-                <Td>{t("page-gas-table-item-1-transaction-type")}</Td>
-                <Td>21,000</Td>
-              </Tr>
-              <Tr>
-                <Td>{t("page-gas-table-item-2-transaction-type")}</Td>
-                <Td>65,000</Td>
-              </Tr>
-              <Tr>
-                <Td>{t("page-gas-table-item-3-transaction-type")}</Td>
-                <Td>84,904</Td>
-              </Tr>
-              <Tr>
-                <Td>{t("page-gas-table-item-4-transaction-type")}</Td>
-                <Td>184,523</Td>
-              </Tr>
-            </Tbody>
-          </Table>
+            </Table.Caption>
+            <Table.Header>
+              <Table.Row>
+                <Table.ColumnHeader>
+                  {t("page-gas-table-header-1")}
+                </Table.ColumnHeader>
+                <Table.ColumnHeader>
+                  {t("page-gas-table-header-2")}
+                </Table.ColumnHeader>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>
+              <Table.Row>
+                <Table.Cell>
+                  {t("page-gas-table-item-1-transaction-type")}
+                </Table.Cell>
+                <Table.Cell>21,000</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  {t("page-gas-table-item-2-transaction-type")}
+                </Table.Cell>
+                <Table.Cell>65,000</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  {t("page-gas-table-item-3-transaction-type")}
+                </Table.Cell>
+                <Table.Cell>84,904</Table.Cell>
+              </Table.Row>
+              <Table.Row>
+                <Table.Cell>
+                  {t("page-gas-table-item-4-transaction-type")}
+                </Table.Cell>
+                <Table.Cell>184,523</Table.Cell>
+              </Table.Row>
+            </Table.Body>
+          </Table.Root>
         </Flex>
       </Content>
       <Content>
@@ -410,39 +415,37 @@ const GasPage = () => {
       <Divider />
       <Content>
         <Flex wrap="wrap" mx={-4}>
-          <Box
-            as={Callout}
-            flex="1 1 416px"
-            minH="full"
-            image={whatIsEthereumImg}
-            titleKey={t("page-gas-how-do-i-pay-less-gas-card-3-title")}
-            alt=""
-            descriptionKey={t(
-              "page-gas-how-do-i-pay-less-gas-card-3-description"
-            )}
-          >
-            <Box>
-              <ButtonLink to="/layer-2/">
-                {t("page-gas-use-layer-2")}
-              </ButtonLink>
-            </Box>
+          <Box flex="1 1 416px" minH="full" asChild>
+            <Callout
+              image={whatIsEthereumImg}
+              titleKey={t("page-gas-how-do-i-pay-less-gas-card-3-title")}
+              alt=""
+              descriptionKey={t(
+                "page-gas-how-do-i-pay-less-gas-card-3-description"
+              )}
+            >
+              <Box>
+                <ButtonLink to="/layer-2/">
+                  {t("page-gas-use-layer-2")}
+                </ButtonLink>
+              </Box>
+            </Callout>
           </Box>
-          <Box
-            as={Callout}
-            flex="1 1 416px"
-            minH="full"
-            image={dogeComputerImg}
-            titleKey={t("page-community:page-community-explore-dapps-title")}
-            alt={t("page-community:page-community-explore-dapps-alt")}
-            descriptionKey={t(
-              "page-community:page-community-explore-dapps-description"
-            )}
-          >
-            <Box>
-              <ButtonLink to="/dapps/">
-                {t("page-community:page-community-explore-dapps")}
-              </ButtonLink>
-            </Box>
+          <Box flex="1 1 416px" minH="full" asChild>
+            <Callout
+              image={dogeComputerImg}
+              titleKey={t("page-community:page-community-explore-dapps-title")}
+              alt={t("page-community:page-community-explore-dapps-alt")}
+              descriptionKey={t(
+                "page-community:page-community-explore-dapps-description"
+              )}
+            >
+              <Box>
+                <ButtonLink to="/dapps/">
+                  {t("page-community:page-community-explore-dapps")}
+                </ButtonLink>
+              </Box>
+            </Callout>
           </Box>
         </Flex>
       </Content>

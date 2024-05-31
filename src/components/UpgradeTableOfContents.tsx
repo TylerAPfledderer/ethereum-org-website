@@ -72,11 +72,11 @@ const UpgradeTableOfContents = ({
     p={0}
     mb={8}
     overflowY="auto"
-    display={{ base: "none", l: "block" }}
+    display={{ base: "none", lg: "block" }}
   >
-    <List m={0} py={0} lineHeight="1.4">
+    <List.Root m={0} py={0} lineHeight="1.4">
       <ItemsList items={items} depth={0} maxDepth={maxDepth} />
-    </List>
+    </List.Root>
   </Box>
 )
 

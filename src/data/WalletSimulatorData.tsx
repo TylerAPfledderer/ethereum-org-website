@@ -1,11 +1,5 @@
 import React from "react"
-import {
-  ListItem,
-  OrderedList,
-  Text as ChakraText,
-  TextProps,
-  UnorderedList,
-} from "@chakra-ui/react"
+import { List, Text as ChakraText, TextProps } from "@chakra-ui/react"
 
 import Emoji from "../components/Emoji"
 import GlossaryTooltip from "../components/Glossary/GlossaryTooltip"
@@ -116,47 +110,47 @@ export const walletOnboardingSimData: SimulatorData = {
             <Text fontWeight="bold" mb={2}>
               Storing small amount of value:
             </Text>
-            <UnorderedList listStyleType="none" mx={0} lineHeight={1}>
-              <ListItem>
+            <List.Root listStyleType="none" mx={0} lineHeight={1}>
+              <List.Item>
                 <Emoji text="✅" me={2} /> Consider saving in a password manager
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
             <Text fontWeight="bold" mb={2}>
               Storing any significant value:
             </Text>
-            <UnorderedList listStyleType="none" mx={0} lineHeight={1}>
-              <ListItem>
+            <List.Root listStyleType="none" mx={0} lineHeight={1}>
+              <List.Item>
                 <Emoji text="✅" me={2} /> Write your recovery phrase down
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Emoji text="✅" me={2} /> Store it in a safe place (consider
                 multiple backups)
-              </ListItem>
+              </List.Item>
               {/* TODO: Add link for seed phrase further reading */}
-              {/* <ListItem>
+              {/* <List.Item>
                 <Emoji text="✅" me={2} />{" "}
                 <Link href="#TODO-link-out">
                   Learn more on protecting your recovery phrase
                 </Link>
-              </ListItem> */}
-            </UnorderedList>
+              </List.Item> */}
+            </List.Root>
             <Text fontWeight="bold" mb={2}>
               Unsafe backup methods:
             </Text>
-            <UnorderedList listStyleType="none" mx={0} lineHeight={1}>
-              <ListItem>
+            <List.Root listStyleType="none" mx={0} lineHeight={1}>
+              <List.Item>
                 <Emoji text="❌" me={2} />
                 Texting it to a friend (or anyone!)
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Emoji text="❌" me={2} />
                 Taking a picture of the phrase
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Emoji text="❌" me={2} />
                 Saving it in a file on your computer
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </>
         ),
       },
@@ -427,17 +421,17 @@ export const walletOnboardingSimData: SimulatorData = {
             <Text fontWeight="bold" mb={2}>
               What to do next:
             </Text>
-            <OrderedList>
+            <List.Root as="ol">
               <Link href="/security/">
-                <ListItem>Learn about staying safe in Web3</ListItem>
+                <List.Item>Learn about staying safe in Web3</List.Item>
               </Link>
               <Link href="/what-is-ethereum/">
-                <ListItem>Learn more about Ethereum</ListItem>
+                <List.Item>Learn more about Ethereum</List.Item>
               </Link>
               <Link href="/dapps/">
-                <ListItem>Check out some beginner friendly apps</ListItem>
+                <List.Item>Check out some beginner friendly apps</List.Item>
               </Link>
-            </OrderedList>
+            </List.Root>
           </>
         ),
       },

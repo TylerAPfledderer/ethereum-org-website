@@ -1,10 +1,8 @@
-import React, { ReactNode } from "react"
+import React from "react"
 import { useTranslation } from "next-i18next"
 import {
   Box,
-  calc,
   Center,
-  cssVar,
   Flex,
   Heading,
   Icon,
@@ -32,9 +30,18 @@ type SectionGridProps = ChildOnlyProp & {
   number: number
 }
 
-const $colorVar = cssVar("color")
-const $nextColorVar = cssVar("next-color")
-const $fillColorVar = cssVar("fill-color")
+const $colorVar = {
+  variable: "--color",
+  reference: "var(--color)",
+}
+const $nextColorVar = {
+  variable: "--next-color",
+  reference: "var(--next-color)",
+}
+const $fillColorVar = {
+  variable: "--fill-color",
+  reference: "var(--fill-color)",
+}
 
 const SectionGrid = ({ number, children }: SectionGridProps) => {
   const colorValue = () => {
@@ -101,7 +108,7 @@ const SectionGrid = ({ number, children }: SectionGridProps) => {
         `,
       }}
       position="relative"
-      sx={{
+      css={{
         [$colorVar.variable]: colorValue(),
         [$nextColorVar.variable]: nextColorValue(),
         [$fillColorVar.variable]: fillColorValue(),
@@ -122,7 +129,7 @@ const StyledEtherSvg = ({ size }: { size: string }) => (
     <StakingGlyphEtherCircleIcon
       boxSize={size}
       color={$colorVar.reference}
-      sx={{
+      css={{
         "#transparentBackground": {
           fill: $fillColorVar.reference,
         },
@@ -144,12 +151,12 @@ const Line = () => {
       hideBelow={medBp}
       _after={{
         content: `""`,
-        height: calc.subtract("100%", "50px"),
+        height: "calc(100% - 50px)",
         borderImage: `linear-gradient(to bottom, ${$colorVar.reference}, ${$nextColorVar.reference}) 1 100%`,
         borderInlineStart: "4px",
         borderColor: "orange",
         position: "absolute",
-        insetInlineStart: calc.subtract("50%", "2px"),
+        insetInlineStart: "calc(50% - 2px)",
         top: "50px",
         zIndex: 1,
       }}
@@ -186,7 +193,7 @@ const Pills = ({ children }: ChildOnlyProp) => (
     flexWrap="wrap"
     gap={1}
     justify={{ base: "center", md: "initial" }}
-    sx={{
+    css={{
       p: {
         color: $colorVar.reference,
         m: 0,
@@ -212,14 +219,16 @@ const Pills = ({ children }: ChildOnlyProp) => (
 )
 
 type GlyphProps = { glyphIcon: typeof Icon }
-const Glyph = ({ glyphIcon }: GlyphProps) => (
+const Glyph = ({ glyphIcon: GlyphIcon }: GlyphProps) => (
   <Center gridArea={{ base: "content", md: "glyph" }}>
     <Icon
-      as={glyphIcon}
       boxSize={{ base: "50%", md: "50px" }}
       color={$colorVar.reference}
       opacity={{ base: 0.1, md: "initial" }}
-    />
+      asChild
+    >
+      <GlyphIcon />
+    </Icon>
   </Center>
 )
 
@@ -229,7 +238,7 @@ const Content = ({ children }: ChildOnlyProp) => (
     gridArea="content"
     mt={{ md: 4 }}
     mb={{ md: 12 }}
-    sx={{
+    css={{
       // For use in markdown files
       ".gold": {
         color: "stakingGold",
@@ -253,11 +262,11 @@ const StakingHierarchy = () => {
     <VStack
       bgGradient="linear(rgba(237, 194, 84, 0.1) 13.39%, rgba(75, 231, 156, 0.1) 44.21%, rgba(231, 202, 200, 0.1) 82.88%)"
       borderRadius={{ base: 0, md: "lg" }}
-      spacing={{ base: 16, md: 0 }}
-      p={8}
+      gap={{ base: "16", md: 0 }}
+      p="8"
       borderInlineStart={{ base: "4px", md: "none" }}
       borderInlineEnd={0}
-      sx={{
+      css={{
         borderImage: `linear-gradient(to bottom, ${stakingGold} 5%, ${stakingGreen} 30%, ${stakingBlue} 55%, ${stakingRed} 80%) 1 100%`,
       }}
     >

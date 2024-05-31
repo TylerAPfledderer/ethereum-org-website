@@ -1,6 +1,6 @@
 import { ChangeEvent, FC, useMemo, useState } from "react"
 import { useTranslation } from "next-i18next"
-import { Button, Flex, Text } from "@chakra-ui/react"
+import { Button, Flex, Spinner, Text } from "@chakra-ui/react"
 
 import CopyToClipboard from "@/components/CopyToClipboard"
 import Emoji from "@/components/Emoji"
@@ -149,17 +149,17 @@ const WithdrawalCredentials: FC = () => {
         >
           <Button
             onClick={() => checkWithdrawalCredentials()}
-            isDisabled={!inputValue.length}
-            isLoading={isLoading.mainnet}
+            disabled={!inputValue.length}
           >
+            {isLoading.mainnet && <Spinner />}
             {t("comp-withdrawal-credentials-verify-mainnet")}
           </Button>
           <Button
             onClick={() => checkWithdrawalCredentials(true)}
-            isDisabled={!inputValue.length}
+            disabled={!inputValue.length}
             variant="outline"
-            isLoading={isLoading.testnet}
           >
+            {isLoading.testnet && <Spinner />}
             {t("comp-withdrawal-credentials-verify-goerli")}
           </Button>
         </Flex>

@@ -1,4 +1,4 @@
-import { calc, Flex, type FlexProps, type HeadingProps } from "@chakra-ui/react"
+import { Flex, type FlexProps, type HeadingProps } from "@chakra-ui/react"
 
 import type { ToCItem } from "@/lib/types"
 
@@ -51,7 +51,7 @@ const LeftNavBar = ({
       me={16}
       position="sticky"
       top="6.25rem"
-      height={calc("100vh").subtract("80px").toString()}
+      height={"calc(100vh - 80px)"}
       zIndex={99}
       {...props}
     >

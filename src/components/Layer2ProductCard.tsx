@@ -55,13 +55,14 @@ const Layer2ProductCard = ({
         boxShadow="inset 0px -1px 0px rgba(0, 0, 0, 0.1)"
         minH="200px"
       >
-        <Image
-          src={image}
-          alt={alt}
-          width={100}
-          maxH={"257px"}
-          style={{ objectFit: "contain" }}
-        />
+        <Box maxH="257px" asChild>
+          <Image
+            src={image}
+            alt={alt}
+            width={100}
+            style={{ objectFit: "contain" }}
+          />
+        </Box>
       </Center>
       <Flex p={6} h="100%" direction="column">
         <Box>

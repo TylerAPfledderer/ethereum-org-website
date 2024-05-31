@@ -3,7 +3,7 @@ import { Box, Heading, Stack, Text, VStack } from "@chakra-ui/react"
 
 import type { CommonHeroProps } from "@/lib/types"
 
-import { ButtonLink } from "@/components/Buttons"
+import ButtonLink from "@/components/Buttons/ButtonLink"
 import { Image } from "@/components/Image"
 import Morpher from "@/components/Morpher"
 
@@ -14,26 +14,26 @@ const HomeHero = ({ heroImg }: HomeHeroProps) => {
   return (
     <Box>
       <Box h={440}>
-        <Image
-          src={heroImg}
-          alt={t("page-index:page-index-hero-image-alt")}
-          sizes="100vw"
-          w="full"
-          h="full"
-          priority
-          style={{ objectFit: "cover" }}
-        />
+        <Box w="full" h="full" asChild>
+          <Image
+            src={heroImg}
+            alt={t("page-index:page-index-hero-image-alt")}
+            sizes="100vw"
+            priority
+            style={{ objectFit: "cover" }}
+          />
+        </Box>
       </Box>
       <VStack>
         <Stack
-          spacing={{ base: "4", lg: "7" }}
+          gap={{ base: "4", lg: "7" }}
           textAlign="center"
           mx="4"
           py="8"
           maxW="2xl"
         >
           <Morpher />
-          <VStack spacing="6">
+          <VStack gap="6">
             <Heading as="h1" size="2xl">
               {t("page-index:page-index-title")}
             </Heading>

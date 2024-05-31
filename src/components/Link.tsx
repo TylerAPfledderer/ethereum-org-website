@@ -1,12 +1,12 @@
+import { forwardRef } from "react"
 import NextLink, { type LinkProps as NextLinkProps } from "next/link"
 import { useRouter } from "next/router"
 import { RxExternalLink } from "react-icons/rx"
 import {
-  forwardRef,
   Icon,
+  type JsxStyleProps,
   Link as ChakraLink,
   type LinkProps as ChakraLinkProps,
-  type StyleProps,
   VisuallyHidden,
 } from "@chakra-ui/react"
 
@@ -24,7 +24,7 @@ type BaseProps = {
   href?: string
   hideArrow?: boolean
   isPartiallyActive?: boolean
-  activeStyle?: StyleProps
+  activeStyle?: JsxStyleProps
   customEventOptions?: MatomoEventOptions
 }
 
@@ -44,7 +44,7 @@ export type LinkProps = BaseProps &
  * - PDFs & static files (which open in a new tab)
  * e.g. <Link href="/eth-whitepaper.pdf">
  */
-export const BaseLink = forwardRef(function Link(
+export const BaseLink = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
   {
     to,
     href: hrefProp,
@@ -54,7 +54,7 @@ export const BaseLink = forwardRef(function Link(
     activeStyle = { color: "primary.base" },
     customEventOptions,
     ...props
-  }: LinkProps,
+  },
   ref
 ) {
   const { asPath } = useRouter()
@@ -89,7 +89,7 @@ export const BaseLink = forwardRef(function Link(
   if (isExternal) {
     return (
       <ChakraLink
-        isExternal
+        external
         onClick={() =>
           trackCustomEvent(
             customEventOptions ?? {
@@ -121,7 +121,7 @@ export const BaseLink = forwardRef(function Link(
   if (isInternalPdf) {
     return (
       <ChakraLink
-        isExternal
+        external
         // disable locale prefixing for internal PDFs
         // TODO: add i18n support using a rehype plugin (similar as we do for
         // images)
@@ -185,7 +185,10 @@ export const BaseLink = forwardRef(function Link(
   )
 })
 
-const InlineLink = forwardRef((props: LinkProps, ref) => {
+const InlineLink = forwardRef<HTMLAnchorElement, LinkProps>(function InlinLink(
+  props,
+  ref
+) {
   return <BaseLink data-inline-link ref={ref} {...props} />
 })
 

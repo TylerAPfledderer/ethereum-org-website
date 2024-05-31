@@ -32,15 +32,15 @@ const FixedDot = ({ bottomOffset, isExpanded, ...props }: FixedDotProps) => {
       transition="transform 0.2s ease-in-out, width 0.25s ease-in-out,
       border-radius 0.25s linear"
       aria-label={t("feedback-widget")}
-      leftIcon={<FeedbackGlyphIcon color="white" />}
-      iconSpacing={{ base: 0, lg: "3" }}
-      sx={{
+      gap={{ base: 0, lg: "3" }}
+      css={{
         ".chakra-button__icon": {
           me: !isExpanded ? 0 : undefined,
         },
       }}
       {...props}
     >
+      <FeedbackGlyphIcon color="white" />
       <ScaleFade in={isExpanded} delay={0.25}>
         <Text
           as="span"

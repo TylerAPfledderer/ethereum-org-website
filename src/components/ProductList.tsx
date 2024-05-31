@@ -1,11 +1,5 @@
-import {
-  Box,
-  Flex,
-  List,
-  ListItem,
-  useColorModeValue,
-  VisuallyHidden,
-} from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Box, Flex, List, VisuallyHidden } from "@chakra-ui/react"
 
 import { ButtonLink } from "@/components/Buttons"
 import { Image, type ImageProps } from "@/components/Image"
@@ -27,7 +21,8 @@ export type ProductListProps = {
 }
 
 const ProductList = ({ actionLabel, content, category }: ProductListProps) => {
-  const shadow = useColorModeValue("tableBox.light", "tableBox.dark")
+  const { theme } = useTheme()
+  const shadow = theme === "light" ? "tableBox.light" : "tableBox.dark"
 
   const CATEGORY_NAME = "category-name"
 
@@ -45,65 +40,65 @@ const ProductList = ({ actionLabel, content, category }: ProductListProps) => {
         {category}
       </OldHeading>
       <Flex
-        as={List}
         aria-labelledby={CATEGORY_NAME}
         m={0}
         flexDirection="column"
         height="inherit"
+        asChild
       >
-        {content.map(({ title, description, link, image, alt, id }, idx) => (
-          <Flex
-            as={ListItem}
-            key={id || idx}
-            color="text"
-            marginBottom="px"
-            marginTop={8}
-            height="inherit"
-          >
-            <Box width="5rem">
-              {image && (
-                <Image
-                  src={image}
-                  alt={alt}
-                  width={66}
-                  boxShadow={shadow}
-                  borderRadius="sm"
-                />
-              )}
-            </Box>
+        <List.Root>
+          {content.map(({ title, description, link, image, alt, id }, idx) => (
             <Flex
-              justifyContent="space-between"
-              flexDir={{ base: "column", sm: "row" }}
-              paddingBottom={4}
-              width="full"
-              ms={{ base: 4, sm: 6 }}
-              borderBottom="1px solid"
-              borderColor="border"
+              key={id || idx}
+              color="text"
+              marginBottom="px"
+              marginTop={8}
+              height="inherit"
+              asChild
             >
-              <Box flex={1}>
-                <Box>{title}</Box>
-                <Box fontSize="sm" marginBottom={0} opacity="0.6">
-                  {description}
+              <List.Item>
+                <Box width="5rem">
+                  {image && (
+                    <Box boxShadow={shadow} borderRadius="sm" asChild>
+                      <Image src={image} alt={alt} width={66} />
+                    </Box>
+                  )}
                 </Box>
-              </Box>
-              {link && (
-                <ButtonLink
-                  variant="outline"
-                  href={link}
-                  alignSelf="center"
-                  ms={{ base: 0, sm: 8 }}
-                  paddingY={1}
-                  paddingX={6}
-                  borderRadius="sm"
-                  marginTop={{ base: 4, sm: 0 }}
+                <Flex
+                  justifyContent="space-between"
+                  flexDir={{ base: "column", sm: "row" }}
+                  paddingBottom={4}
+                  width="full"
+                  ms={{ base: 4, sm: 6 }}
+                  borderBottom="1px solid"
+                  borderColor="border"
                 >
-                  {actionLabel}
-                  <VisuallyHidden>to {title} website</VisuallyHidden>
-                </ButtonLink>
-              )}
+                  <Box flex={1}>
+                    <Box>{title}</Box>
+                    <Box fontSize="sm" marginBottom={0} opacity="0.6">
+                      {description}
+                    </Box>
+                  </Box>
+                  {link && (
+                    <ButtonLink
+                      variant="outline"
+                      href={link}
+                      alignSelf="center"
+                      ms={{ base: 0, sm: 8 }}
+                      paddingY={1}
+                      paddingX={6}
+                      borderRadius="sm"
+                      marginTop={{ base: 4, sm: 0 }}
+                    >
+                      {actionLabel}
+                      <VisuallyHidden>to {title} website</VisuallyHidden>
+                    </ButtonLink>
+                  )}
+                </Flex>
+              </List.Item>
             </Flex>
-          </Flex>
-        ))}
+          ))}
+        </List.Root>
       </Flex>
     </Box>
   )

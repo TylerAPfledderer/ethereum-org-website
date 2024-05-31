@@ -21,7 +21,7 @@ export const ButtonTwoLines: Story = {
     w: "300px",
   },
   render: (args) => (
-    <Stack spacing="8">
+    <Stack gap="8">
       <ButtonTwoLinesComponent {...args} />
       <ButtonTwoLinesComponent
         {...args}

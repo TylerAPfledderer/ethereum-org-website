@@ -19,7 +19,7 @@ const DocSearchModalWithChakra = chakra(
 )
 
 const SearchModal = (props: ModalPropsNoScroll) => {
-  return <DocSearchModalWithChakra {...props} sx={getSearchModalStyles()} />
+  return <DocSearchModalWithChakra {...props} css={getSearchModalStyles()} />
 }
 
 export default SearchModal

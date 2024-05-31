@@ -1,5 +1,6 @@
 import { useTranslation } from "next-i18next"
-import { useColorModeValue } from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Box } from "@chakra-ui/react"
 
 import { Image } from "@/components/Image"
 
@@ -8,10 +9,13 @@ import lightImage from "@/public/ef-logo-white.png"
 
 const Logo = () => {
   const { t } = useTranslation("common")
-  const image = useColorModeValue(darkImage, lightImage)
+  const { theme } = useTheme()
+  const image = theme === "light" ? darkImage : lightImage
 
   return (
-    <Image src={image} h={100} w="auto" alt={t("ethereum-foundation-logo")} />
+    <Box h="full" w="auto" asChild>
+      <Image src={image} alt={t("ethereum-foundation-logo")} />
+    </Box>
   )
 }
 

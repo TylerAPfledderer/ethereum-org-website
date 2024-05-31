@@ -53,7 +53,7 @@ export const WalletSocialLinks = ({
       alignItems="flex-start"
       mt={6}
       mb={8}
-      spacing={4}
+      gap={4}
     >
       {/* Social icons */}
       <Heading

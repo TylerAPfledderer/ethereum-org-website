@@ -1,11 +1,6 @@
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  type BreadcrumbProps as ChakraBreadcrumbProps,
-} from "@chakra-ui/react"
+import { Breadcrumb } from "@chakra-ui/react"
 
 import type { Lang } from "@/lib/types"
 
@@ -13,7 +8,7 @@ import { BaseLink } from "@/components/Link"
 
 import { isLangRightToLeft } from "@/lib/utils/translations"
 
-export type BreadcrumbsProps = ChakraBreadcrumbProps & {
+export type BreadcrumbsProps = Breadcrumb.RootProps & {
   slug: string
   startDepth?: number
 }
@@ -65,23 +60,29 @@ const Breadcrumbs = ({ slug, startDepth = 0, ...props }: BreadcrumbsProps) => {
     .slice(startDepth)
 
   return (
-    <Breadcrumb {...props} dir={dir}>
-      {crumbs.map(({ fullPath, text }) => {
-        const isCurrentPage = slug === fullPath
-        return (
-          <BreadcrumbItem key={fullPath} isCurrentPage={isCurrentPage}>
-            <BreadcrumbLink
-              as={BaseLink}
-              to={fullPath}
-              isPartiallyActive={isCurrentPage}
-              textTransform="uppercase"
-            >
-              {text}
-            </BreadcrumbLink>
-          </BreadcrumbItem>
-        )
-      })}
-    </Breadcrumb>
+    <Breadcrumb.Root {...props} dir={dir}>
+      <Breadcrumb.List>
+        {crumbs.map(({ fullPath, text }) => {
+          const isCurrentPage = slug === fullPath
+          return (
+            <>
+              <Breadcrumb.Separator />
+              <Breadcrumb.Item key={fullPath}>
+                <Breadcrumb.Link
+                  aria-current={isCurrentPage ? "page" : undefined}
+                  textTransform="uppercase"
+                  asChild
+                >
+                  <BaseLink href={fullPath} isPartiallyActive={isCurrentPage}>
+                    {text}
+                  </BaseLink>
+                </Breadcrumb.Link>
+              </Breadcrumb.Item>
+            </>
+          )
+        })}
+      </Breadcrumb.List>
+    </Breadcrumb.Root>
   )
 }
 

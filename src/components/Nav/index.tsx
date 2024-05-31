@@ -1,20 +1,11 @@
 import { useRef } from "react"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
+import { useTheme } from "next-themes"
 import { BsTranslate } from "react-icons/bs"
 import { MdBrightness2, MdWbSunny } from "react-icons/md"
-import {
-  Box,
-  Button,
-  Flex,
-  HStack,
-  Icon,
-  MenuButton,
-  Text,
-  useColorModeValue,
-  useDisclosure,
-  useEventListener,
-} from "@chakra-ui/react"
+import { useDisclosure, useEventListener } from "@chakra-ui/hooks"
+import { Box, Button, Dialog, Flex, HStack, Icon, Text } from "@chakra-ui/react"
 
 import { IconButton } from "@/components/Buttons"
 import { EthHomeIcon } from "@/components/icons"
@@ -37,28 +28,30 @@ const Nav = () => {
   const navWrapperRef = useRef(null)
   const languagePickerState = useDisclosure()
   const languagePickerRef = useRef<HTMLButtonElement>(null)
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
 
   /**
    * Adds a keydown event listener to toggle color mode (ctrl|cmd + \)
    * or open the language picker (\).
    * @param {string} event - The keydown event.
    */
-  useEventListener("keydown", (e) => {
+  useEventListener(null, "keydown", (e) => {
     if (e.key !== "\\") return
     e.preventDefault()
     if (e.metaKey || e.ctrlKey) {
       toggleColorMode()
     } else {
-      if (languagePickerState.isOpen) return
+      if (languagePickerState.open) return
       languagePickerRef.current?.click()
     }
   })
 
-  const ThemeIcon = useColorModeValue(<MdBrightness2 />, <MdWbSunny />)
-  const themeIconAriaLabel = useColorModeValue(
-    "Switch to Dark Theme",
-    "Switch to Light Theme"
-  )
+  const ThemeIcon = !isDark ? MdBrightness2 : MdWbSunny
+
+  const themeIconAriaLabel = !isDark
+    ? "Switch to Dark Theme"
+    : "Switch to Light Theme"
 
   return (
     <Box position="sticky" top={0} zIndex="sticky" width="full">
@@ -103,7 +96,6 @@ const Nav = () => {
               <HStack hideBelow="md" gap="0">
                 <IconButton
                   transition="transform 0.5s, color 0.2s"
-                  icon={ThemeIcon}
                   aria-label={themeIconAriaLabel}
                   variant="ghost"
                   isSecondary
@@ -113,7 +105,9 @@ const Nav = () => {
                     color: "primary.hover",
                   }}
                   onClick={toggleColorMode}
-                />
+                >
+                  <ThemeIcon />
+                </IconButton>
 
                 {/* Locale-picker menu */}
                 <LanguagePicker
@@ -125,11 +119,9 @@ const Nav = () => {
                   top="unset"
                   menuState={languagePickerState}
                 >
-                  <MenuButton
-                    as={Button}
+                  <Dialog.Trigger
                     name={DESKTOP_LANGUAGE_BUTTON_NAME}
                     ref={languagePickerRef}
-                    variant="ghost"
                     color="body.base"
                     transition="color 0.2s"
                     px={{ base: "2", xl: "3" }}
@@ -144,24 +136,27 @@ const Nav = () => {
                       color: "primary.hover",
                       bg: "primary.lowContrast",
                     }}
-                    sx={{
+                    css={{
                       "& svg": {
                         transform: "rotate(0deg)",
                         transition: "transform 0.5s",
                       },
                     }}
+                    asChild
                   >
-                    <Icon
-                      as={BsTranslate}
-                      fontSize="2xl"
-                      verticalAlign="middle"
-                      me={2}
-                    />
-                    <Text hideBelow="lg" as="span">
-                      {t("common:languages")}&nbsp;
-                    </Text>
-                    {locale!.toUpperCase()}
-                  </MenuButton>
+                    <Button variant="ghost">
+                      <Icon
+                        as={BsTranslate}
+                        fontSize="2xl"
+                        verticalAlign="middle"
+                        me={2}
+                      />
+                      <Text hideBelow="lg" as="span">
+                        {t("common:languages")}&nbsp;
+                      </Text>
+                      {locale!.toUpperCase()}
+                    </Button>
+                  </Dialog.Trigger>
                 </LanguagePicker>
               </HStack>
               {/* Mobile */}

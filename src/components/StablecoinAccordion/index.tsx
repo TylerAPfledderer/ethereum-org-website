@@ -58,7 +58,7 @@ const StepBox = (
       color="text"
       flexDirection={{ base: "column", md: "row" }}
       p={4}
-      sx={{
+      css={{
         "&:not(:first-of-type)": {
           mt: "-1px",
         },
@@ -72,21 +72,22 @@ const StepBox = (
       <Flex justifyContent="space-between" alignItems="center" width="100%">
         <Box>
           <LinkOverlay
-            as={BaseLink}
             color="inherit"
             textDecoration="inherit"
-            to={props.to}
             fontWeight={700}
             textAlign="start"
             _hover={{
               textDecoration: "inherit",
             }}
+            asChild
           >
-            {t(props.titleId)}
+            <BaseLink href={props.to}>{t(props.titleId)}</BaseLink>
           </LinkOverlay>
           <Text mb={0}>{t(props.descId)}</Text>
         </Box>
-        <Icon as={MdArrowForward} ms={4} minW={6} />
+        <Icon ms={4} minW={6} asChild>
+          <MdArrowForward />
+        </Icon>
       </Flex>
     </Flex>
   )
@@ -104,7 +105,7 @@ const StablecoinAccordion = () => {
   const DEFAULT_IMAGE_WIDTH = 24
 
   return (
-    <Accordion borderRadius="base" width="full" allowToggle>
+    <Accordion.Root borderRadius="base" width="full" collapsible>
       <AccordionCustomItem category="dapps">
         <LeftColumnPanel>
           <SectionTitle>
@@ -257,7 +258,7 @@ const StablecoinAccordion = () => {
           </Text>
         </RightColumnPanel>
       </AccordionCustomItem>
-    </Accordion>
+    </Accordion.Root>
   )
 }
 

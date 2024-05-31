@@ -1,11 +1,5 @@
 import React, { ReactNode } from "react"
-import {
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs as ChakraTabs,
-} from "@chakra-ui/react"
+import { Tabs as ChakraTabs } from "@chakra-ui/react"
 
 interface Tab {
   title: string
@@ -25,20 +19,26 @@ const Tabs = ({ tabs, onTabClick }: TabsProps) => {
   }
 
   return (
-    <ChakraTabs as="nav">
-      <TabList>
+    <ChakraTabs.Root as="nav">
+      <ChakraTabs.List>
         {tabs.map((tab, index) => (
-          <Tab key={index} onClick={() => handleTabClick(index)}>
+          <ChakraTabs.Trigger
+            key={index}
+            value={tab.title}
+            onClick={() => handleTabClick(index)}
+          >
             {tab.title}
-          </Tab>
+          </ChakraTabs.Trigger>
         ))}
-      </TabList>
-      <TabPanels as="main">
+      </ChakraTabs.List>
+      <ChakraTabs.ContentGroup as="main">
         {tabs.map((tab, index) => (
-          <TabPanel key={index}>{tab.content}</TabPanel>
+          <ChakraTabs.Content key={index} value={tab.title}>
+            {tab.content}
+          </ChakraTabs.Content>
         ))}
-      </TabPanels>
-    </ChakraTabs>
+      </ChakraTabs.ContentGroup>
+    </ChakraTabs.Root>
   )
 }
 

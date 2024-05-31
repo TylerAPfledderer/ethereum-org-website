@@ -41,7 +41,7 @@ const StyleVariantList = (args: EthTagProps) => (
 
 export const StyleVariantsBasic = {
   render: () => (
-    <VStack spacing={8}>
+    <VStack gap="8">
       <Box textAlign="center">
         Click anywhere in the whitespace and then tab to see the button styling
         on `:focus-visible`
@@ -53,7 +53,7 @@ export const StyleVariantsBasic = {
 
 export const StyleVariantsAsLinks = {
   render: () => (
-    <VStack spacing={8}>
+    <VStack gap="8">
       <Box textAlign="center">
         They are all rendered as links to hover, click, and focus
       </Box>

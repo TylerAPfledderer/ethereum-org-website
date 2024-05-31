@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import { Center, ChakraProps, Container } from "@chakra-ui/react"
+import { Center, Container, type SystemStyleObject } from "@chakra-ui/react"
 
 import { PROGRESS_BAR_GAP } from "@/lib/constants"
 
@@ -10,7 +10,7 @@ export const QuizProgressBar = () => {
     useQuizWidgetContext()
 
   const progressBarBackground = useCallback(
-    (index: number): ChakraProps["bg"] => {
+    (index: number): SystemStyleObject["bg"] => {
       if (
         (answerStatus &&
           index === currentQuestionIndex &&

@@ -1,5 +1,11 @@
 import { useTranslation } from "next-i18next"
-import { Box, Flex, Heading, useTheme } from "@chakra-ui/react"
+import {
+  Box,
+  Flex,
+  Heading,
+  useChakraContext,
+  useTheme,
+} from "@chakra-ui/react"
 
 import type { StakingPage, TranslationKey } from "@/lib/types"
 
@@ -29,7 +35,7 @@ export type StakingComparisonProps = {
 }
 
 const StakingComparison = ({ page, className }: StakingComparisonProps) => {
-  const theme = useTheme()
+  const theme = useChakraContext()
   const { stakingGold, stakingGreen, stakingBlue } = theme.colors
   const { t } = useTranslation("page-staking")
 

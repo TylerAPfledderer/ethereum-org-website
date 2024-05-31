@@ -13,9 +13,9 @@ import { getLocaleForNumberFormat } from "@/lib/utils/translations"
 
 const Cell = ({ children }: ChildOnlyProp) => (
   <VStack
-    spacing={2}
-    py={4}
-    px={8}
+    gap="2"
+    py="4"
+    px="8"
     borderInlineStart={{ md: "1px" }}
     borderTop={{ base: "1px", md: "none" }}
     // `!important` needed to force an override of the user-agent
@@ -52,14 +52,16 @@ const BeaconchainTooltip = ({ children }: ChildOnlyProp) => (
   <Tooltip content={children}>
     <Box as="span" marginInlineStart={2}>
       <Icon
-        as={MdInfoOutline}
         color="text"
+        boxSize="4"
+        verticalAlign="middle"
         _hover={{ color: "primary.base" }}
         _active={{ color: "primary.base" }}
         _focus={{ color: "primary.base" }}
-        boxSize={4}
-        verticalAlign="middle"
-      />
+        asChild
+      >
+        <MdInfoOutline />
+      </Icon>
     </Box>
   </Tooltip>
 )

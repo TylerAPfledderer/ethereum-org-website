@@ -20,12 +20,7 @@ const HubHero = ({
 
   return (
     <Box position="relative">
-      <Image
-        src={heroImg}
-        alt=""
-        priority
-        sizes="100vw"
-        style={{ width: "100vw", objectFit: "cover" }}
+      <Box
         h={{
           base: "192px",
           md: "256px",
@@ -33,9 +28,18 @@ const HubHero = ({
           xl: "576px",
           "2xl": "672px",
         }}
-      />
+        asChild
+      >
+        <Image
+          src={heroImg}
+          alt=""
+          priority
+          sizes="100vw"
+          style={{ width: "100vw", objectFit: "cover" }}
+        />
+      </Box>
       <Stack
-        spacing={{ base: "3", md: "4" }}
+        gap={{ base: "3", md: "4" }}
         p={{ base: "4", lg: "8" }}
         textAlign={{ base: "center", xl: "start" }}
         borderRadius={{ xl: "base" }}
@@ -62,7 +66,7 @@ const HubHero = ({
         ) : null}
         <Stack
           alignSelf="center"
-          spacing={{ base: "2", md: "1" }}
+          gap={{ base: "2", md: "1" }}
           maxW="container.md"
         >
           <Heading as={title ? "h2" : "h1"} size="2xl">
@@ -70,7 +74,7 @@ const HubHero = ({
           </Heading>
           <Text size="lg">{description}</Text>
         </Stack>
-        <HStack justify={{ md: "center", xl: "start" }} spacing="4">
+        <HStack justify={{ md: "center", xl: "start" }} gap="4">
           {buttons?.map((button, idx) => {
             if (!button) return
             return <CallToAction key={idx} index={idx} {...button} />

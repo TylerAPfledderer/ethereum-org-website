@@ -1,5 +1,5 @@
 import { useTranslation } from "next-i18next"
-import { Flex, type FlexProps } from "@chakra-ui/react"
+import { Box, Flex, type FlexProps } from "@chakra-ui/react"
 
 import type { TranslationKey } from "@/lib/types"
 
@@ -32,23 +32,22 @@ const CalloutBanner = ({
       as="aside"
       direction={{ base: "column", lg: "row-reverse" }}
       bg="layer2Gradient"
-      p={{ base: 8, sm: 12 }}
+      p={{ base: "8", sm: "12" }}
       borderRadius="base"
       {...props}
     >
       {image && (
         <Flex>
-          <Image
-            src={image}
-            alt={alt}
-            width={imageWidth}
-            style={{
-              objectFit: "contain",
-            }}
-            mx="auto"
-            mt={-24}
-            mb={{ base: 0, lg: -24 }}
-          />
+          <Box mx="auto" mt="-24" mb={{ base: 0, lg: "-24" }} asChild>
+            <Image
+              src={image}
+              alt={alt}
+              width={imageWidth}
+              style={{
+                objectFit: "contain",
+              }}
+            />
+          </Box>
         </Flex>
       )}
       <Flex

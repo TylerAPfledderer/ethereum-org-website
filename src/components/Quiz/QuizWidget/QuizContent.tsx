@@ -22,7 +22,7 @@ export const QuizContent = ({ children }: QuizContentProps) => {
   }
 
   return (
-    <VStack spacing="4">
+    <VStack gap="4">
       <Text fontWeight="bold" textAlign="center" color={getTitleTextColor()}>
         {getTitleContent()}
       </Text>

@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react"
+import { forwardRef, useEffect, useMemo, useState } from "react"
 import { GetStaticProps, InferGetServerSidePropsType } from "next"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
@@ -9,8 +9,8 @@ import {
   Box,
   chakra,
   Flex,
-  forwardRef,
   Heading,
+  HTMLChakraProps,
   useToken,
 } from "@chakra-ui/react"
 
@@ -44,36 +44,37 @@ import externalTutorials from "@/data/externalTutorials.json"
 
 import { useRtlFlip } from "@/hooks/useRtlFlip"
 
-const FilterTag = forwardRef<{ isActive: boolean; name: string }, "button">(
-  (props, ref) => {
-    const { isActive, name, ...rest } = props
-    return (
-      <chakra.button
-        ref={ref}
-        bg="none"
-        bgImage="radial-gradient(46.28% 66.31% at 66.95% 58.35%,rgba(127, 127, 213, 0.2) 0%,rgba(134, 168, 231, 0.2) 50%,rgba(145, 234, 228, 0.2) 100%)"
-        border="1px"
-        borderColor={isActive ? "primary300" : "white800"}
-        borderRadius="base"
-        boxShadow={!isActive ? "table" : undefined}
-        color="text"
-        fontSize="sm"
-        lineHeight={1.2}
-        opacity={isActive ? 1 : 0.7}
-        p={2}
-        textTransform="uppercase"
-        _hover={{
-          color: "primary.base",
-          borderColor: "text200",
-          opacity: "1",
-        }}
-        {...rest}
-      >
-        {name}
-      </chakra.button>
-    )
-  }
-)
+const FilterTag = forwardRef<
+  "button",
+  HTMLChakraProps<"button"> & { isActive: boolean; name: string }
+>(function FilterTag(props, ref) {
+  const { isActive, name, ...rest } = props
+  return (
+    <chakra.button
+      ref={ref}
+      bg="none"
+      bgImage="radial-gradient(46.28% 66.31% at 66.95% 58.35%,rgba(127, 127, 213, 0.2) 0%,rgba(134, 168, 231, 0.2) 50%,rgba(145, 234, 228, 0.2) 100%)"
+      border="1px"
+      borderColor={isActive ? "primary300" : "white800"}
+      borderRadius="base"
+      boxShadow={!isActive ? "table" : undefined}
+      color="text"
+      fontSize="sm"
+      lineHeight={1.2}
+      opacity={isActive ? 1 : 0.7}
+      p={2}
+      textTransform="uppercase"
+      _hover={{
+        color: "primary.base",
+        borderColor: "text200",
+        opacity: "1",
+      }}
+      {...rest}
+    >
+      {name}
+    </chakra.button>
+  )
+})
 
 type Props = BasePageProps & {
   internalTutorials: ITutorial[]
@@ -423,7 +424,6 @@ const TutorialPage = ({
         {filteredTutorials.map((tutorial) => {
           return (
             <Flex
-              as={BaseLink}
               textDecoration="none"
               flexDirection="column"
               justifyContent="space-between"
@@ -440,67 +440,68 @@ const TutorialPage = ({
                 bg: "tableBackgroundHover",
               }}
               key={tutorial.to}
-              to={tutorial.to ?? undefined}
-              hideArrow
+              asChild
             >
-              <Flex
-                justifyContent="space-between"
-                mb={{ base: 8, md: -4 }}
-                alignItems="flex-start"
-                flexDirection={{ base: "column", md: "initial" }}
-              >
-                <Text
-                  color="text"
-                  fontWeight="semibold"
-                  fontSize="2xl"
-                  me={{ base: 0, md: 24 }}
-                  _after={{
-                    ms: 0.5,
-                    me: "0.3rem",
-                    display: tutorial.isExternal ? "inline-block" : "none",
-                    content: `"↗"`,
-                    transform: flipForRtl,
-                    transitionProperty: "all",
-                    transitionDuration: "0.1s",
-                    transitionTimingFunction: "ease-in-out",
-                    fontStyle: "normal",
-                  }}
+              <BaseLink href={tutorial.to ?? undefined} hideArrow>
+                <Flex
+                  justifyContent="space-between"
+                  mb={{ base: 8, md: -4 }}
+                  alignItems="flex-start"
+                  flexDirection={{ base: "column", md: "initial" }}
                 >
-                  {tutorial.title}
+                  <Text
+                    color="text"
+                    fontWeight="semibold"
+                    fontSize="2xl"
+                    me={{ base: 0, md: 24 }}
+                    _after={{
+                      ms: 0.5,
+                      me: "0.3rem",
+                      display: tutorial.isExternal ? "inline-block" : "none",
+                      content: `"↗"`,
+                      transform: flipForRtl,
+                      transitionProperty: "all",
+                      transitionDuration: "0.1s",
+                      transitionTimingFunction: "ease-in-out",
+                      fontStyle: "normal",
+                    }}
+                  >
+                    {tutorial.title}
+                  </Text>
+                  <Badge variant="secondary">
+                    <Translation id={getSkillTranslationId(tutorial.skill!)} />
+                  </Badge>
+                </Flex>
+                <Text color="text200" fontSize="sm" textTransform="uppercase">
+                  <Emoji text=":writing_hand:" fontSize="sm" me={2} />
+                  {tutorial.author}
+                  {tutorial.published ? (
+                    <> •{published(locale!, tutorial.published!)}</>
+                  ) : null}
+                  {tutorial.timeToRead && (
+                    <>
+                      {" "}
+                      •
+                      <Emoji text=":stopwatch:" fontSize="sm" mx={2} />
+                      {tutorial.timeToRead}{" "}
+                      <Translation id="page-developers-tutorials:page-tutorial-read-time" />
+                    </>
+                  )}
+                  {tutorial.isExternal && (
+                    <>
+                      {" "}
+                      •<Emoji text=":link:" fontSize="sm" mx={2} />
+                      <Box as="span" color="primary.base" cursor="pointer">
+                        <Translation id="page-developers-tutorials:page-tutorial-external-link" />
+                      </Box>
+                    </>
+                  )}
                 </Text>
-                <Badge variant="secondary">
-                  <Translation id={getSkillTranslationId(tutorial.skill!)} />
-                </Badge>
-              </Flex>
-              <Text color="text200" fontSize="sm" textTransform="uppercase">
-                <Emoji text=":writing_hand:" fontSize="sm" me={2} />
-                {tutorial.author}
-                {tutorial.published ? (
-                  <> •{published(locale!, tutorial.published!)}</>
-                ) : null}
-                {tutorial.timeToRead && (
-                  <>
-                    {" "}
-                    •
-                    <Emoji text=":stopwatch:" fontSize="sm" mx={2} />
-                    {tutorial.timeToRead}{" "}
-                    <Translation id="page-developers-tutorials:page-tutorial-read-time" />
-                  </>
-                )}
-                {tutorial.isExternal && (
-                  <>
-                    {" "}
-                    •<Emoji text=":link:" fontSize="sm" mx={2} />
-                    <Box as="span" color="primary.base" cursor="pointer">
-                      <Translation id="page-developers-tutorials:page-tutorial-external-link" />
-                    </Box>
-                  </>
-                )}
-              </Text>
-              <Text color="text200">{tutorial.description}</Text>
-              <Flex flexWrap="wrap" w="full">
-                <TutorialTags tags={tutorial.tags ?? []} />
-              </Flex>
+                <Text color="text200">{tutorial.description}</Text>
+                <Flex flexWrap="wrap" w="full">
+                  <TutorialTags tags={tutorial.tags ?? []} />
+                </Flex>
+              </BaseLink>
             </Flex>
           )
         })}

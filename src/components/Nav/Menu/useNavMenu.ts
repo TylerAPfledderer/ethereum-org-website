@@ -1,6 +1,6 @@
 import { useState } from "react"
 import type { MotionProps } from "framer-motion"
-import { useEventListener } from "@chakra-ui/react"
+import { useEventListener } from "@chakra-ui/hooks"
 
 import { isModified } from "@/lib/utils/keyboard"
 
@@ -17,7 +17,7 @@ export const useNavMenu = (sections: NavSections) => {
   const [activeSection, setActiveSection] = useState<NavSectionKey | null>(null)
 
   // Focus corresponding nav section when number keys pressed
-  useEventListener("keydown", (event) => {
+  useEventListener(null, "keydown", (event) => {
     if (!document || !event.key.match(/[1-9]/) || isModified(event)) return
     if (event.target instanceof HTMLInputElement) return
     if (event.target instanceof HTMLTextAreaElement) return

@@ -1,16 +1,7 @@
 import { useTranslation } from "next-i18next"
-import {
-  Box,
-  Drawer,
-  DrawerBody,
-  DrawerCloseButton,
-  DrawerContent,
-  DrawerHeader,
-  DrawerOverlay,
-  Flex,
-} from "@chakra-ui/react"
+import { Box, Drawer, Flex } from "@chakra-ui/react"
 
-import { Button } from "@/components/Buttons"
+import Button from "@/components/Buttons/Button"
 
 import walletData from "@/data/wallets/wallet-data"
 
@@ -56,18 +47,18 @@ export const MobileFiltersMenu = ({
         onClose={onClose}
       />
 
-      <Drawer
-        isOpen={showMobileSidebar}
+      <Drawer.Root
+        open={showMobileSidebar}
         placement="start"
-        onClose={onClose}
+        onOpenChange={onClose}
         size="full"
       >
-        <DrawerOverlay />
-        <DrawerContent bg="background.base">
-          <DrawerHeader mb={4}>
-            <DrawerCloseButton />
-          </DrawerHeader>
-          <DrawerBody position="relative" p={3}>
+        <Drawer.Backdrop />
+        <Drawer.Content bg="background.base">
+          <Drawer.Header mb={4}>
+            <Drawer.CloseTrigger />
+          </Drawer.Header>
+          <Drawer.Body position="relative" p={3}>
             {/* Wallet Personas */}
             <Box px={{ base: showMobileSidebar ? 0 : 4, "2xl": 0 }}>
               <OldHeading
@@ -130,9 +121,9 @@ export const MobileFiltersMenu = ({
                 {`(${filteredWallets.length})`}
               </Button>
             </Flex>
-          </DrawerBody>
-        </DrawerContent>
-      </Drawer>
+          </Drawer.Body>
+        </Drawer.Content>
+      </Drawer.Root>
     </>
   )
 }

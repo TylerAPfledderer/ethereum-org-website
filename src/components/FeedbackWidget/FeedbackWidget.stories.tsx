@@ -23,6 +23,4 @@ const meta = {
 
 export default meta
 
-export const FeedbackWidget: StoryObj<FeedbackWidgetType> = {
-  render: () => <FeedbackWidgetComponent />,
-}
+export const FeedbackWidget: StoryObj<FeedbackWidgetType> = {}

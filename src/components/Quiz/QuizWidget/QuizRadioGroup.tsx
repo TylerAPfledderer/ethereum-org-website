@@ -3,10 +3,10 @@ import { useTranslation } from "next-i18next"
 import {
   Box,
   chakra,
-  ChakraProps,
   Circle,
   HStack,
   Stack,
+  type SystemStyleObject,
   Text,
   useRadio,
   useRadioGroup,
@@ -35,7 +35,7 @@ export const QuizRadioGroup = () => {
   }
 
   const {
-    getRadioProps,
+    getItemProps,
     getRootProps,
     value: selectedAnswer,
   } = useRadioGroup({
@@ -73,7 +73,7 @@ export const QuizRadioGroup = () => {
         {t(prompt)}
       </Text>
 
-      <Stack spacing="4">
+      <Stack gap="4">
         {answers.map(({ id, label }, idx) => {
           const display =
             !answerStatus || id === selectedAnswer ? "inline-flex" : "none"
@@ -85,7 +85,7 @@ export const QuizRadioGroup = () => {
                 isAnswerVisible={!!answerStatus}
                 isSelectedCorrect={isSelectedCorrect}
                 index={idx}
-                {...getRadioProps({ value: id })}
+                {...getItemProps({ value: id })}
               />
             </Box>
           )
@@ -93,7 +93,7 @@ export const QuizRadioGroup = () => {
       </Stack>
 
       {!!answerStatus && (
-        <Stack spacing="2" mt="6">
+        <Stack gap="2" mt="6">
           <Text fontWeight="bold">{t("explanation")}</Text>
 
           <Text m={0}>{t(explanation)}</Text>
@@ -118,24 +118,24 @@ const CustomRadio = ({
   ...radioProps
 }: CustomRadioProps) => {
   const INPUT_ID = `quiz-question-answer-${index}`
-  const { state, getInputProps, getRadioProps, getLabelProps } = useRadio({
+  const { state, getInputProps, getControlProps, getLabelProps } = useRadio({
     ...radioProps,
     id: INPUT_ID,
   })
 
   const buttonBg = useMemo<string>(() => {
-    if (!state.isChecked) return "body.inverted"
+    if (!state.checked) return "body.inverted"
     if (!isAnswerVisible) return "primary.base"
     if (!isSelectedCorrect) return "error.base"
     return "success.base"
-  }, [state.isChecked, isAnswerVisible, isSelectedCorrect])
+  }, [state.checked, isAnswerVisible, isSelectedCorrect])
 
   const primaryBaseColor = useToken("colors", "primary.base")
 
-  const getAnswerColor = (): ChakraProps["bg"] =>
+  const getAnswerColor = (): SystemStyleObject["color"] =>
     isSelectedCorrect ? "success.base" : "error.base"
 
-  const controlFocusProps: ChakraProps = {
+  const controlFocusProps: SystemStyleObject = {
     bg: isAnswerVisible ? "white" : "primary.pressed",
     color: isAnswerVisible ? getAnswerColor() : undefined,
   }
@@ -149,10 +149,10 @@ const CustomRadio = ({
         w="full"
       >
         <HStack
-          {...getRadioProps()}
-          // Override: `aria-hidden` is marked true in `getRadioProps`
+          {...getControlProps()}
+          // Override: `aria-hidden` is marked true in `getControlProps`
           aria-hidden="false"
-          spacing="2"
+          gap="2"
           w="full"
           p="2"
           color="text"

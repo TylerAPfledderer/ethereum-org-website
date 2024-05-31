@@ -4,17 +4,17 @@ import { FaDiscord } from "react-icons/fa"
 import {
   Box,
   Center,
-  Divider,
   Flex,
   Grid,
   GridItem,
   Icon,
+  Separator,
 } from "@chakra-ui/react"
 
 import type { Lang } from "@/lib/types"
 import type { CommunityEvent } from "@/lib/interfaces"
 
-import { ButtonLink } from "@/components/Buttons"
+import ButtonLink from "@/components/Buttons/ButtonLink"
 import InlineLink from "@/components/Link"
 import OldHeading from "@/components/OldHeading"
 import Text from "@/components/OldText"
@@ -140,7 +140,7 @@ const CommunityEvents = ({ events }: CommunityEventsProps) => {
             )}
             <Flex flexDirection="column" gap={2}>
               <ButtonLink
-                to="/discord/"
+                href="/discord/"
                 gap={2}
                 onClick={() => matomoEvent("discord")}
               >
@@ -168,7 +168,7 @@ const CommunityEvents = ({ events }: CommunityEventsProps) => {
           <Text fontSize="lg" fontWeight="bold" mb={2}>
             {t("page-index:community-events-upcoming-calls")}
           </Text>
-          <Divider mb={4} />
+          <Separator mb="4" />
           {reversedUpcomingEventData.slice(1).length ? (
             reversedUpcomingEventData.slice(1).map((item, idx) => {
               return <Event key={idx} event={item} type="upcoming" />
@@ -181,7 +181,7 @@ const CommunityEvents = ({ events }: CommunityEventsProps) => {
           <Text fontSize="lg" fontWeight="bold" mb={2} mt={4}>
             {t("page-index:community-events-previous-calls")}
           </Text>
-          <Divider mb={4} />
+          <Separator mb="4" />
           {reversedPastEventData.length ? (
             reversedPastEventData.map((item, idx) => {
               return <Event key={idx} event={item} type="past" />

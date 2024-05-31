@@ -3,10 +3,10 @@ import {
   Badge,
   Box,
   type BoxProps,
-  Divider,
   Flex,
   type HeadingProps,
   Kbd,
+  Separator,
   Text,
   type TextProps,
   useToken,
@@ -59,7 +59,7 @@ const ContentContainer = (props: ContentContainerProps) => {
       p={{ base: "3rem 2rem", lg: 16 }}
       borderRadius="4px"
       {...props}
-      sx={{
+      css={{
         ".citation": {
           p: { color: "text200" },
         },
@@ -107,7 +107,7 @@ const Heading4 = (props: HeadingProps) => (
 )
 
 const StyledDivider = (props) => (
-  <Divider
+  <Separator
     my={16}
     w="10%"
     h="1"

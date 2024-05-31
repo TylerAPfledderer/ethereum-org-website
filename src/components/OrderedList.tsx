@@ -1,11 +1,6 @@
 // Libraries
 import React from "react"
-import {
-  Box,
-  ListItem,
-  OrderedList as ChakraOrderedList,
-  SystemStyleObject,
-} from "@chakra-ui/react"
+import { Box, List, SystemStyleObject } from "@chakra-ui/react"
 
 export type OrderedListProps = {
   listData: Array<React.ReactNode>
@@ -33,31 +28,31 @@ const liCustomType: SystemStyleObject = {
 const OrderedList = ({ listData }: OrderedListProps) => {
   return (
     <Box mb="1.45rem">
-      <ChakraOrderedList
+      <List.Root
         styleType="none"
         ps={8}
         mb="0"
         ms="1.45rem"
-        sx={{
+        css={{
           counterReset: "li-counter",
         }}
       >
         {listData.map((data, idx) => {
           return (
-            <ListItem
+            <List.Item
               key={idx}
               m="0 0 1rem 0"
               position="relative" // For the custom list types
-              sx={{
+              css={{
                 counterIncrement: "li-counter",
               }}
               _before={liCustomType}
             >
               {data}
-            </ListItem>
+            </List.Item>
           )
         })}
-      </ChakraOrderedList>
+      </List.Root>
     </Box>
   )
 }

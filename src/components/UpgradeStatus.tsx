@@ -1,6 +1,7 @@
 import React from "react"
 import { useTranslation } from "next-i18next"
-import { Heading, useColorModeValue, VStack } from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Heading, VStack } from "@chakra-ui/react"
 
 import type { TranslationKey } from "@/lib/types"
 
@@ -21,9 +22,12 @@ const UpgradeStatus = ({
   children,
   isShipped = false,
 }: UpgradeStatusProps) => {
-  const border = useColorModeValue("none", "2px solid")
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
+
+  const border = !isDark ? "none" : "2px solid"
   const darkBorderColor = isShipped ? "#3fb181" : "#a4a4ff"
-  const borderColor = useColorModeValue(undefined, darkBorderColor)
+  const borderColor = !isDark ? undefined : darkBorderColor
   const { t } = useTranslation("page-staking")
 
   return (
@@ -41,7 +45,7 @@ const UpgradeStatus = ({
       mb={8}
       mt={{ base: 8, lg: 0 }}
       p={6}
-      spacing={6}
+      gap={6}
       width="100%"
     >
       <Heading fontSize="sm" fontWeight="normal" textTransform="uppercase">

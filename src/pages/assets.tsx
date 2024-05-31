@@ -1,6 +1,7 @@
 import type { GetStaticProps } from "next/types"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { useTheme } from "next-themes"
 import {
   Box,
   Center,
@@ -9,7 +10,6 @@ import {
   type HeadingProps,
   SimpleGrid,
   type SimpleGridProps,
-  useColorModeValue,
 } from "@chakra-ui/react"
 
 import type { BasePageProps, ChildOnlyProp } from "@/lib/types"
@@ -135,10 +135,11 @@ export const getStaticProps = (async ({ locale }) => {
 
 const AssetsPage = () => {
   const { t } = useTranslation("page-assets")
-  const assetPageHeroImage = useColorModeValue(
-    ethDiamondBlack,
-    ethDiamondPurple
-  )
+
+  const { theme } = useTheme()
+  const assetPageHeroImage =
+    theme === "light" ? ethDiamondBlack : ethDiamondPurple
+
   return (
     <Flex direction="column" width="full">
       <PageMetadata

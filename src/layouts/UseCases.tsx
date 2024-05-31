@@ -1,15 +1,7 @@
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
 import { MdExpandMore } from "react-icons/md"
-import {
-  Box,
-  Flex,
-  Icon,
-  ListItem,
-  Text,
-  UnorderedList,
-  useToken,
-} from "@chakra-ui/react"
+import { Box, Flex, Icon, List, Text, useToken } from "@chakra-ui/react"
 
 import type { ChildOnlyProp } from "@/lib/types"
 import type { MdPageContent, UseCasesFrontmatter } from "@/lib/interfaces"
@@ -195,13 +187,13 @@ export const UseCasesLayout = ({
           <Emoji fontSize="4rem" text={frontmatter.emoji!} />
           <Title>{frontmatter.title}</Title>
           <Box>
-            <UnorderedList ms="1.45rem">
+            <List.Root ms="1.45rem">
               {summaryPoints.map((point, idx) => (
-                <ListItem key={idx} mb={0}>
+                <List.Item key={idx} mb={0}>
                   {point}
-                </ListItem>
+                </List.Item>
               ))}
-            </UnorderedList>
+            </List.Root>
             <TableOfContents
               items={tocItems}
               maxDepth={frontmatter.sidebarDepth || 2}
@@ -235,8 +227,6 @@ export const UseCasesLayout = ({
         />
       </HeroContainer>
       <Flex
-        as={BaseLink}
-        to={"#" + MAIN_CONTENT_ID}
         bg="ednBackground"
         justifyContent="center"
         p={4}
@@ -245,8 +235,11 @@ export const UseCasesLayout = ({
           bg: "background.base",
         }}
         hideBelow={lgBp}
+        asChild
       >
-        <Icon as={MdExpandMore} fontSize="2xl" color="secondary" />
+        <BaseLink href={"#" + MAIN_CONTENT_ID}>
+          <Icon as={MdExpandMore} fontSize="2xl" color="secondary" />
+        </BaseLink>
       </Flex>
       <Page>
         {/* TODO: Switch to `above="lg"` after completion of Chakra Migration */}

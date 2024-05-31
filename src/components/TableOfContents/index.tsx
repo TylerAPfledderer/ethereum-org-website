@@ -1,14 +1,6 @@
 import { useTranslation } from "next-i18next"
 import { FaGithub } from "react-icons/fa"
-import {
-  Box,
-  BoxProps,
-  calc,
-  Icon,
-  List,
-  ListItem,
-  useToken,
-} from "@chakra-ui/react"
+import { Box, BoxProps, Icon, List, useToken } from "@chakra-ui/react"
 
 import type { ToCItem } from "@/lib/types"
 
@@ -76,13 +68,13 @@ const TableOfContents = ({
       pe={0}
       maxW="25%"
       minW={48}
-      height={calc.subtract("100vh", "80px")}
+      height="calc(100vh - 80px)"
       overflowY="auto"
       {...rest}
     >
-      <List {...outerListProps}>
+      <List.Root {...outerListProps}>
         {!hideEditButton && editPath && (
-          <ListItem mb={2}>
+          <List.Item mb={2}>
             <ButtonLink
               leftIcon={<Icon as={FaGithub} />}
               href={editPath}
@@ -90,22 +82,22 @@ const TableOfContents = ({
             >
               {t("edit-page")}
             </ButtonLink>
-          </ListItem>
+          </List.Item>
         )}
-        <ListItem>
+        <List.Item>
           <Box mb={2} textTransform="uppercase">
             {t("on-this-page")}
           </Box>
-          <List m={0}>
+          <List.Root m={0}>
             <ItemsList
               items={items}
               depth={0}
               maxDepth={maxDepth ? maxDepth : 1}
               activeHash={activeHash}
             />
-          </List>
-        </ListItem>
-      </List>
+          </List.Root>
+        </List.Item>
+      </List.Root>
     </Box>
   )
 }

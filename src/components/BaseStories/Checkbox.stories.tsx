@@ -8,14 +8,14 @@ import { Meta } from "@storybook/react"
 
 const meta = {
   title: "Atoms / Form / Checkbox",
-  component: CheckboxComponent,
+  component: CheckboxComponent.Root,
   parameters: {
     controls: {
       hideNoControlsWarning: true,
       expanded: false,
     },
   },
-} satisfies Meta<typeof CheckboxComponent>
+} satisfies Meta<typeof CheckboxComponent.Root>
 
 export default meta
 
@@ -23,25 +23,27 @@ const DEFAULT_VAL = "checked"
 
 export const Checkbox = {
   render: () => (
-    <CheckboxGroup defaultValue={[DEFAULT_VAL]}>
-      <VStack spacing={4} align="flex-start">
-        <CheckboxComponent value={DEFAULT_VAL}>defaultValue</CheckboxComponent>
-        <CheckboxComponent value="disabled" isDisabled>
+    <CheckboxComponent.Group defaultValue={[DEFAULT_VAL]}>
+      <VStack gap={4} align="flex-start">
+        <CheckboxComponent.Root value={DEFAULT_VAL}>
+          defaultValue
+        </CheckboxComponent.Root>
+        <CheckboxComponent.Root value="disabled" disabled>
           isDisabled
-        </CheckboxComponent>
-        <CheckboxComponent value="focusable" isFocusable isDisabled>
+        </CheckboxComponent.Root>
+        <CheckboxComponent.Root value="focusable" focusable disabled>
           isFocusable
-        </CheckboxComponent>
-        <CheckboxComponent value="read-only" isReadOnly>
+        </CheckboxComponent.Root>
+        <CheckboxComponent.Root value="read-only" readOnly>
           isReadOnly
-        </CheckboxComponent>
-        <CheckboxComponent value="required" isRequired>
+        </CheckboxComponent.Root>
+        <CheckboxComponent.Root value="required" required>
           isRequired
-        </CheckboxComponent>
-        <CheckboxComponent value="invalid" isInvalid>
+        </CheckboxComponent.Root>
+        <CheckboxComponent.Root value="invalid" invalid>
           isInvalid
-        </CheckboxComponent>
+        </CheckboxComponent.Root>
       </VStack>
-    </CheckboxGroup>
+    </CheckboxComponent.Group>
   ),
 }

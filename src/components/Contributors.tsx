@@ -65,15 +65,15 @@ const Contributors = () => {
             <Box padding="1rem">
               <Text as="h3" fontSize="md" marginTop="2" marginBottom="4">
                 <LinkOverlay
-                  as={InlineLink}
-                  href={contributor.profile}
-                  hideArrow
                   color="text"
                   textDecoration="none"
                   _hover={{ textDecoration: "none" }}
-                  isExternal
+                  external
+                  asChild
                 >
-                  {contributor.name}
+                  <InlineLink href={contributor.profile} hideArrow>
+                    {contributor.name}
+                  </InlineLink>
                 </LinkOverlay>
               </Text>
             </Box>

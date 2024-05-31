@@ -44,13 +44,14 @@ export const GridItem = ({ metric }: GridItemProps) => {
         <Tooltip content={tooltipContent(metric)}>
           <Box as="span" display="inline-block">
             <Icon
-              as={MdInfoOutline}
-              boxSize={6}
+              boxSize="6"
               fill="text"
               _hover={{ fill: "primary.base" }}
               _active={{ fill: "primary.base" }}
               _focus={{ fill: "primary.base" }}
-            />
+            >
+              <MdInfoOutline />
+            </Icon>
           </Box>
         </Tooltip>
       </Box>

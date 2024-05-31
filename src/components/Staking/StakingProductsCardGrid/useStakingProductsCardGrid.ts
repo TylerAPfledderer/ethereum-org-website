@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { shuffle } from "lodash"
-import { useColorModeValue } from "@chakra-ui/react"
+import { useTheme } from "next-themes"
 
 import stakingProducts from "@/data/staking-products.json"
 
@@ -27,7 +27,8 @@ export const useStakingProductsCardGrid = ({
   category: StakingProductsCategoryKeys
 }) => {
   const [rankedProducts, updateRankedProducts] = useState<Array<Product>>([])
-  const [SAT, LUM] = useColorModeValue(["75%", "60%"], ["50%", "35%"])
+  const { theme } = useTheme()
+  const [SAT, LUM] = theme === "light" ? ["75%", "60%"] : ["50%", "35%"]
 
   useEffect(() => {
     const categoryProducts = stakingProducts[category]

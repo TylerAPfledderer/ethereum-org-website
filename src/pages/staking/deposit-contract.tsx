@@ -1,4 +1,4 @@
-import { ReactNode, useEffect, useState } from "react"
+import { forwardRef, ReactNode, useEffect, useState } from "react"
 import makeBlockie from "ethereum-blockies-base64"
 import { type GetStaticProps } from "next"
 import { useRouter } from "next/router"
@@ -10,9 +10,8 @@ import {
   type ButtonProps,
   Checkbox,
   Flex,
-  forwardRef,
   Heading,
-  Img,
+  Image,
   Text,
   useToken,
 } from "@chakra-ui/react"
@@ -135,19 +134,21 @@ const AddressCard = (props: ChildOnlyProp) => {
   )
 }
 
-const Address = forwardRef<ChildOnlyProp, "div">((props, ref) => (
-  <Box
-    ref={ref}
-    fontFamily="monospace"
-    borderRadius="sm"
-    fontSize="2rem"
-    flexWrap="wrap"
-    textTransform="uppercase"
-    lineHeight="140%"
-    mb={4}
-    {...props}
-  />
-))
+const Address = forwardRef<"div", ChildOnlyProp>(function Address(props, ref) {
+  return (
+    <Box
+      ref={ref}
+      fontFamily="monospace"
+      borderRadius="sm"
+      fontSize="2rem"
+      flexWrap="wrap"
+      textTransform="uppercase"
+      lineHeight="140%"
+      mb={4}
+      {...props}
+    />
+  )
+})
 
 const CopyButton = (props: ButtonProps) => (
   <Button
@@ -192,7 +193,7 @@ const Caption = (props: ChildOnlyProp) => (
 )
 
 const Blockie = (props: { src: string }) => (
-  <Img src={props.src} borderRadius="base" height={16} width={16} />
+  <Image src={props.src} alt="" borderRadius="base" height={16} width={16} />
 )
 
 const StyledFakeLink = (props: { onClick: any; children: ReactNode }) => (
@@ -379,9 +380,9 @@ const DepositContractPage = () => {
                       {t("page-staking-deposit-contract-confirm-address")}
                     </CardTitle>
                   </Row>
-                  <Checkbox
+                  <Checkbox.Root
                     mb={2}
-                    isChecked={state.userHasUsedLaunchpad}
+                    checked={state.userHasUsedLaunchpad}
                     onChange={() =>
                       setState({
                         ...state,
@@ -390,10 +391,10 @@ const DepositContractPage = () => {
                     }
                   >
                     {t("page-staking-deposit-contract-checkbox1")}
-                  </Checkbox>
-                  <Checkbox
+                  </Checkbox.Root>
+                  <Checkbox.Root
                     mb={2}
-                    isChecked={state.userUnderstandsStaking}
+                    checked={state.userUnderstandsStaking}
                     onChange={() =>
                       setState({
                         ...state,
@@ -402,10 +403,10 @@ const DepositContractPage = () => {
                     }
                   >
                     {t("page-staking-deposit-contract-checkbox2")}
-                  </Checkbox>
-                  <Checkbox
+                  </Checkbox.Root>
+                  <Checkbox.Root
                     mb={2}
-                    isChecked={state.userWillCheckOtherSources}
+                    checked={state.userWillCheckOtherSources}
                     onChange={() =>
                       setState({
                         ...state,
@@ -415,14 +416,14 @@ const DepositContractPage = () => {
                     }
                   >
                     {t("page-staking-deposit-contract-checkbox3")}
-                  </Checkbox>
+                  </Checkbox.Root>
                   <CopyButton
-                    isDisabled={!isButtonEnabled}
-                    leftIcon={<Emoji text=":eyes:" boxSize={4} />}
+                    disabled={!isButtonEnabled}
                     onClick={() =>
                       setState({ ...state, showAddress: !state.showAddress })
                     }
                   >
+                    <Emoji text=":eyes:" boxSize="4" />
                     {t("page-staking-deposit-contract-reveal-address-btn")}
                   </CopyButton>
                 </>

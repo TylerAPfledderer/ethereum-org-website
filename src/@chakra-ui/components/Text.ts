@@ -1,48 +1,48 @@
-import { defineStyle, defineStyleConfig } from "@chakra-ui/react"
+import { defineRecipe } from "@chakra-ui/react"
 
-const sizes = {
-  "6xl": defineStyle({
-    fontSize: "6xl",
-    lineHeight: "4xs",
-  }),
-  "5xl": defineStyle({
-    fontSize: "5xl",
-    lineHeight: "4xs",
-  }),
-  "4xl": defineStyle({
-    fontSize: "4xl",
-    lineHeight: "4xs",
-  }),
-  "3xl": defineStyle({
-    fontSize: "3xl",
-    lineHeight: "2xs",
-  }),
-  "2xl": defineStyle({
-    fontSize: "2xl",
-    lineHeight: "2xs",
-  }),
-  xl: defineStyle({
-    fontSize: "xl",
-    lineHeight: "xs",
-  }),
-  lg: defineStyle({
-    fontSize: "lg",
-    lineHeight: "base",
-  }),
-  md: defineStyle({
-    fontSize: "md",
-    lineHeight: "base",
-  }),
-  sm: defineStyle({
-    fontSize: "sm",
-    lineHeight: "base",
-  }),
-  xs: defineStyle({
-    fontSize: "xs",
-    lineHeight: "base",
-  }),
-}
-
-export const Text = defineStyleConfig({
-  sizes,
+export const textRecipe = defineRecipe({
+  variants: {
+    sizes: {
+      "6xl": {
+        fontSize: "6xl",
+        lineHeight: "4xs",
+      },
+      "5xl": {
+        fontSize: "5xl",
+        lineHeight: "4xs",
+      },
+      "4xl": {
+        fontSize: "4xl",
+        lineHeight: "4xs",
+      },
+      "3xl": {
+        fontSize: "3xl",
+        lineHeight: "2xs",
+      },
+      "2xl": {
+        fontSize: "2xl",
+        lineHeight: "2xs",
+      },
+      xl: {
+        fontSize: "xl",
+        lineHeight: "xs",
+      },
+      lg: {
+        fontSize: "lg",
+        lineHeight: "base",
+      },
+      md: {
+        fontSize: "md",
+        lineHeight: "base",
+      },
+      sm: {
+        fontSize: "sm",
+        lineHeight: "base",
+      },
+      xs: {
+        fontSize: "xs",
+        lineHeight: "base",
+      },
+    },
+  },
 })

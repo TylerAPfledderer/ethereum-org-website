@@ -42,7 +42,7 @@ export const Dropdown: Story = {
     ],
   },
   render: (args) => (
-    <HStack spacing={4}>
+    <HStack gap="4">
       <Select {...args} />
       <Select {...args} variant="outline" />
     </HStack>

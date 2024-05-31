@@ -4,17 +4,14 @@ import {
   Badge,
   Box,
   type BoxProps,
-  calc,
   chakra,
-  Divider as ChakraDivider,
   Flex,
   type FlexProps,
   type HeadingProps,
   Icon,
-  ListItem,
-  OrderedList,
+  List,
+  Separator,
   Text,
-  UnorderedList,
   useToken,
 } from "@chakra-ui/react"
 
@@ -141,7 +138,7 @@ export const Paragraph = (props: ChildOnlyProp) => (
 )
 
 export const HR = () => (
-  <ChakraDivider
+  <Separator
     mt={8}
     mb={4}
     display="inline-block"
@@ -160,12 +157,12 @@ export const htmlElements = {
   h4: Heading4,
   hr: HR,
   img: MarkdownImage,
-  li: ListItem,
-  ol: OrderedList,
+  li: List.Item,
+  ol: (props) => <List.Root as="ol" {...props} />,
   p: Paragraph,
   pre: Pre,
   time: LocaleDateTime,
-  ul: UnorderedList,
+  ul: List.Root,
   iframe: VideoIframe,
   ...mdxTableComponents,
 }
@@ -181,7 +178,7 @@ export const Page = (props: FlexProps) => (
     mb={16}
     pt={{ lg: 16 }}
     width="full"
-    sx={{ "h2:first-of-type": { mt: { lg: 0 } } }}
+    css={{ "h2:first-of-type": { mt: { lg: 0 } } }}
     {...props}
   />
 )
@@ -199,7 +196,7 @@ export const ContentContainer = (props: Pick<BoxProps, "id" | "children">) => {
       px={8}
       pb={8}
       {...props}
-      sx={{
+      css={{
         ".citation p": {
           color: "text200",
         },

@@ -7,6 +7,7 @@ import {
   Box,
   type BoxProps,
   Flex,
+  type FlexProps,
   Heading,
   Text as ChakraText,
 } from "@chakra-ui/react"
@@ -43,15 +44,17 @@ import ETHImage from "@/public/eth-logo.png"
 import FindWalletImage from "@/public/wallets/find-wallet.png"
 import HeroImage from "@/public/wallets/wallet-hero.png"
 
-const Page = (props: BoxProps) => (
+const Page = (props: FlexProps) => (
   <Flex
-    as={MainArticle}
-    direction="column"
+    flexDirection="column"
     align="center"
     width="full"
     m="0 auto"
     {...props}
-  />
+    asChild
+  >
+    <MainArticle />
+  </Flex>
 )
 
 const GrayContainer = (props: BoxProps) => (

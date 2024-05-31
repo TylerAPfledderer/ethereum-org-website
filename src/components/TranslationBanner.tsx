@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
-import { Box, CloseButton, Flex, Heading, useToken } from "@chakra-ui/react"
+import { MdClose } from "react-icons/md"
+import { Box, Flex, Heading, useToken } from "@chakra-ui/react"
 
 import type { Lang } from "@/lib/types"
 
@@ -9,7 +10,8 @@ import { isLangRightToLeft } from "@/lib/utils/translations"
 
 import { DEFAULT_LOCALE } from "../lib/constants"
 
-import { ButtonLink } from "./Buttons"
+import ButtonLink from "./Buttons/ButtonLink"
+import IconButton from "./Buttons/IconButton"
 import Emoji from "./Emoji"
 
 export type TranslationBannerProps = {
@@ -115,7 +117,7 @@ const TranslationBanner = ({
             )} */}
           </Flex>
         </Flex>
-        <CloseButton
+        <IconButton
           position="absolute"
           top="0"
           insetInlineEnd="0"
@@ -125,7 +127,9 @@ const TranslationBanner = ({
             color: "primary.base",
           }}
           onClick={() => setIsOpen(false)}
-        />
+        >
+          <MdClose />
+        </IconButton>
       </Flex>
     </Box>
   )

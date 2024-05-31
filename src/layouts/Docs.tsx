@@ -3,13 +3,12 @@ import {
   Badge,
   Box,
   type BoxProps,
-  Divider as ChakraDivider,
   Flex,
   type FlexProps,
   type HeadingProps,
-  type ListProps,
-  OrderedList as ChakraOrderedList,
-  UnorderedList as ChakraUnorderedList,
+  List,
+  type ListRootProps,
+  Separator,
   useToken,
 } from "@chakra-ui/react"
 
@@ -62,12 +61,7 @@ const Page = (props: ChildOnlyProp & Pick<FlexProps, "dir">) => (
 )
 
 const Divider = () => (
-  <ChakraDivider
-    my={16}
-    w="10%"
-    borderBottomWidth={1}
-    borderColor="homeDivider"
-  />
+  <Separator my={16} w="10%" borderBottomWidth={1} borderColor="homeDivider" />
 )
 
 type ContentContainerProps = Pick<BoxProps, "children" | "dir">
@@ -127,11 +121,11 @@ const H4 = (props: HeadingProps) => (
   <MdHeading4 {...baseSubHeadingStyles} {...props} />
 )
 
-const UnorderedList = (props: ListProps) => (
-  <ChakraUnorderedList ms="1.45rem" {...props} />
+const UnorderedList = (props: ListRootProps) => (
+  <List.Root ms="1.45rem" {...props} />
 )
-const OrderedList = (props: ListProps) => (
-  <ChakraOrderedList ms="1.45rem" {...props} />
+const OrderedList = (props: ListRootProps) => (
+  <List.Root as="ol" ms="1.45rem" {...props} />
 )
 
 // Apply styles for classes within markdown here
@@ -147,7 +141,7 @@ const Content = (props: ChildOnlyProp) => {
       pb={{ base: 8, md: 16 }}
       px={{ base: 8, md: 16 }}
       m="0 auto"
-      sx={{
+      css={{
         ".citation": {
           p: {
             color: "text200",

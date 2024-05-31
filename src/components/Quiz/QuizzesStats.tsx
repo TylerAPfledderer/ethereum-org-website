@@ -8,12 +8,11 @@ import {
   GridItem,
   Highlight,
   HStack,
-  ListItem,
+  List,
   Progress,
   SimpleGrid,
   Stack,
   Text,
-  UnorderedList,
 } from "@chakra-ui/react"
 
 import { CompletedQuizzes, QuizShareStats } from "@/lib/types"
@@ -74,7 +73,7 @@ const QuizzesStats = ({
 
   return (
     <Box>
-      <Stack mt={{ base: 0, lg: "12" }} spacing={{ base: "4", lg: "2" }}>
+      <Stack mt={{ base: 0, lg: "12" }} gap={{ base: "4", lg: "2" }}>
         {/* user stats */}
         <SimpleGrid
           columns={{ base: 1, lg: 2 }}
@@ -111,11 +110,8 @@ const QuizzesStats = ({
           </GridItem>
 
           <GridItem colSpan={{ lg: 2 }} order={{ base: 2, lg: 3 }}>
-            <Stack spacing="2">
-              <HStack
-                spacing="4"
-                justify={{ base: "center", lg: "flex-start" }}
-              >
+            <Stack gap="2">
+              <HStack gap="4" justify={{ base: "center", lg: "flex-start" }}>
                 <Circle size="64px" bg="primary.base">
                   <TrophyIcon color="neutral" w="35.62px" h="35.62px" />
                 </Circle>
@@ -129,9 +125,14 @@ const QuizzesStats = ({
                 </Text>
               </HStack>
 
-              <Progress
+              <Progress.Root
                 value={(totalCorrectAnswers / totalQuizzesPoints) * 100}
-              />
+              >
+                <Progress.Track>
+                  <Progress.FilledTrack />
+                </Progress.Track>
+                <Progress.ValueText />
+              </Progress.Root>
 
               <Flex columnGap="10" direction={{ base: "column", lg: "row" }}>
                 <Text mt={{ base: "2", lg: 0 }} color="body.medium">
@@ -163,36 +164,43 @@ const QuizzesStats = ({
           </Text>
 
           <Flex
-            as={UnorderedList}
             direction={{ base: "column", md: "row" }}
             columnGap="20"
             rowGap="6"
             m={0}
+            asChild
           >
-            {(
-              [
-                {
-                  labelId: "average-score",
-                  value: formattedCollectiveAverageScore,
-                },
-                {
-                  labelId: "questions-answered",
-                  value: formattedCollectiveQuestionsAnswered + "+",
-                },
-                {
-                  labelId: "retry",
-                  value: formattedCollectiveRetryRate,
-                },
-              ] satisfies Array<{ labelId: string; value: string }>
-            ).map(({ labelId, value }) => (
-              <Stack as={ListItem} key={labelId} spacing={0} m={0}>
-                <Text as="span" color="body.medium">
-                  <Translation id={labelId} options={{ ns: "learn-quizzes" }} />
-                </Text>
-                {/* Data from Matomo, manually updated */}
-                <Text as="span">{value}</Text>
-              </Stack>
-            ))}
+            <List.Root>
+              {(
+                [
+                  {
+                    labelId: "average-score",
+                    value: formattedCollectiveAverageScore,
+                  },
+                  {
+                    labelId: "questions-answered",
+                    value: formattedCollectiveQuestionsAnswered + "+",
+                  },
+                  {
+                    labelId: "retry",
+                    value: formattedCollectiveRetryRate,
+                  },
+                ] satisfies Array<{ labelId: string; value: string }>
+              ).map(({ labelId, value }) => (
+                <Stack key={labelId} gap={0} m={0} asChild>
+                  <List.Item>
+                    <Text as="span" color="body.medium">
+                      <Translation
+                        id={labelId}
+                        options={{ ns: "learn-quizzes" }}
+                      />
+                    </Text>
+                    {/* Data from Matomo, manually updated */}
+                    <Text as="span">{value}</Text>
+                  </List.Item>
+                </Stack>
+              ))}
+            </List.Root>
           </Flex>
         </Stack>
       </Stack>

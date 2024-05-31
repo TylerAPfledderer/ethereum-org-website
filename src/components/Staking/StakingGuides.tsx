@@ -24,7 +24,11 @@ const StakingGuides = () => {
     },
   ]
 
-  return <Stack as={CardList} direction="column" gap={4} items={guides} />
+  return (
+    <Stack direction="column" gap="4" asChild>
+      <CardList items={guides} />
+    </Stack>
+  )
 }
 
 export default StakingGuides

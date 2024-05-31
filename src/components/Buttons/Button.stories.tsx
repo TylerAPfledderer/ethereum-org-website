@@ -46,11 +46,11 @@ export const StyleVariants: Story = {
     },
   },
   render: (args) => (
-    <VStack spacing={4}>
+    <VStack gap="4">
       {variants.map((variant, idx) => (
-        <HStack spacing={4} key={idx}>
+        <HStack gap="4" key={idx}>
           <Button variant={variant} {...args} />
-          <Button variant={variant} isDisabled {...args} />
+          <Button variant={variant} disabled {...args} />
         </HStack>
       ))}
     </VStack>
@@ -64,28 +64,41 @@ export const IconVariants: Story = {
       options: ["solid", "outline", "ghost", "link"],
     },
   },
-  render: (args) => (
+  render: ({ children, ...args }) => (
     <HStack>
       <VStack>
-        <Button {...args} />
-        <Button size="sm" {...args} />
+        <Button {...args}>{children}</Button>
+        <Button size="sm" {...args}>
+          {children}
+        </Button>
       </VStack>
       <VStack>
-        <Button leftIcon={<MdExpandMore />} {...args} />
-        <Button leftIcon={<MdExpandMore />} size="sm" {...args} />
+        <Button {...args}>
+          <MdExpandMore />
+          {children}
+        </Button>
+        <Button size="sm" {...args}>
+          <MdExpandMore />
+          {children}
+        </Button>
       </VStack>
       <VStack>
-        <Button rightIcon={<MdChevronRight />} {...args} />
-        <Button rightIcon={<MdChevronRight />} size="sm" {...args} />
+        <Button {...args}>
+          {children}
+          <MdChevronRight />
+        </Button>
+        <Button size="sm" {...args}>
+          {children}
+          <MdChevronRight />
+        </Button>
       </VStack>
       <VStack>
-        <IconButton aria-label="next" icon={<MdChevronRight />} {...args} />
-        <IconButton
-          aria-label="next"
-          icon={<MdChevronRight />}
-          size="sm"
-          {...args}
-        />
+        <IconButton aria-label="next" {...args}>
+          <MdChevronRight />
+        </IconButton>
+        <IconButton aria-label="next" size="sm" {...args}>
+          <MdChevronRight />
+        </IconButton>
       </VStack>
     </HStack>
   ),
@@ -95,24 +108,31 @@ export const MultiLineText: Story = {
   args: {
     children: "Button label can have two lines",
   },
-  render: (args) => (
+  render: ({ children, ...args }) => (
     <HStack>
       <VStack maxW="171px">
-        <Button variant="outline" isSecondary {...args} />
-        <Button variant="outline" size="sm" isSecondary {...args} />
+        <Button variant="outline" isSecondary {...args}>
+          {children}
+        </Button>
+        <Button variant="outline" size="sm" isSecondary {...args}>
+          {children}
+        </Button>
       </VStack>
       <VStack maxW="171px">
-        <Button {...args} />
-        <Button size="sm" isSecondary {...args} />
+        <Button {...args}>{children}</Button>
+        <Button size="sm" isSecondary {...args}>
+          {children}
+        </Button>
       </VStack>
       <VStack maxW="209px">
-        <Button rightIcon={<MdChevronRight />} {...args} />
-        <Button
-          rightIcon={<MdChevronRight />}
-          size="sm"
-          isSecondary
-          {...args}
-        />
+        <Button {...args}>
+          {children}
+          <MdChevronRight />
+        </Button>
+        <Button size="sm" isSecondary {...args}>
+          {children}
+          <MdChevronRight />
+        </Button>
       </VStack>
     </HStack>
   ),
@@ -126,7 +146,9 @@ export const OverrideStyles: Story = {
         the theme config
       </Text>
       <VStack>
-        <IconButton aria-label="toggle" icon={<MdNightlight />} px="1.5" />
+        <IconButton aria-label="toggle" px="1.5">
+          <MdNightlight />
+        </IconButton>
         <ButtonLink href="#" borderRadius="full" px="0" py="0">
           <Translation id="get-involved" />
         </ButtonLink>

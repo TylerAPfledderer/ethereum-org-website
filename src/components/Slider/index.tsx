@@ -75,28 +75,30 @@ const Slider = ({ children, onSlideChange }: SliderProps) => {
         <IconButton
           aria-label="MdChevronLeft"
           onClick={scrollPrev}
-          icon={<MdChevronLeft fontSize={24} focusable />}
-          isRound
+          size="sm"
+          bg={prevBtnEnabled ? "sliderBtnBg" : "sliderBtnBgDisabled"}
+          borderRadius="full"
+          color={prevBtnEnabled ? "sliderBtnColor" : "sliderBtnColorDisabled"}
           me="0.8rem"
+          transform={flipForRtl}
           _hover={{ boxShadow: "none" }}
           _focus={{ boxShadow: "none" }}
-          bg={prevBtnEnabled ? "sliderBtnBg" : "sliderBtnBgDisabled"}
-          size="sm"
-          color={prevBtnEnabled ? "sliderBtnColor" : "sliderBtnColorDisabled"}
-          transform={flipForRtl}
-        />
+        >
+          <MdChevronLeft fontSize={24} focusable />
+        </IconButton>
         <IconButton
           aria-label="MdChevronRight"
           onClick={scrollNext}
-          icon={<MdChevronRight fontSize={24} focusable />}
-          isRound
-          _hover={{ boxShadow: "none" }}
-          _focus={{ boxShadow: "none" }}
-          bg={nextBtnEnabled ? "sliderBtnBg" : "sliderBtnBgDisabled"}
           size="sm"
+          bg={nextBtnEnabled ? "sliderBtnBg" : "sliderBtnBgDisabled"}
+          borderRadius="full"
           color={nextBtnEnabled ? "sliderBtnColor" : "sliderBtnColorDisabled"}
           transform={flipForRtl}
-        />
+          _hover={{ boxShadow: "none" }}
+          _focus={{ boxShadow: "none" }}
+        >
+          <MdChevronRight fontSize={24} focusable />
+        </IconButton>
       </Flex>
       <Center
         position={{ sm: "absolute" }}
@@ -116,7 +118,7 @@ const Slider = ({ children, onSlideChange }: SliderProps) => {
             padding={0}
             cursor="pointer"
             onClick={() => scrollTo(index)}
-            sx={{
+            css={{
               me: "1rem",
               "&:last-child": {
                 me: 0,
@@ -134,7 +136,7 @@ export const EmblaSlide = ({ children }: ChildOnlyProp) => {
     <Box
       position="relative"
       minWidth="full"
-      sx={{
+      css={{
         h2: {
           marginTop: 0,
         },
@@ -143,7 +145,7 @@ export const EmblaSlide = ({ children }: ChildOnlyProp) => {
         },
       }}
     >
-      <Stack spacing="8">{children}</Stack>
+      <Stack gap="8">{children}</Stack>
     </Box>
   )
 }

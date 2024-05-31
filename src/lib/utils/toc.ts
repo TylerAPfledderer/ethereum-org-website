@@ -1,4 +1,4 @@
-import { ListProps } from "@chakra-ui/react"
+import type { ListRootProps } from "@chakra-ui/react"
 
 import type { ToCItem, TocNodeType } from "@/lib/types"
 
@@ -29,7 +29,7 @@ export const parseHeadingId = (heading: string): string => {
 /**
  * Common props used used for the outermost list element in the mobile and desktop renders
  */
-export const outerListProps: ListProps = {
+export const outerListProps: ListRootProps = {
   borderStart: "1px solid",
   borderStartColor: "dropdownBorder",
   borderTop: 0,
@@ -42,7 +42,7 @@ export const outerListProps: ListProps = {
   ps: 4,
   pe: 1,
   pt: 0,
-  sx: {
+  css: {
     // TODO: Flip to object syntax with `lg` token after completion of Chakra migration
     "@media (max-width: var(--eth-breakpoints-lg))": {
       borderStart: 0,

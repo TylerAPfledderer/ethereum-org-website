@@ -4,7 +4,7 @@ import { Box, Text } from "@chakra-ui/react"
 
 import { WalletFilter } from "@/lib/types"
 
-import { Button } from "@/components/Buttons"
+import Button from "@/components/Buttons/Button"
 
 import { trackCustomEvent } from "@/lib/utils/matomo"
 import { walletsListingCount } from "@/lib/utils/wallets"
@@ -53,13 +53,12 @@ export const MobileFiltersButton = ({
       py="5px"
     >
       <Button
-        rightIcon={<FilterBurgerIcon />}
         variant="outline"
         border="none"
         ps={0}
         ms={4}
         gap={4}
-        sx={{
+        css={{
           svg: {
             boxSize: 8,
             line: { stroke: "primary.base" },
@@ -81,6 +80,7 @@ export const MobileFiltersButton = ({
             {t("page-find-wallet-active")}
           </Text>
         </Box>
+        <FilterBurgerIcon />
       </Button>
     </Box>
   )

@@ -3,15 +3,12 @@ import type { ComponentType, ReactNode, SVGProps } from "react"
 import {
   Badge,
   Box,
-  BoxProps,
   Center,
   Flex,
   Heading,
   HStack,
   Icon,
   List,
-  ListIcon,
-  ListItem,
 } from "@chakra-ui/react"
 
 import { ButtonLink } from "@/components/Buttons"
@@ -39,14 +36,14 @@ const Status = ({ status }: { status: FlagType | undefined }) => {
   const styles = { fontSize: "2xl", m: 0 }
   switch (status) {
     case "green-check":
-      return <ListIcon as={GreenCheckProductGlyphIcon} {...styles} />
+      return <List.Icon as={GreenCheckProductGlyphIcon} {...styles} />
     case "caution":
-      return <ListIcon as={CautionProductGlyphIcon} {...styles} />
+      return <List.Icon as={CautionProductGlyphIcon} {...styles} />
     case "warning":
     case "false":
-      return <ListIcon as={WarningProductGlyphIcon} {...styles} />
+      return <List.Icon as={WarningProductGlyphIcon} {...styles} />
     default:
-      return <ListIcon as={UnknownProductGlyphIcon} {...styles} />
+      return <List.Icon as={UnknownProductGlyphIcon} {...styles} />
   }
 }
 
@@ -100,7 +97,7 @@ export const StakingProductCard = ({
     matomo,
   },
 }: StakingProductCardProps) => {
-  const PADDED_DIV_STYLE: BoxProps = {
+  const PADDED_DIV_STYLE = {
     px: 8,
     py: 6,
   }
@@ -175,7 +172,7 @@ export const StakingProductCard = ({
     >
       <HStack
         {...PADDED_DIV_STYLE}
-        spacing={6}
+        gap="6"
         background={color}
         bgGradient="linear(0deg, rgba(0, 0, 0, 30%), rgba(0, 0, 0, 0))"
         borderRadius="base"
@@ -216,9 +213,9 @@ export const StakingProductCard = ({
         ))}
       </Flex>
       <Box {...PADDED_DIV_STYLE} py={0}>
-        <List m={0} gap={3}>
+        <List.Root m={0} gap={3}>
           {data.map(({ label, status }, idx) => (
-            <ListItem
+            <List.Item
               as={Flex}
               key={idx}
               textTransform="uppercase"
@@ -233,9 +230,9 @@ export const StakingProductCard = ({
             >
               <Status status={status} />
               {label}
-            </ListItem>
+            </List.Item>
           ))}
-        </List>
+        </List.Root>
       </Box>
       <Box {...PADDED_DIV_STYLE}>
         <ButtonLink href={url} customEventOptions={matomo} width="100%">

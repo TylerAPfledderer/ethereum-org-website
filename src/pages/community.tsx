@@ -272,8 +272,8 @@ const CommunityPage = () => {
           <Flex
             direction={{ base: "column-reverse", md: "row" }}
             alignItems="center"
-            mb={{ base: 0, m: 12 }}
-            mt={{ base: 0, m: 4 }}
+            mb={{ base: 0, md: 12 }}
+            mt={{ base: 0, md: 4 }}
           >
             <Box p={{ base: 0, sm: 8, lg: 24 }} boxSize="full">
               <H2 id="get-involved">
@@ -294,10 +294,9 @@ const CommunityPage = () => {
               />
             </ImageContainer>
           </Flex>
-          <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={{ base: 8, lg: 0 }}>
+          <SimpleGrid columns={{ base: 1, lg: 2 }} gap={{ base: 8, lg: 0 }}>
             {cards.map((card, idx) => (
               <Box
-                as={ActionCard}
                 minW={{ base: "min(100%, 240px)", lg: "440px" }}
                 m={{ base: 0, lg: 4 }}
                 borderRadius="sm"
@@ -306,13 +305,17 @@ const CommunityPage = () => {
                 bg="background.base"
                 boxShadow={theme.colors.cardBoxShadow}
                 key={idx}
-                title={card.title}
-                description={card.description}
-                to={card.to}
-                image={card.image}
-                imageWidth={320}
-                alt={card.alt}
-              />
+                asChild
+              >
+                <ActionCard
+                  title={card.title}
+                  description={card.description}
+                  to={card.to}
+                  image={card.image}
+                  imageWidth={320}
+                  alt={card.alt}
+                />
+              </Box>
             ))}
           </SimpleGrid>
         </Box>
@@ -452,35 +455,33 @@ const CommunityPage = () => {
       </Flex>
       <Content>
         <CardContainer>
-          <Box
-            as={Callout}
-            flex="1 1 416px"
-            minH="full"
-            image={ethImg}
-            titleKey="page-community:page-community-get-eth-title"
-            alt={t("page-community-get-eth-alt")}
-            descriptionKey="page-community:page-community-get-eth-description"
-          >
-            <Box>
-              <ButtonLink to="/get-eth/">
-                {t("page-community-get-eth")}
-              </ButtonLink>
-            </Box>
+          <Box flex="1 1 416px" minH="full" asChild>
+            <Callout
+              image={ethImg}
+              titleKey="page-community:page-community-get-eth-title"
+              alt={t("page-community-get-eth-alt")}
+              descriptionKey="page-community:page-community-get-eth-description"
+            >
+              <Box>
+                <ButtonLink to="/get-eth/">
+                  {t("page-community-get-eth")}
+                </ButtonLink>
+              </Box>
+            </Callout>
           </Box>
-          <Box
-            as={Callout}
-            flex="1 1 416px"
-            minH="full"
-            image={dogeComputerImg}
-            titleKey="page-community:page-community-explore-dapps-title"
-            alt={t("page-community-explore-dapps-alt")}
-            descriptionKey="page-community:page-community-explore-dapps-description"
-          >
-            <Box>
-              <ButtonLink to="/dapps/">
-                {t("page-community-explore-dapps")}
-              </ButtonLink>
-            </Box>
+          <Box flex="1 1 416px" minH="full" asChild>
+            <Callout
+              image={dogeComputerImg}
+              titleKey="page-community:page-community-explore-dapps-title"
+              alt={t("page-community-explore-dapps-alt")}
+              descriptionKey="page-community:page-community-explore-dapps-description"
+            >
+              <Box>
+                <ButtonLink to="/dapps/">
+                  {t("page-community-explore-dapps")}
+                </ButtonLink>
+              </Box>
+            </Callout>
           </Box>
         </CardContainer>
       </Content>

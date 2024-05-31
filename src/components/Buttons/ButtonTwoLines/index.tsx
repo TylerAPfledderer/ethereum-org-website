@@ -1,7 +1,7 @@
 import type { IconType } from "react-icons/lib"
 import { Icon, Stack, Text } from "@chakra-ui/react"
 
-import { Button, type ButtonProps } from "@/components/Buttons"
+import Button, { type ButtonProps } from "@/components/Buttons/Button"
 import ButtonLink, {
   type ButtonLinkProps,
 } from "@/components/Buttons/ButtonLink"
@@ -71,24 +71,20 @@ const ButtonTwoLines = (props: ButtonTwoLinesProps) => {
   const Component = hasHref(props) ? ButtonLink : Button
 
   return (
-    // TODO: fix type error
-    // @ts-ignore
+    // @ts-expect-error Need prop type overload here, or split the render
     <Component
       {...buttonStyles}
       size={size}
       py={vertPadding}
       {...rest}
-      sx={{
+      css={{
         ".chakra-button__icon svg": {
           // Force icon to be the same size for both button sizes
           fontSize: "2xl",
         },
       }}
     >
-      <Stack
-        spacing="0"
-        flexDir={reverseTextOrder ? "column-reverse" : "column"}
-      >
+      <Stack gap="0" flexDir={reverseTextOrder ? "column-reverse" : "column"}>
         <Text
           as="span"
           size="md"

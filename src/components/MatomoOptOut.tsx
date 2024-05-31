@@ -53,16 +53,19 @@ const MatomoOptOut = () => {
       {loading ? (
         "Loading preferences..."
       ) : (
-        <Checkbox
+        <Checkbox.Root
           id="matomo"
-          isChecked={!isOptedOut}
+          checked={!isOptedOut}
           onChange={handleCheckbox}
           me={2}
         >
-          {isOptedOut
-            ? "You are opted out. Check this box to opt-in."
-            : "You are not opted out. Uncheck this box to opt-out."}
-        </Checkbox>
+          <Checkbox.Control />
+          <Checkbox.Label>
+            {isOptedOut
+              ? "You are opted out. Check this box to opt-in."
+              : "You are not opted out. Uncheck this box to opt-out."}
+          </Checkbox.Label>
+        </Checkbox.Root>
       )}
     </Flex>
   )

@@ -1,12 +1,8 @@
 import { useTranslation } from "next-i18next"
+import { useTheme } from "next-themes"
 import { BsTranslate } from "react-icons/bs"
 import { MdBrightness2, MdSearch, MdWbSunny } from "react-icons/md"
-import {
-  DrawerFooter,
-  Grid,
-  MenuButton,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { DrawerFooter, Grid, Menu } from "@chakra-ui/react"
 
 import LanguagePicker from "@/components/LanguagePicker"
 
@@ -27,8 +23,10 @@ const MenuFooter = ({
   toggleSearch,
 }: MenuFooterProps) => {
   const { t } = useTranslation("common")
-  const ThemeIcon = useColorModeValue(MdBrightness2, MdWbSunny)
-  const themeLabelKey = useColorModeValue("dark-mode", "light-mode")
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
+  const ThemeIcon = !isDark ? MdBrightness2 : MdWbSunny
+  const themeLabelKey = !isDark ? "dark-mode" : "light-mode"
 
   return (
     <DrawerFooter
@@ -70,13 +68,11 @@ const MenuFooter = ({
             opacity: 0.4,
           }} // TODO: Replace with overlay component
         >
-          <MenuButton
-            as={FooterButton}
-            icon={BsTranslate}
-            name={MOBILE_LANGUAGE_BUTTON_NAME}
-          >
-            <FooterItemText>{t("languages")}</FooterItemText>
-          </MenuButton>
+          <Menu.Trigger name={MOBILE_LANGUAGE_BUTTON_NAME} asChild>
+            <FooterButton icon={BsTranslate}>
+              <FooterItemText>{t("languages")}</FooterItemText>
+            </FooterButton>
+          </Menu.Trigger>
         </LanguagePicker>
       </Grid>
     </DrawerFooter>

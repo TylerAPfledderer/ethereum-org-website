@@ -136,7 +136,7 @@ export const ConnectWeb3 = ({ nav, ctaLabel }: PhoneScreenProps) => {
               px={6}
               py={{ base: 2, md: 6 }}
               fontSize="lg"
-              sx={{ button: { textDecoration: "none" } }}
+              css={{ button: { textDecoration: "none" } }}
             >
               <Text fontWeight="bold" mb={4}>
                 Your collection (1)
@@ -151,7 +151,9 @@ export const ConnectWeb3 = ({ nav, ctaLabel }: PhoneScreenProps) => {
                 <NotificationPopover
                   title="Example walkthrough"
                   content="These are some things you could do as the owner of your NFTs"
-                  placement="top"
+                  positioning={{
+                    placement: "top",
+                  }}
                 >
                   <Flex
                     direction="column"
@@ -190,7 +192,9 @@ export const ConnectWeb3 = ({ nav, ctaLabel }: PhoneScreenProps) => {
               <NotificationPopover
                 title="Example walkthrough"
                 content="Try out a real Ethereum application when finished here"
-                placement="top"
+                positioning={{
+                  placement: "top",
+                }}
               >
                 <Box fontSize={{ base: "sm", md: "md" }}>
                   <Button variant="link" isDisabled display="block">
@@ -208,7 +212,7 @@ export const ConnectWeb3 = ({ nav, ctaLabel }: PhoneScreenProps) => {
       {[0, 1, 2, 3, 4].includes(step) && (
         <ProgressCta
           isAnimated={step === 0}
-          isDisabled={ctaDisabled}
+          disabled={ctaDisabled}
           progressStepper={progressStepper}
           mb={step === 0 ? 16 : 0}
         >

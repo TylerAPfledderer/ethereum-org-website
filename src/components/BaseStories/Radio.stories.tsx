@@ -1,10 +1,10 @@
 import * as React from "react"
-import { Flex, Radio as RadioComponent, RadioGroup } from "@chakra-ui/react"
+import { Flex, RadioGroup } from "@chakra-ui/react"
 import { Meta, StoryObj } from "@storybook/react"
 
 const meta = {
   title: "Atoms / Form / Radio",
-  component: RadioComponent,
+  component: RadioGroup.Item,
   argTypes: {
     flexDirection: {
       options: ["column", "row"],
@@ -17,7 +17,7 @@ const meta = {
       expanded: false,
     },
   },
-} satisfies Meta<typeof RadioComponent>
+} satisfies Meta<typeof RadioGroup.Item>
 
 export default meta
 
@@ -36,25 +36,25 @@ export const Radio: Story = {
     },
   },
   render: ({ flexDirection, value }) => (
-    <RadioGroup value={value}>
+    <RadioGroup.Root value={value}>
       <Flex flexDirection={flexDirection} gap={4} align="flex-start">
-        <RadioComponent value="checked">defaultValue</RadioComponent>
-        <RadioComponent value="disabled" isDisabled>
+        <RadioGroup.Item value="checked">defaultValue</RadioGroup.Item>
+        <RadioGroup.Item value="disabled" disabled>
           isDisabled
-        </RadioComponent>
-        <RadioComponent value="focusable" isFocusable isDisabled>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="focusable" focusable disabled>
           isFocusable and disabled
-        </RadioComponent>
-        <RadioComponent value="read-only" isReadOnly>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="read-only" readOnly>
           isReadOnly
-        </RadioComponent>
-        <RadioComponent value="required" isRequired>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="required" required>
           isRequired
-        </RadioComponent>
-        <RadioComponent value="invalid" isInvalid>
+        </RadioGroup.Item>
+        <RadioGroup.Item value="invalid" invalid>
           isInvalid
-        </RadioComponent>
+        </RadioGroup.Item>
       </Flex>
-    </RadioGroup>
+    </RadioGroup.Root>
   ),
 }

@@ -1,13 +1,12 @@
 import { useState } from "react"
 import sortBy from "lodash/sortBy"
+import { useTheme } from "next-themes"
 import {
   Box,
   Flex,
   LinkBox,
   LinkOverlay,
   List,
-  ListItem,
-  useColorModeValue,
   useToken,
   VisuallyHidden,
 } from "@chakra-ui/react"
@@ -53,12 +52,11 @@ const sortedMeetups: Array<Meetup> = sortBy(meetups, ["emoji", "location"])
 const MeetupList = () => {
   const [searchField, setSearchField] = useState<string>("")
   const { flipForRtl } = useRtlFlip()
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
   const filteredMeetups = filterMeetups(searchField)
-  const listBoxShadow = useColorModeValue("tableBox.light", "tableBox.dark")
-  const listItemBoxShadow = useColorModeValue(
-    "tableItemBox.light",
-    "tableItemBox.dark"
-  )
+  const listBoxShadow = isDark ? "tableBox.dark" : "tableBox.light"
+  const listItemBoxShadow = isDark ? "tableItemBox.dark" : "tableItemBox.light"
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>): void => {
     setSearchField(event.target.value)
@@ -84,10 +82,13 @@ const MeetupList = () => {
         results update as you type
       </VisuallyHidden>
 
-      <List m={0} boxShadow={listBoxShadow} aria-label="Event meetup results">
+      <List.Root
+        m={0}
+        boxShadow={listBoxShadow}
+        aria-label="Event meetup results"
+      >
         {filteredMeetups.map((meetup, idx) => (
           <LinkBox
-            as={ListItem}
             key={idx}
             display="flex"
             justifyContent="space-between"
@@ -101,54 +102,52 @@ const MeetupList = () => {
               boxShadow: `0 0 1px ${primaryBaseColor}`,
               bg: "tableBackgroundHover",
             }}
+            asChild
           >
-            <Flex flex="1 1 75%" me={4}>
-              <Box me={4} opacity="0.4">
-                {idx + 1}
-              </Box>
-              <Box>
-                <LinkOverlay
-                  as={BaseLink}
-                  href={meetup.link}
-                  textDecor="none"
-                  color="text"
-                  hideArrow
-                  isExternal
-                >
-                  {meetup.title}
-                </LinkOverlay>
-              </Box>
-            </Flex>
-            <Flex
-              textAlign="end"
-              alignContent="flex-start"
-              flex="1 1 25%"
-              me={4}
-              flexWrap="wrap"
-            >
-              <Emoji
-                text={meetup.emoji}
-                boxSize={4}
-                me={2}
-                lineHeight="unset"
-              />
-              <Text mb={0} opacity={"0.6"}>
-                {meetup.location}
-              </Text>
-            </Flex>
-            <Box
-              as="span"
-              _after={{
-                content: '"↗"',
-                ms: 0.5,
-                me: 1.5,
-                transform: flipForRtl,
-                display: "inline-block",
-              }}
-            ></Box>
+            <List.Item>
+              <Flex flex="1 1 75%" me={4}>
+                <Box me={4} opacity="0.4">
+                  {idx + 1}
+                </Box>
+                <Box>
+                  <LinkOverlay textDecor="none" color="text" external asChild>
+                    <BaseLink href={meetup.link} hideArrow>
+                      {meetup.title}
+                    </BaseLink>
+                  </LinkOverlay>
+                </Box>
+              </Flex>
+              <Flex
+                textAlign="end"
+                alignContent="flex-start"
+                flex="1 1 25%"
+                me={4}
+                flexWrap="wrap"
+              >
+                <Emoji
+                  text={meetup.emoji}
+                  boxSize="4"
+                  me={2}
+                  lineHeight="unset"
+                />
+                <Text mb={0} opacity={"0.6"}>
+                  {meetup.location}
+                </Text>
+              </Flex>
+              <Box
+                as="span"
+                _after={{
+                  content: '"↗"',
+                  ms: 0.5,
+                  me: 1.5,
+                  transform: flipForRtl,
+                  display: "inline-block",
+                }}
+              ></Box>
+            </List.Item>
           </LinkBox>
         ))}
-      </List>
+      </List.Root>
       <Box aria-live="assertive" aria-atomic>
         {!filteredMeetups.length && (
           <InfoBanner emoji=":information_source:">

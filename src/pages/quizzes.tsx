@@ -3,7 +3,8 @@ import { GetStaticProps, InferGetStaticPropsType, NextPage } from "next"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import { FaGithub } from "react-icons/fa"
-import { Box, Flex, Icon, Stack, Text, useDisclosure } from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/hooks"
+import { Box, Flex, Icon, Stack, Text } from "@chakra-ui/react"
 
 import { BasePageProps, QuizKey, QuizStatus } from "@/lib/types"
 

@@ -2,17 +2,18 @@ import React, { useState } from "react"
 import reverse from "lodash/reverse"
 import sortBy from "lodash/sortBy"
 import { useTranslation } from "next-i18next"
+import { useTheme } from "next-themes"
 import {
   Box,
   Button as ChakraButton,
   Flex,
-  Img,
-  useColorModeValue,
+  Image,
   useRadio,
   useRadioGroup,
+  type UseRadioProps,
 } from "@chakra-ui/react"
 
-import type { CostLeaderboardData } from "@/lib/types"
+import type { ChildOnlyProp, CostLeaderboardData } from "@/lib/types"
 
 import Emoji from "./Emoji"
 import Text from "./OldText"
@@ -47,12 +48,13 @@ const Button = (props) => {
   )
 }
 
-const RadioCard = (props) => {
-  const shadow = useColorModeValue("tableBox.light", "tableBox.dark")
-  const { getInputProps, getCheckboxProps } = useRadio(props)
+const RadioCard = (props: UseRadioProps & ChildOnlyProp) => {
+  const { theme } = useTheme()
+  const shadow = theme === "light" ? "tableBox.light" : "tableBox.dark"
+  const { getInputProps, getControlProps } = useRadio(props)
 
   const input = getInputProps()
-  const checkbox = getCheckboxProps()
+  const checkbox = getControlProps()
 
   return (
     <Button
@@ -92,11 +94,12 @@ const TranslationLeaderboard = ({
   quarterData,
   allTimeData,
 }: TranslationLeaderboardProps) => {
-  const tableBoxShadow = useColorModeValue("tableBox.light", "tableBox.dark")
-  const tableItemBoxShadow = useColorModeValue(
-    "tableItemBox.light",
-    "tableItemBox.dark"
-  )
+  const { theme } = useTheme()
+  const isDark = theme === "dark"
+  const tableBoxShadow = !isDark ? "tableBox.light" : "tableBox.dark"
+  const tableItemBoxShadow = !isDark
+    ? "tableItemBox.light"
+    : "tableItemBox.dark"
 
   const leaderboardData = {
     monthData: sortAndFilterData(monthData),
@@ -115,7 +118,7 @@ const TranslationLeaderboard = ({
     updateFilterAmount(50)
   }
 
-  const { getRadioProps } = useRadioGroup({
+  const { getItemProps } = useRadioGroup({
     name: "period selection",
     defaultValue: "monthData",
     onChange: updateDateRangeType,
@@ -135,14 +138,14 @@ const TranslationLeaderboard = ({
         flexDirection={{ base: "column", lg: "inherit" }}
         w="full"
       >
-        <RadioCard key="monthData" {...getRadioProps({ value: "monthData" })}>
+        <RadioCard key="monthData" {...getItemProps({ value: "monthData" })}>
           {t(
             "page-contributing-translation-program-acknowledgements-translation-leaderboard-month-view"
           )}
         </RadioCard>
         <RadioCard
           key="quarterData"
-          {...getRadioProps({ value: "quarterData" })}
+          {...getItemProps({ value: "quarterData" })}
         >
           {t(
             "page-contributing-translation-program-acknowledgements-translation-leaderboard-quarter-view"
@@ -150,7 +153,7 @@ const TranslationLeaderboard = ({
         </RadioCard>
         <RadioCard
           key="allTimeData"
-          {...getRadioProps({ value: "allTimeData" })}
+          {...getItemProps({ value: "allTimeData" })}
         >
           {t(
             "page-contributing-translation-program-acknowledgements-translation-leaderboard-all-time-view"
@@ -236,12 +239,13 @@ const TranslationLeaderboard = ({
                     me={8}
                     overflowWrap="anywhere"
                   >
-                    <Img
+                    <Image
+                      alt=""
                       me={4}
                       h={{ base: "30px", sm: 10 }}
                       w={{ base: "30px", sm: 10 }}
                       borderRadius="50%"
-                      display={{ base: "none", s: "block" }}
+                      display={{ base: "none", sm: "block" }}
                       src={avatarUrl}
                     />
                     <Box maxW={{ base: "100px", sm: "none" }}>

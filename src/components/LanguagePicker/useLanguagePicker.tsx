@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
-import { useDisclosure, type UseDisclosureReturn } from "@chakra-ui/react"
+import { useDisclosure, type UseDisclosureReturn } from "@chakra-ui/hooks"
 
 import type {
   I18nLocale,
@@ -171,7 +171,7 @@ export const useLanguagePicker = (
     )
   }, [filterValue, locale, rawLocales, t])
 
-  const { isOpen, ...menu } = useDisclosure()
+  const { open, ...menu } = useDisclosure()
 
   const eventBase: Pick<MatomoEventOptions, "eventCategory" | "eventAction"> = {
     eventCategory: `Language picker`,
@@ -224,7 +224,7 @@ export const useLanguagePicker = (
   return {
     t,
     refs,
-    disclosure: { isOpen, onOpen, onClose },
+    disclosure: { open, onOpen, onClose },
     filterValue,
     setFilterValue,
     filteredNames,

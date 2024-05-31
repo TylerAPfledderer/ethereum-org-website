@@ -20,24 +20,22 @@ type IssuesListProps = SimpleGridProps & {
 
 const IssuesList = ({ issues, ...props }: IssuesListProps) => {
   return (
-    <SimpleGrid columns={[1, null, 2]} spacing={4} {...props}>
+    <SimpleGrid columns={[1, null, 2]} gap={4} {...props}>
       {issues.map((issue) => (
         <Stack
           key={issue.title}
           p={4}
-          spacing={4}
+          gap={4}
           border="1px solid"
           borderColor="body.light"
           borderRadius="md"
         >
-          <Stack spacing={2}>
-            <HStack spacing={2}>
-              <Avatar
-                name={issue.user.login}
-                src={issue.user.avatar_url}
-                w="32px"
-                h="32px"
-              />
+          <Stack gap={2}>
+            <HStack gap={2}>
+              <Avatar.Root w="32px" h="32px">
+                <Avatar.Image src={issue.user.avatar_url} />
+                <Avatar.Fallback name={issue.user.login} />
+              </Avatar.Root>
               <Text size="sm">by {issue.user.login}</Text>
             </HStack>
 

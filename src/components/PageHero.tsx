@@ -97,7 +97,7 @@ const PageHero = ({
           {subtitle}
         </Text>
         {buttons && (
-          <Wrap spacing={2} overflow="visible" sx={{ ul: { m: 0 } }}>
+          <Wrap gap={2} overflow="visible" css={{ ul: { m: 0 } }}>
             {buttons.map((button, idx) => {
               const isSecondary = idx !== 0
               if (isButtonLink(button)) {

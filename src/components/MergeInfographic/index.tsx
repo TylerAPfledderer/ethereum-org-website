@@ -6,7 +6,7 @@ import Translation from "@/components/Translation"
 import { Background } from "./Background"
 
 const Text = chakra("text", {
-  baseStyle: {
+  base: {
     textAnchor: "start",
     fill: "currentColor",
   },
@@ -59,7 +59,7 @@ const MergeInfographic = () => {
       position="relative"
       width="100%"
       ratio={25 / 11}
-      sx={{
+      css={{
         isolation: "isolate",
       }}
     >

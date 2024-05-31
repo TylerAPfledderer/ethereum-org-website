@@ -25,7 +25,7 @@ export default meta
 
 const H3 = (props: HeadingProps) => <Heading as="h3" size="lg" {...props} />
 
-const Description = (props: StackProps) => <Stack spacing="6" {...props} />
+const Description = (props: StackProps) => <Stack gap="6" {...props} />
 
 const ComponentSlides = () => (
   <>

@@ -57,18 +57,18 @@ export const Browser = ({ progressStepper, ...props }: BrowserProps) => {
               flex={1}
             >
               {typing ? (
-                <Text
-                  as={motion.p}
-                  variants={sentence}
-                  initial="hidden"
-                  animate="visible"
-                  color="body.medium"
-                >
-                  {EXAMPLE_APP_URL.split("").map((char, index) => (
-                    <motion.span key={char + "-" + index} variants={letter}>
-                      {char}
-                    </motion.span>
-                  ))}
+                <Text color="body.medium" asChild>
+                  <motion.p
+                    variants={sentence}
+                    initial="hidden"
+                    animate="visible"
+                  >
+                    {EXAMPLE_APP_URL.split("").map((char, index) => (
+                      <motion.span key={char + "-" + index} variants={letter}>
+                        {char}
+                      </motion.span>
+                    ))}
+                  </motion.p>
                 </Text>
               ) : (
                 <Text>Search or enter website</Text>

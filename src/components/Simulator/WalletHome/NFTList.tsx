@@ -21,13 +21,15 @@ export const NFTList = ({ nfts, ...flexProps }: NFTListProps) => {
       {nfts.length ? (
         nfts.map(({ title, image }) => (
           <Box key={title} w="fit-content">
-            <Image
-              src={image}
-              alt=""
-              objectFit="contain"
-              maxW={size}
-              maxH={size}
-            />
+            <Box maxW={size} maxH={size} asChild>
+              <Image
+                src={image}
+                alt=""
+                style={{
+                  objectFit: "contain",
+                }}
+              />
+            </Box>
             <Text fontSize="xs" m={0}>
               {title}
             </Text>

@@ -7,12 +7,12 @@ import { FaGithub } from "react-icons/fa"
 import {
   Box,
   chakra,
-  Divider,
   Flex,
   FlexProps,
   Heading,
   HeadingProps,
   Icon,
+  Separator,
   SimpleGridProps,
   Stack,
   useToken,
@@ -97,7 +97,7 @@ const CardContainer = (props: {
     gap={8}
     p={{ lg: 4 }}
     width="full"
-    sx={{
+    css={{
       "& > *": {
         minW: props.minChildWidth,
       },
@@ -112,7 +112,7 @@ const ContentBox = (props: ChildOnlyProp) => (
 )
 
 const StyledActionCard = chakra(ActionCard, {
-  baseStyle: {
+  base: {
     background: "background.base",
     borderRadius: "sm",
     border: "1px",
@@ -122,8 +122,6 @@ const StyledActionCard = chakra(ActionCard, {
 })
 
 const StyledCodeModal = chakra(CodeModal)
-
-const StyledTitleCardList = chakra(TitleCardList)
 
 const GrayContainer = (props: ChildOnlyProp) => (
   <Box width="full" pb={16} background="grayBackground" {...props} />
@@ -175,7 +173,7 @@ const ButtonLinkRow = (props: ChildOnlyProp) => (
   <Stack
     alignItems="flex-start"
     direction={{ base: "column", md: "row" }}
-    spacing={{ base: 6, md: 2 }}
+    gap={{ base: 6, md: 2 }}
     {...props}
   />
 )
@@ -510,17 +508,21 @@ const HomePage = ({
       <MainSectionContainer containerBg="homeBoxPurple">
         <Row>
           <Box py={4} px={{ base: 4, sm: 8 }} width="full">
-            <StyledTitleCardList
-              content={codeExamples}
-              clickHandler={toggleCodeExample}
-              headerKey="page-index:page-index-developers-code-examples"
-              isCode
+            <Box
               border="1px"
               borderColor="text"
               boxShadow={cardBoxShadow}
               maxWidth={{ lg: "624px" }}
               ms={{ lg: 16 }}
-            />
+              asChild
+            >
+              <TitleCardList
+                content={codeExamples}
+                clickHandler={toggleCodeExample}
+                headerKey="page-index:page-index-developers-code-examples"
+                isCode
+              />
+            </Box>
           </Box>
           <FeatureContent>
             <SectionHeading>
@@ -539,7 +541,7 @@ const HomePage = ({
             isOpen={isModalOpen}
             setIsOpen={setModalOpen}
             title={codeExamples[activeCode].title}
-            sx={{
+            css={{
               ".modal-component-container": {
                 padding: 0,
                 left: 0,
@@ -581,7 +583,13 @@ const HomePage = ({
         </ContentBox>
         <StatsBoxGrid data={metricResults} />
       </GrayContainer>
-      <Divider mb={16} mt={16} w="10%" height="0.25rem" bgColor="homeDivider" />
+      <Separator
+        mb={16}
+        mt={16}
+        w="10%"
+        height="0.25rem"
+        bgColor="homeDivider"
+      />
       <CommunityEvents events={communityEvents} />
       {/* Explore Section */}
       <ContentBox>

@@ -65,7 +65,7 @@ export const SendSummary = ({
         h="full"
         gap={{ base: 3, md: 6 }}
         direction="column"
-        sx={{ p: { m: 0 } }}
+        css={{ p: { m: 0 } }}
         fontSize={{ base: "sm", md: "md" }}
       >
         <Box>

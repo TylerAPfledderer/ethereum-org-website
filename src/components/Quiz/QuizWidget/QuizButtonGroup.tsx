@@ -195,7 +195,7 @@ export const QuizButtonGroup = () => {
       w={{ base: "full", sm: "auto" }}
       flexDirection={{ base: "column", sm: "row" }}
       flexWrap="wrap"
-      sx={{
+      css={{
         button: { width: { base: "100%", sm: "fit-content" } },
       }}
     >

@@ -37,7 +37,7 @@ const IndicatorGroup = ({
     return <WarningProductGlyphIcon style={style} />
   }
   return (
-    <VStack spacing={2} flex={1}>
+    <VStack gap="2" flex="1">
       <IndicatorIcon style={styleObj} />
       <Text fontSize="xs" textAlign="center" maxW="{40}">
         <Translation id={label} />
@@ -71,7 +71,7 @@ const StakingConsiderations = ({ page }: StakingConsiderationsProps) => {
   const activeStyles = {
     bg: "background.highlight",
     color: "body.base",
-    transition: "background 0.5s, color 0.5s"
+    transition: "background 0.5s, color 0.5s",
   }
 
   return (
@@ -80,10 +80,10 @@ const StakingConsiderations = ({ page }: StakingConsiderationsProps) => {
       {/* TODO: Improve a11y */}
       <Box flex={1} hideBelow={mdBp}>
         {!!pageData && (
-          <List m={0}>
+          <List.Root m={0}>
             {/* TODO: Make mobile responsive */}
             {pageData.map(({ title, matomo }, idx) => (
-              <ListItem
+              <List.Item
                 key={idx}
                 onClick={(e) => {
                   handleSelection(idx)
@@ -103,9 +103,9 @@ const StakingConsiderations = ({ page }: StakingConsiderationsProps) => {
                   : { color: "primary.base" })}
               >
                 {title}
-              </ListItem>
+              </List.Item>
             ))}
-          </List>
+          </List.Root>
         )}
       </Box>
       <Flex

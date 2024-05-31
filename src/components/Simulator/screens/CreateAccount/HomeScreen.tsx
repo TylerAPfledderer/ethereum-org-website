@@ -1,7 +1,8 @@
 import React from "react"
 import { AnimatePresence, motion } from "framer-motion"
+import { useTheme } from "next-themes"
 import { MdArrowDownward } from "react-icons/md"
-import { Box, Grid, GridProps, Icon, useColorModeValue } from "@chakra-ui/react"
+import { Box, Grid, GridProps, Icon } from "@chakra-ui/react"
 
 import type { SimulatorNavProps } from "@/lib/types"
 
@@ -10,10 +11,11 @@ import { EthGlyphIcon } from "../../icons"
 type HomeScreenProps = GridProps & SimulatorNavProps
 
 export const HomeScreen = ({ nav, ...props }: HomeScreenProps) => {
-  const gridShadow = useColorModeValue(
-    "0 0 7px 0 var(--eth-colors-blackAlpha-800)",
-    "0 0 7px 0 var(--eth-colors-whiteAlpha-800)"
-  )
+  const { theme } = useTheme()
+  const gridShadow =
+    theme === "light"
+      ? "0 0 7px 0 var(--eth-colors-whiteAlpha-800)"
+      : "0 0 7px 0 var(--eth-colors-blackAlpha-800)"
 
   const { step } = nav
   const ICON_COUNT = 8
@@ -43,10 +45,6 @@ export const HomeScreen = ({ nav, ...props }: HomeScreenProps) => {
       <AnimatePresence>
         {step === 1 ? (
           <Grid
-            as={motion.button}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             {...sharedIconStyles}
             onClick={nav.progressStepper}
             transitionDuration="0.3s"
@@ -57,29 +55,39 @@ export const HomeScreen = ({ nav, ...props }: HomeScreenProps) => {
               outline: "2px solid var(--eth-colors-primary-hover)",
               outlineOffset: "2px",
             }}
+            asChild
           >
-            <Icon
-              as={EthGlyphIcon}
-              color="background.base"
-              fontSize={{ base: "2xl", sm: "3xl" }}
-            />
+            <motion.button
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Icon
+                color="background.base"
+                fontSize={{ base: "2xl", sm: "3xl" }}
+                asChild
+              >
+                <EthGlyphIcon />
+              </Icon>
+            </motion.button>
           </Grid>
         ) : (
           <Grid
-            as={motion.div}
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
             transitionDuration="0.2s"
             {...sharedIconStyles}
             bg="background.base"
             borderStyle="dashed"
             borderColor="disabled"
           >
-            <Icon
-              as={MdArrowDownward}
-              color="disabled"
-              fontSize={{ base: "2xl", sm: "3xl" }}
-            />
+            <motion.div initial={{ opacity: 1 }} exit={{ opacity: 0 }}>
+              <Icon
+                color="disabled"
+                fontSize={{ base: "2xl", sm: "3xl" }}
+                asChild
+              >
+                <MdArrowDownward />
+              </Icon>
+            </motion.div>
           </Grid>
         )}
       </AnimatePresence>

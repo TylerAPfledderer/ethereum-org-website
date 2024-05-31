@@ -2,18 +2,11 @@ import { useRouter } from "next/router"
 import type { GetStaticProps } from "next/types"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import {
-  Box,
-  Center,
-  Heading,
-  ListItem,
-  UnorderedList,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Box, Center, Heading, List } from "@chakra-ui/react"
 
 import type { BasePageProps, ChildOnlyProp } from "@/lib/types"
 
-import BugBountyBanner from "@/components/Banners/BugBountyBanner"
 import Breadcrumbs from "@/components/Breadcrumbs"
 import BugBountyCards from "@/components/BugBountyCards"
 import ButtonLink from "@/components/Buttons/ButtonLink"
@@ -108,7 +101,7 @@ const SloganGradient = (props: ChildOnlyProp) => (
     mt="4"
     bgClip="text"
     overflow="auto"
-    sx={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+    css={{ WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
     bg="upgradesGradient"
   >
     <Heading
@@ -349,6 +342,10 @@ const BugBountiesPage = () => {
   const { pathname } = useRouter()
   const { t } = useTranslation("page-bug-bounty")
 
+  const { theme } = useTheme()
+
+  const isDark = theme === "dark"
+
   const consensusBountyHunters: Node[] = consensusData.sort(sortBountyHuntersFn)
   const executionBountyHunters: Node[] = executionData.sort(sortBountyHuntersFn)
 
@@ -399,7 +396,7 @@ const BugBountiesPage = () => {
     {
       title: "Lighthouse",
       link: "https://lighthouse-book.sigmaprime.io/",
-      image: useColorModeValue(lighthouseLight, lighthouseDark),
+      image: !isDark ? lighthouseLight : lighthouseDark,
     },
     {
       title: "Lodestar",
@@ -424,7 +421,7 @@ const BugBountiesPage = () => {
     {
       title: "Teku",
       link: "https://pegasys.tech/teku",
-      image: useColorModeValue(tekuDark, tekuLight),
+      image: !isDark ? tekuDark : tekuLight,
     },
   ]
 
@@ -504,7 +501,7 @@ const BugBountiesPage = () => {
       <ClientRow>
         <Client>
           <Image
-            src={useColorModeValue(lighthouseLight, lighthouseDark)}
+            src={!isDark ? lighthouseLight : lighthouseDark}
             alt=""
             {...iconImageProps}
           />
@@ -520,7 +517,7 @@ const BugBountiesPage = () => {
         </Client>
         <Client>
           <Image
-            src={useColorModeValue(tekuDark, tekuLight)}
+            src={!isDark ? tekuDark : tekuLight}
             alt=""
             {...iconImageProps}
           />
@@ -548,20 +545,20 @@ const BugBountiesPage = () => {
               <br />
               <Box>
                 <Text>{t("page-upgrades-bug-bounty-annotations")}</Text>
-                <UnorderedList>
-                  <ListItem>
+                <List.Root>
+                  <List.Item>
                     <InlineLink href="https://benjaminion.xyz/eth2-annotated-spec/">
                       Ben Edgington&apos;s{" "}
                       {t("page-upgrades-bug-bounty-annotated-specs")}
                     </InlineLink>
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     <InlineLink href="https://github.com/ethereum/annotated-spec">
                       Vitalik Buterin&apos;s{" "}
                       {t("page-upgrades-bug-bounty-annotated-specs")}
                     </InlineLink>
-                  </ListItem>
-                </UnorderedList>
+                  </List.Item>
+                </List.Root>
               </Box>
               <Box>
                 <OldHeading
@@ -572,12 +569,12 @@ const BugBountiesPage = () => {
                 >
                   {t("page-upgrades-bug-bounty-types")}
                 </OldHeading>
-                <UnorderedList>
-                  <ListItem>{t("page-upgrades-bug-bounty-type-1")}</ListItem>
-                  <ListItem>{t("page-upgrades-bug-bounty-type-2")}</ListItem>
-                  <ListItem>{t("page-upgrades-bug-bounty-type-3")}</ListItem>
-                  <ListItem>{t("page-upgrades-bug-bounty-type-4")}</ListItem>
-                </UnorderedList>
+                <List.Root>
+                  <List.Item>{t("page-upgrades-bug-bounty-type-1")}</List.Item>
+                  <List.Item>{t("page-upgrades-bug-bounty-type-2")}</List.Item>
+                  <List.Item>{t("page-upgrades-bug-bounty-type-3")}</List.Item>
+                  <List.Item>{t("page-upgrades-bug-bounty-type-4")}</List.Item>
+                </List.Root>
               </Box>
               <Box>
                 <OldHeading
@@ -608,17 +605,17 @@ const BugBountiesPage = () => {
                 >
                   {t("page-upgrades-bug-bounty-types")}
                 </OldHeading>
-                <UnorderedList>
-                  <ListItem>
+                <List.Root>
+                  <List.Item>
                     {t("page-upgrades-bug-bounty-clients-type-1")}
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     {t("page-upgrades-bug-bounty-clients-type-2")}
-                  </ListItem>
-                  <ListItem>
+                  </List.Item>
+                  <List.Item>
                     {t("page-upgrades-bug-bounty-clients-type-3")}
-                  </ListItem>
-                </UnorderedList>
+                  </List.Item>
+                </List.Root>
               </Box>
               <Box>
                 <OldHeading
@@ -714,14 +711,14 @@ const BugBountiesPage = () => {
           <Text>
             <Text as="em">{t("page-upgrades-bug-bounty-hunting-desc")}</Text>
           </Text>
-          <UnorderedList>
-            <ListItem>{t("page-upgrades-bug-bounty-hunting-li-1")}</ListItem>
-            <ListItem>{t("page-upgrades-bug-bounty-hunting-li-2")}</ListItem>
-            <ListItem>{t("page-upgrades-bug-bounty-hunting-li-3")}</ListItem>
-            <ListItem id="leaderboard">
+          <List.Root>
+            <List.Item>{t("page-upgrades-bug-bounty-hunting-li-1")}</List.Item>
+            <List.Item>{t("page-upgrades-bug-bounty-hunting-li-2")}</List.Item>
+            <List.Item>{t("page-upgrades-bug-bounty-hunting-li-3")}</List.Item>
+            <List.Item id="leaderboard">
               {t("page-upgrades-bug-bounty-hunting-li-4")}
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List.Root>
         </Rules>
       </Content>
       <GradientContainer>

@@ -2,8 +2,7 @@ import type { RefObject } from "react"
 import {
   type ButtonProps,
   Drawer,
-  DrawerContent,
-  DrawerOverlay,
+  Portal,
   useBreakpointValue,
 } from "@chakra-ui/react"
 
@@ -15,7 +14,7 @@ import MenuFooter from "./MenuFooter"
 import MenuHeader from "./MenuHeader"
 
 type MobileNavMenuProps = ButtonProps & {
-  isOpen: boolean
+  open: boolean
   onToggle: () => void
   toggleColorMode: () => void
   toggleSearch: () => void
@@ -25,7 +24,7 @@ type MobileNavMenuProps = ButtonProps & {
 }
 
 const MobileNavMenu = ({
-  isOpen,
+  open,
   onToggle,
   toggleColorMode,
   toggleSearch,
@@ -34,37 +33,39 @@ const MobileNavMenu = ({
   drawerContainerRef,
   ...props
 }: MobileNavMenuProps) => {
-  const isMenuOpen = useBreakpointValue({ base: isOpen, md: false }) as boolean
+  const isMenuOpen = useBreakpointValue({ base: open, md: false }) as boolean
 
   return (
     <>
       <HamburgerButton isMenuOpen={isMenuOpen} onToggle={onToggle} {...props} />
 
       {/* DRAWER MENU */}
-      <Drawer
-        portalProps={{ containerRef: drawerContainerRef }}
-        isOpen={isMenuOpen}
-        onClose={onToggle}
+      <Drawer.Root
+        open={isMenuOpen}
+        onOpenChange={onToggle}
         placement="start"
         size="md"
       >
-        <DrawerOverlay onClick={onToggle} bg="modalBackground" />
+        <Drawer.Backdrop onClick={onToggle} bg="modalBackground" />
+        <Portal containerRef={drawerContainerRef}>
+          <Drawer.Positioner>
+            <Drawer.Content bg="background.base">
+              {/* HEADER ELEMENTS: SITE NAME, CLOSE BUTTON */}
+              <MenuHeader />
 
-        <DrawerContent bg="background.base">
-          {/* HEADER ELEMENTS: SITE NAME, CLOSE BUTTON */}
-          <MenuHeader />
+              {/* MAIN NAV ACCORDION CONTENTS OF MOBILE MENU */}
+              <MenuBody linkSections={linkSections} onToggle={onToggle} />
 
-          {/* MAIN NAV ACCORDION CONTENTS OF MOBILE MENU */}
-          <MenuBody linkSections={linkSections} onToggle={onToggle} />
-
-          {/* FOOTER ELEMENTS: SEARCH, LIGHT/DARK, LANGUAGES */}
-          <MenuFooter
-            onToggle={onToggle}
-            toggleSearch={toggleSearch}
-            toggleColorMode={toggleColorMode}
-          />
-        </DrawerContent>
-      </Drawer>
+              {/* FOOTER ELEMENTS: SEARCH, LIGHT/DARK, LANGUAGES */}
+              <MenuFooter
+                onToggle={onToggle}
+                toggleSearch={toggleSearch}
+                toggleColorMode={toggleColorMode}
+              />
+            </Drawer.Content>
+          </Drawer.Positioner>
+        </Portal>
+      </Drawer.Root>
     </>
   )
 }

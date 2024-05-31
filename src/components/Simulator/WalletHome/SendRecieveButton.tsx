@@ -1,19 +1,13 @@
 import React from "react"
-import {
-  type As,
-  Box,
-  Grid,
-  Icon,
-  Text,
-  type TextProps,
-} from "@chakra-ui/react"
+import type { IconType } from "react-icons"
+import { Box, Grid, Icon, Text, type TextProps } from "@chakra-ui/react"
 
 import { Button } from "../../Buttons"
 import { ClickAnimation } from "../ClickAnimation"
 import { PulseAnimation } from "../PulseAnimation"
 
 type SendReceiveButtonProps = Pick<TextProps, "children"> & {
-  icon: As
+  icon: IconType | typeof Icon
   isHighlighted: boolean
   isDisabled: boolean
   onClick?: () => void
@@ -30,13 +24,13 @@ export const SendReceiveButton = ({
 }: SendReceiveButtonProps) => (
   <Button
     variant="ghost"
+    alignItems="center"
     display="flex"
     flexDirection="column"
-    alignItems="center"
-    data-group
+    gap="4"
     isDisabled={isDisabled}
     onClick={onClick}
-    gap={4}
+    data-group
   >
     <Grid
       bg="primary.base"

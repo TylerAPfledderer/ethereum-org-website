@@ -1,5 +1,11 @@
 import { ReactNode } from "react"
-import { Heading, Stack, StackProps, Text } from "@chakra-ui/react"
+import {
+  Card as ChakraCard,
+  Heading,
+  Stack,
+  StackProps,
+  Text,
+} from "@chakra-ui/react"
 
 import Emoji from "@/components/Emoji"
 
@@ -11,8 +17,8 @@ export type CardProps = Omit<StackProps, "children" | "title"> & {
 }
 
 const Card = ({ emoji, title, description, children, ...props }: CardProps) => (
-  <Stack
-    spacing="4"
+  <ChakraCard.Root
+    gap="4"
     justifyContent="space-between"
     bg="ednBackground"
     borderRadius="sm"
@@ -22,9 +28,9 @@ const Card = ({ emoji, title, description, children, ...props }: CardProps) => (
     p="6"
     {...props}
   >
-    <Stack spacing="4">
+    <Stack gap="4">
       {emoji && <Emoji fontSize="5xl" lineHeight={0} text={emoji} />}
-      <Stack spacing="8">
+      <Stack gap="8">
         {title && (
           <Heading as="h3" fontSize="2xl">
             {title}
@@ -34,7 +40,7 @@ const Card = ({ emoji, title, description, children, ...props }: CardProps) => (
       </Stack>
     </Stack>
     {children}
-  </Stack>
+  </ChakraCard.Root>
 )
 
 export default Card

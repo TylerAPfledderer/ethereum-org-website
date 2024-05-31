@@ -1,5 +1,5 @@
 import * as React from "react"
-import { Center, ListItem, Stack, Text, UnorderedList } from "@chakra-ui/react"
+import { Center, List, Stack, Text } from "@chakra-ui/react"
 import { Meta, StoryObj } from "@storybook/react"
 
 import Link from "../Link"
@@ -45,7 +45,7 @@ export const ExternalLink: Story = {
 
 export const LinkList = {
   render: () => (
-    <Stack spacing="6">
+    <Stack gap="6">
       <Text>
         Text body normal. Ethereum is open access to digital money and
         data-friendly services for everyone &ndash; no matter your background or
@@ -53,17 +53,17 @@ export const LinkList = {
         cryptocurrency ether (ETH) and thousands of applications you can use
         today.
       </Text>
-      <UnorderedList>
+      <List.Root>
         {Array.from({ length: 9 }).map((_, idx) => (
-          <ListItem key={idx + 1}>
+          <List.Item key={idx + 1}>
             <Link
               to={idx % 2 === 0 ? "https://example.com" : "#"}
             >{`List Item ${idx % 2 === 0 ? "External" : "Internal"} ${
               idx + 1
             }`}</Link>
-          </ListItem>
+          </List.Item>
         ))}
-      </UnorderedList>
+      </List.Root>
     </Stack>
   ),
 }

@@ -27,7 +27,7 @@ const ResultsContainer = (props: ChildOnlyProp) => (
     w="full"
     maxWidth="876px"
     flexWrap={{ base: "wrap", md: "initial" }}
-    sx={{
+    css={{
       "& > *": {
         _first: {
           me: { base: 0, md: 6 },

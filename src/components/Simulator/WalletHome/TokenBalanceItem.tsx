@@ -33,7 +33,7 @@ export const TokenBalanceItem = ({
         textAlign="end"
         lineHeight={1.5}
         fontWeight="bold"
-        sx={{ p: { m: 0 } }}
+        css={{ p: { m: 0 } }}
       >
         <Text>{usdValue}</Text>
         <Text color="body.medium">

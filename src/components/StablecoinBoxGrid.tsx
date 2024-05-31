@@ -1,7 +1,8 @@
 import { useState } from "react"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
-import { Box, Flex, useColorModeValue } from "@chakra-ui/react"
+import { useTheme } from "next-themes"
+import { Box, Flex } from "@chakra-ui/react"
 
 import { ChildOnlyProp } from "@/lib/types"
 
@@ -152,7 +153,8 @@ const GridItem = ({
   const handleClick = (): void => {
     callback(index)
   }
-  const shadow = useColorModeValue("tableBox.light", "tableBox.dark")
+  const { theme } = useTheme()
+  const shadow = theme === "light" ? "tableBox.light" : "tableBox.dark"
   const { t } = useTranslation("page-stablecoins")
 
   return (

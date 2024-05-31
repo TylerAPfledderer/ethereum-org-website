@@ -58,7 +58,7 @@ const Card = ({
 }: CardProps) => {
   const { flipForRtl } = useRtlFlip()
   const isLink = !!link
-  const isExternal = url.isExternal(link || "")
+  const external = url.isExternal(link || "")
 
   const descriptionColor = useColorModeValue("gray.500", "gray.400")
 
@@ -68,15 +68,15 @@ const Card = ({
       <Flex flex="1 1 75%" direction="column">
         {isLink ? (
           <LinkOverlay
-            as={BaseLink}
-            href={link}
-            isExternal={isExternal}
-            hideArrow
+            external={external}
             color="text"
             textDecoration="none"
             _hover={{ textDecoration: "none" }}
+            asChild
           >
-            {title}
+            <BaseLink href={link} hideArrow>
+              {title}
+            </BaseLink>
           </LinkOverlay>
         ) : (
           <Box>{title}</Box>
@@ -93,7 +93,7 @@ const Card = ({
           </Box>
         </Flex>
       )}
-      {isExternal && <Box transform={flipForRtl}>↗</Box>}
+      {external && <Box transform={flipForRtl}>↗</Box>}
     </CardContainer>
   )
 }

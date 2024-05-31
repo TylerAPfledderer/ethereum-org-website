@@ -1,4 +1,5 @@
 import { StaticImageData } from "next/image"
+import { useTheme } from "next-themes"
 import type { ReactNode } from "react"
 import {
   Box,
@@ -8,14 +9,14 @@ import {
   LinkBox,
   type LinkBoxProps,
   LinkOverlay,
-  useColorModeValue,
+  type SystemStyleObject,
 } from "@chakra-ui/react"
 
 import { Image } from "@/components/Image"
 import { BaseLink } from "@/components/Link"
 import Text from "@/components/OldText"
 
-const linkBoxFocusStyles: BoxProps = {
+const linkBoxFocusStyles: SystemStyleObject = {
   borderRadius: "base",
   boxShadow: "0px 8px 17px rgba(0, 0, 0, 0.15)",
   bg: "tableBackgroundHover",
@@ -23,7 +24,7 @@ const linkBoxFocusStyles: BoxProps = {
   transform: "scale(1.02)",
 }
 
-const linkFocusStyles: BoxProps = {
+const linkFocusStyles: SystemStyleObject = {
   textDecoration: "none",
 }
 
@@ -53,7 +54,9 @@ const ActionCard = ({
   isBottom = true,
   ...props
 }: ActionCardProps) => {
-  const descriptionColor = useColorModeValue("blackAlpha.700", "whiteAlpha.800")
+  const { theme } = useTheme()
+  const descriptionColor =
+    theme === "light" ? "blackAlpha.700" : "whiteAlpha.800"
 
   return (
     <LinkBox
@@ -77,13 +80,14 @@ const ActionCard = ({
         className="action-card-image-wrapper"
         boxShadow="inset 0px -1px 0px rgba(0, 0, 0, 0.1)"
       >
-        <Image
-          src={image}
-          width={imageWidth}
-          maxH="full"
-          alt={alt || ""}
-          style={{ objectFit: "cover" }}
-        />
+        <Box maxH="full" asChild>
+          <Image
+            src={image}
+            width={imageWidth}
+            alt={alt || ""}
+            style={{ objectFit: "cover" }}
+          />
+        </Box>
       </Flex>
       <Box p={6} className="action-card-content">
         <Heading
@@ -95,15 +99,15 @@ const ActionCard = ({
           lineHeight={1.4}
         >
           <LinkOverlay
-            as={BaseLink}
             color="text"
-            hideArrow
             textDecoration="none"
-            to={to}
             _hover={linkFocusStyles}
             _focus={linkFocusStyles}
+            asChild
           >
-            {title}
+            <BaseLink href={to} hideArrow>
+              {title}
+            </BaseLink>
           </LinkOverlay>
         </Heading>
         <Text mb={0} color={descriptionColor}>

@@ -6,9 +6,9 @@ import {
   Flex,
   Grid,
   type HeadingProps,
+  List,
   SimpleGrid,
   Text,
-  UnorderedList,
   useToken,
 } from "@chakra-ui/react"
 
@@ -78,7 +78,7 @@ export const InfoGrid = (props: ChildOnlyProp) => (
   <Grid
     templateColumns="repeat(auto-fill, minmax(min(100%, 340px), 1fr))"
     gap={8}
-    sx={{
+    css={{
       "& > div": {
         h: "fit-content",
         m: 0,
@@ -99,9 +99,9 @@ export const InfoGrid = (props: ChildOnlyProp) => (
 const CardGrid = (props: ChildOnlyProp) => (
   <SimpleGrid
     columns={{ base: 1, md: 3 }}
-    spacing={8}
+    gap={8}
     m={{ base: "auto", md: 0 }}
-    sx={{
+    css={{
       h3: {
         mt: 0,
       },
@@ -144,7 +144,7 @@ const TableContainer = (props: BoxProps) => (
   <Box
     w="fit-content"
     mx={["auto", null, null, 0]}
-    sx={{
+    css={{
       table: {
         borderCollapse: "separate",
         borderSpacing: "1rem 0",
@@ -260,11 +260,11 @@ export const StakingLayout = ({
         <Flex direction="column" justify="flex-start" w="full" p={8}>
           <Breadcrumbs slug={slug} mb="8" />
           <Title>{frontmatter.title}</Title>
-          <UnorderedList>
+          <List.Root>
             {(summaryPoints || []).map((point, idx) => (
               <SummaryPoint key={idx}>{point}</SummaryPoint>
             ))}
-          </UnorderedList>
+          </List.Root>
           <TableOfContents
             position="relative"
             zIndex={2}

@@ -1,14 +1,7 @@
 import React from "react"
+import { useTheme } from "next-themes"
 import { IoCodeOutline } from "react-icons/io5"
-import {
-  Box,
-  Flex,
-  Hide,
-  Icon,
-  LinkBox,
-  LinkOverlay,
-  useColorModeValue,
-} from "@chakra-ui/react"
+import { Box, Flex, Icon, LinkBox, LinkOverlay } from "@chakra-ui/react"
 
 import { TranslationKey } from "@/lib/types"
 
@@ -41,11 +34,10 @@ const TitleCardList = ({
   headerKey,
   isCode,
 }: TitleCardListProps) => {
-  // This will be accessible with color contrast
-  const descriptionCaptionColor = useColorModeValue(
-    "blackAlpha.700",
-    "whiteAlpha.700"
-  )
+  const { theme } = useTheme()
+
+  const descriptionCaptionColor =
+    theme === "light" ? "blackAlpha.700" : "whiteAlpha.700"
   return (
     <Box
       bg="background.base"
@@ -68,31 +60,29 @@ const TitleCardList = ({
         <Icon as={IoCodeOutline} />
         <Translation id={headerKey} />
         {isCode && (
-          <Hide below="s">
-            <Flex>
-              <Box
-                width="12px"
-                height="12px"
-                bg="fail300"
-                me={2}
-                borderRadius="full"
-              />
-              <Box
-                width="12px"
-                height="12px"
-                bg="gridYellow"
-                me={2}
-                borderRadius="full"
-              />
-              <Box
-                width="12px"
-                height="12px"
-                bg="success300"
-                me={2}
-                borderRadius="full"
-              />
-            </Flex>
-          </Hide>
+          <Flex hideBelow="s">
+            <Box
+              width="12px"
+              height="12px"
+              bg="fail300"
+              me={2}
+              borderRadius="full"
+            />
+            <Box
+              width="12px"
+              height="12px"
+              bg="gridYellow"
+              me={2}
+              borderRadius="full"
+            />
+            <Box
+              width="12px"
+              height="12px"
+              bg="success300"
+              me={2}
+              borderRadius="full"
+            />
+          </Flex>
         )}
       </Flex>
       {content.map((listItem, idx) => {
@@ -118,26 +108,22 @@ const TitleCardList = ({
             }}
           >
             {image && (
-              <Image
-                src={image}
-                alt={alt || ""}
-                marginTop={1}
-                me={4}
-                minWidth={5}
-              />
+              <Box marginTop="1" me="4" minWidth="5" asChild>
+                <Image src={image} alt={alt || ""} />
+              </Box>
             )}
             <Flex flex="1 1 75%" flexDirection="column" me={8}>
               <LinkOverlay
                 as={BaseLink}
                 href={link}
-                hideArrow
                 color="inherit"
                 textDecoration="none"
                 _hover={{
                   textDecoration: "none",
                 }}
+                asChild
               >
-                {title}
+                <BaseLink>{title}</BaseLink>
               </LinkOverlay>
 
               <Box
@@ -175,17 +161,13 @@ const TitleCardList = ({
             _hover={{
               boxShadow: "0 0 1px var(--eth-colors-primary-base)",
               bg: "primary100",
-              "*": { color: "black" },
+              // "*": { color: "black" },
             }}
           >
             {image && (
-              <Image
-                src={image}
-                alt={alt || ""}
-                marginTop={1}
-                me={4}
-                minWidth={5}
-              />
+              <Box marginTop="1" me="4" minWidth="5" asChild>
+                <Image src={image} alt={alt || ""} />
+              </Box>
             )}
             <Flex flex="1 1 75%" flexDirection="column" me={8}>
               <Box>{title}</Box>

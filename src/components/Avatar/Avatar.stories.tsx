@@ -1,5 +1,5 @@
 import * as React from "react"
-import { AvatarGroup, HStack, VStack } from "@chakra-ui/react"
+import { Avatar as ChakraAvatar, HStack, VStack } from "@chakra-ui/react"
 import { Meta, StoryObj } from "@storybook/react"
 
 import Avatar from "."
@@ -20,7 +20,7 @@ export const Single: Story = {
     href: "#",
   },
   render: (args) => (
-    <VStack spacing={4}>
+    <VStack gap={4}>
       {["lg", "md", "sm", "xs"].map((size) => (
         <Avatar key={size} size={size} {...args} />
       ))}
@@ -35,14 +35,14 @@ export const Group: Story = {
     href: "#",
   },
   render: (args) => (
-    <VStack spacing={4}>
-      {["sm", "xs"].map((size) => (
-        <AvatarGroup key={size} size={size} max={3}>
+    <VStack gap={4}>
+      {(["sm", "xs"] as const).map((size) => (
+        <ChakraAvatar.Group key={size} size={size}>
           <Avatar {...args} />
           <Avatar {...args} />
           <Avatar {...args} />
           <Avatar {...args} />
-        </AvatarGroup>
+        </ChakraAvatar.Group>
       ))}
     </VStack>
   ),
@@ -56,7 +56,7 @@ export const WithUsername: Story = {
     label: "daneabrahmov",
   },
   render: (args) => (
-    <HStack spacing={16}>
+    <HStack gap={16}>
       <VStack>
         {["md", "sm"].map((size, idx) => (
           <Avatar key={idx} size={size} {...args} />

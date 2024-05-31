@@ -12,7 +12,6 @@ export const PathButton = ({ pathSummary, handleClick }: PathButtonProps) => {
   return (
     <Button
       variant="outline"
-      leftIcon={<Icon />}
       justifyContent="start"
       gap={3}
       textAlign="start"
@@ -20,6 +19,7 @@ export const PathButton = ({ pathSummary, handleClick }: PathButtonProps) => {
       py={6}
       onClick={handleClick}
     >
+      <Icon />
       <Flex direction="column" as="span">
         <Text
           as="span"

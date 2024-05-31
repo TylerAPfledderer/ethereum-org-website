@@ -1,15 +1,7 @@
-import * as React from "react"
-import {
-  forwardRef,
-  Tag as ChakraTag,
-  TagCloseButton,
-  TagLabel,
-  TagLeftIcon,
-  TagProps,
-  TagRightIcon,
-} from "@chakra-ui/react"
+import { forwardRef } from "react"
+import { Icon, Tag as ChakraTag, type TagRootProps } from "@chakra-ui/react"
 
-export interface EthTagProps extends TagProps {
+export interface EthTagProps extends TagRootProps {
   label: React.ReactNode
   isCloseable?: boolean
   leftIcon?: any
@@ -17,7 +9,7 @@ export interface EthTagProps extends TagProps {
   status?: "normal" | "tag" | "success" | "error" | "warning"
 }
 
-const Tag = forwardRef<EthTagProps, typeof ChakraTag>((props, ref) => {
+const Tag = forwardRef<HTMLSpanElement, EthTagProps>(function Tag(props, ref) {
   const {
     label,
     isCloseable = false,
@@ -31,16 +23,16 @@ const Tag = forwardRef<EthTagProps, typeof ChakraTag>((props, ref) => {
     m: 0,
   }
   return (
-    <ChakraTag ref={ref} status={status} {...rest}>
+    <ChakraTag.Root ref={ref} status={status} {...rest}>
       {leftIcon ? (
-        <TagLeftIcon as={leftIcon} boxSize={6} {...commonIconProps} />
+        <Icon as={leftIcon} boxSize="6" {...commonIconProps} />
       ) : null}
-      <TagLabel noOfLines={2}>{label}</TagLabel>
+      <ChakraTag.Label noOfLines={2}>{label}</ChakraTag.Label>
       {rightIcon ? (
-        <TagRightIcon as={rightIcon} boxSize="22px" {...commonIconProps} />
+        <Icon as={rightIcon} boxSize="22px" {...commonIconProps} />
       ) : null}
-      {isCloseable ? <TagCloseButton /> : null}
-    </ChakraTag>
+      {isCloseable ? <ChakraTag.CloseTrigger /> : null}
+    </ChakraTag.Root>
   )
 })
 

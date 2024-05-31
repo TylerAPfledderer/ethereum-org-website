@@ -3,7 +3,7 @@ import {
   IconButtonProps as ChakraIconButtonProps,
 } from "@chakra-ui/react"
 
-import { type ButtonProps, checkIsSecondary } from "@/components/Buttons"
+import { type ButtonProps, checkIsSecondary } from "@/components/Buttons/Button"
 
 type IconButtonProps = Omit<ButtonProps, keyof ChakraIconButtonProps> &
   ChakraIconButtonProps

@@ -1,9 +1,8 @@
 import { useEffect } from "react"
 import { merge } from "lodash"
 import { appWithTranslation } from "next-i18next"
-// ChakraProvider import updated as recommended on https://github.com/chakra-ui/chakra-ui/issues/4975#issuecomment-1174234230
-// to reduce bundle size. Should be reverted to "@chakra-ui/react" in case on theme issues
-import { ChakraProvider } from "@chakra-ui/provider"
+import { ThemeProvider } from "next-themes"
+import { ChakraProvider } from "@chakra-ui/react"
 import { init } from "@socialgouv/matomo-next"
 
 import customTheme from "@/@chakra-ui/theme"
@@ -44,14 +43,16 @@ const App = ({ Component, pageProps }: AppPropsWithLayout) => {
           }
         `}
       </style>
-      <ChakraProvider theme={theme}>
-        <RootLayout
-          contentIsOutdated={!!pageProps.frontmatter?.isOutdated}
-          contentNotTranslated={pageProps.contentNotTranslated}
-          lastDeployDate={pageProps.lastDeployDate}
-        >
-          {getLayout(<Component {...pageProps} />)}
-        </RootLayout>
+      <ChakraProvider value={theme}>
+        <ThemeProvider attribute="class" disableTransitionOnChange>
+          <RootLayout
+            contentIsOutdated={!!pageProps.frontmatter?.isOutdated}
+            contentNotTranslated={pageProps.contentNotTranslated}
+            lastDeployDate={pageProps.lastDeployDate}
+          >
+            {getLayout(<Component {...pageProps} />)}
+          </RootLayout>
+        </ThemeProvider>
       </ChakraProvider>
     </>
   )

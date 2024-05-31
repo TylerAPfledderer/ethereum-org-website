@@ -1,16 +1,5 @@
 import { useTranslation } from "next-i18next"
-import {
-  Flex,
-  Image,
-  Table,
-  Tbody,
-  Td,
-  Text,
-  Th,
-  Thead,
-  Tr,
-  useToken,
-} from "@chakra-ui/react"
+import { Box, Flex, Image, Table, Text, useToken } from "@chakra-ui/react"
 
 import { ButtonLink } from "./Buttons"
 
@@ -47,11 +36,17 @@ const StablecoinsTable = ({
   }
 
   return (
-    <Table variant="unstyled" my={8} bg="background.base" mb={8} minW="720px">
-      <Thead bg="background.highlight" color="body.medium">
-        <Tr>
+    <Table.Root
+      variant="unstyled"
+      my={8}
+      bg="background.base"
+      mb={8}
+      minW="720px"
+    >
+      <Table.Header bg="background.highlight" color="body.medium">
+        <Table.Row>
           {columns.map((column, idx) => (
-            <Th
+            <Table.ColumnHeader
               key={idx}
               fontWeight="bold"
               fontSize="md"
@@ -59,27 +54,34 @@ const StablecoinsTable = ({
               letterSpacing="normal"
             >
               {column}
-            </Th>
+            </Table.ColumnHeader>
           ))}
 
           {content && content[0]?.url && (
-            <Th p={5} fontSize="md" fontWeight="normal" textAlign="end">
+            <Table.ColumnHeader
+              p={5}
+              fontSize="md"
+              fontWeight="normal"
+              textAlign="end"
+            >
               <Text as="span" display="inline-block" transform={flipForRtl}>
                 ↗
               </Text>
-            </Th>
+            </Table.ColumnHeader>
           )}
-        </Tr>
-      </Thead>
-      <Tbody>
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
         {hasError && (
-          <Tr p={4}>
-            <Td colSpan={4}>{t("page-stablecoins-table-error")}</Td>
-          </Tr>
+          <Table.Row p={4}>
+            <Table.Cell colSpan={4}>
+              {t("page-stablecoins-table-error")}
+            </Table.Cell>
+          </Table.Row>
         )}
 
         {content.map(({ name, marketCap, image, type, url }, idx) => (
-          <Tr
+          <Table.Row
             key={idx}
             color="text"
             _hover={{
@@ -91,25 +93,31 @@ const StablecoinsTable = ({
               color: "body.base",
             }}
           >
-            <Td verticalAlign="middle">
+            <Table.Cell verticalAlign="middle">
               <Flex>
-                {image && <Image src={image} alt="" me={4} boxSize={6} />}
+                {image && (
+                  <Box me="4" boxSize="6" asChild>
+                    <Image src={image} alt="" />
+                  </Box>
+                )}
                 <>{name}</>
               </Flex>
-            </Td>
-            <Td verticalAlign="middle">{marketCap}</Td>
-            <Td verticalAlign="middle">{stablecoinsType[type]}</Td>
+            </Table.Cell>
+            <Table.Cell verticalAlign="middle">{marketCap}</Table.Cell>
+            <Table.Cell verticalAlign="middle">
+              {stablecoinsType[type]}
+            </Table.Cell>
             {url && (
-              <Td textAlign="end">
+              <Table.Cell textAlign="end">
                 <ButtonLink to={url} size="sm">
                   Go to {name}
                 </ButtonLink>
-              </Td>
+              </Table.Cell>
             )}
-          </Tr>
+          </Table.Row>
         ))}
-      </Tbody>
-    </Table>
+      </Table.Body>
+    </Table.Root>
   )
 }
 export default StablecoinsTable

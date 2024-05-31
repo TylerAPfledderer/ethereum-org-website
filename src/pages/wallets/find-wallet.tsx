@@ -3,15 +3,8 @@ import { GetStaticProps } from "next"
 import { useRouter } from "next/router"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import {
-  Box,
-  calc,
-  Center,
-  Flex,
-  Text,
-  useDisclosure,
-  useTheme,
-} from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/hooks"
+import { Box, Center, Flex, Text } from "@chakra-ui/react"
 
 import { BasePageProps, ChildOnlyProp, WalletData } from "@/lib/types"
 
@@ -76,7 +69,6 @@ export const getStaticProps = (async ({ locale }) => {
 
 const FindWalletPage = () => {
   const { pathname, locale } = useRouter()
-  const theme = useTheme()
   const { t } = useTranslation("page-wallets-find-wallet")
 
   const resetWalletFilter = useRef(() => {})
@@ -85,7 +77,7 @@ const FindWalletPage = () => {
   const [selectedPersona, setSelectedPersona] = useState(NaN)
   const [supportedLanguage, setSupportedLanguage] = useState(DEFAULT_LOCALE)
 
-  const { isOpen: showMobileSidebar, onOpen, onClose } = useDisclosure()
+  const { open: showMobileSidebar, onOpen, onClose } = useDisclosure()
 
   const supportedLocaleWallets = getSupportedLocaleWallets(locale!)
   const noSupportedLocaleWallets = getNonSupportedLocaleWallets(locale!)
@@ -223,7 +215,7 @@ const FindWalletPage = () => {
             {/* Filters sidebar */}
             <WalletFilterSidebar
               hideBelow="lg"
-              top={calc(NAV_BAR_PX_HEIGHT).subtract("2px").toString()}
+              top={`calc(${NAV_BAR_PX_HEIGHT} + 2px)`}
               {...{
                 filters,
                 resetWalletFilter,

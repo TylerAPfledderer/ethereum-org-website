@@ -1,29 +1,27 @@
 import { motion } from "framer-motion"
 import type { ReactNode } from "react"
 import { MdExpandMore } from "react-icons/md"
+import { useDisclosure } from "@chakra-ui/hooks"
 import {
-  type BackgroundProps,
   Box,
   Center,
-  type ChakraProps,
   Collapse,
   Heading,
   HStack,
   Icon,
   Stack,
-  useDisclosure,
+  type StackProps,
   VStack,
 } from "@chakra-ui/react"
 
 import { Image, type ImageProps } from "@/components/Image"
 import Text from "@/components/OldText"
 
-export type ExpandableInfoProps = ChakraProps & {
+export type ExpandableInfoProps = StackProps & {
   children?: ReactNode
   image?: ImageProps["src"]
   title: ReactNode
   contentPreview: ReactNode
-  background: BackgroundProps["background"]
   forceOpen?: boolean
   className?: string
 }
@@ -38,8 +36,8 @@ const ExpandableInfo = ({
   className,
   ...props
 }: ExpandableInfoProps) => {
-  const { isOpen, getButtonProps, getDisclosureProps } = useDisclosure({
-    defaultIsOpen: forceOpen,
+  const { open, getButtonProps, getDisclosureProps } = useDisclosure({
+    defaultOpen: forceOpen,
   })
 
   const chevronFlip = {
@@ -57,7 +55,7 @@ const ExpandableInfo = ({
     },
   }
 
-  const animateToggle = isOpen ? "expanded" : "collapsed"
+  const animateToggle = open ? "expanded" : "collapsed"
 
   return (
     <VStack
@@ -66,7 +64,7 @@ const ExpandableInfo = ({
       borderRadius="2px"
       p="6"
       mb="4"
-      spacing="0"
+      gap="0"
       background={background ?? "background.base"}
       position="relative"
       _hover={{
@@ -94,7 +92,7 @@ const ExpandableInfo = ({
         )}
         <HStack gap="12" width="full">
           <Box me="4">
-            <HStack width="full" my="4" sx={{ img: { me: 6 } }}>
+            <HStack width="full" my="4" css={{ img: { me: 6 } }}>
               <Heading
                 mt="0"
                 mb="1"
@@ -112,10 +110,6 @@ const ExpandableInfo = ({
         </HStack>
         {!forceOpen && (
           <Center
-            as={motion.div}
-            variants={chevronFlip}
-            animate={animateToggle}
-            initial={false}
             {...getButtonProps()}
             width={{ base: "full", md: "5rem" }}
             minHeight={{ base: "full", md: "10rem" }}
@@ -126,14 +120,23 @@ const ExpandableInfo = ({
                 transition: "transform 0.1s",
               },
             }}
+            asChild
           >
-            <Icon as={MdExpandMore} boxSize="initial" size="36" />
+            <motion.div
+              variants={chevronFlip}
+              animate={animateToggle}
+              initial={false}
+            >
+              <Icon boxSize="initial" asChild>
+                <MdExpandMore size="36" />
+              </Icon>
+            </motion.div>
           </Center>
         )}
       </Stack>
       <Collapse
         {...getDisclosureProps()}
-        in={isOpen}
+        in={open}
         startingHeight="0"
         endingHeight="100%"
         initial={false}

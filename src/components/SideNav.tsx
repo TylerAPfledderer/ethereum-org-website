@@ -99,30 +99,32 @@ const NavLink = ({ item, path, isTopLevel }: NavLinkProps) => {
             </Box>
           )}
           <Box
-            as={motion.div}
             onClick={() => setIsOpen(!isOpen)}
-            variants={dropdownIconContainerVariant}
-            animate={isOpen ? "open" : "closed"}
             cursor="pointer"
             display="flex"
+            asChild
           >
-            <Icon as={MdChevronRight} boxSize={6} color="secondary" />
+            <motion.div
+              variants={dropdownIconContainerVariant}
+              animate={isOpen ? "open" : "closed"}
+            >
+              <Icon boxSize="6" color="secondary" asChild>
+                <MdChevronRight />
+              </Icon>
+            </motion.div>
           </Box>
         </LinkContainer>
-        <Box
-          as={motion.div}
-          fontSize="sm"
-          lineHeight="tall"
-          fontWeight="normal"
-          ms={4}
-          key={item.id}
-          animate={isOpen ? "open" : "closed"}
-          variants={innerLinksVariants}
-          initial={isOpen ? "open" : "closed"}
-        >
-          {item.items.map((childItem, idx) => (
-            <NavLink item={childItem} path={path} key={idx} />
-          ))}
+        <Box fontSize="sm" lineHeight="tall" fontWeight="normal" ms="4" asChild>
+          <motion.div
+            key={item.id}
+            animate={isOpen ? "open" : "closed"}
+            variants={innerLinksVariants}
+            initial={isOpen ? "open" : "closed"}
+          >
+            {item.items.map((childItem, idx) => (
+              <NavLink item={childItem} path={path} key={idx} />
+            ))}
+          </motion.div>
         </Box>
       </Box>
     )

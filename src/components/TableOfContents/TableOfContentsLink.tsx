@@ -1,4 +1,4 @@
-import { cssVar, SystemStyleObject } from "@chakra-ui/react"
+import { SystemStyleObject } from "@chakra-ui/react"
 
 import type { ToCItem } from "@/lib/types"
 
@@ -26,7 +26,10 @@ const Link = ({
   isNested && classList.push("nested")
   const classes = classList.join(" ")
 
-  const $dotBg = cssVar("dot-bg")
+  const $dotBg = {
+    reference: "var('dot-bg)",
+    variable: "--dot-bg",
+  }
 
   const hoverOrActiveStyle: SystemStyleObject = {
     color: "primary.base",
@@ -36,7 +39,7 @@ const Link = ({
       border: "1px",
       borderColor: "primary.base",
       borderRadius: "50%",
-      boxSize: 2,
+      boxSize: "2",
       position: "absolute",
       insetInlineStart: "-1.29rem",
       top: "50%",
@@ -58,7 +61,7 @@ const Link = ({
       _hover={{
         ...hoverOrActiveStyle,
       }}
-      sx={{
+      css={{
         [$dotBg.variable]: "colors.background",
         "&.active": {
           [$dotBg.variable]: "colors.primary",

@@ -1,17 +1,8 @@
 import React from "react"
 import { useTranslation } from "next-i18next"
 import { MdExpandMore } from "react-icons/md"
-import {
-  Box,
-  chakra,
-  Fade,
-  Flex,
-  Icon,
-  List,
-  Show,
-  useDisclosure,
-  useToken,
-} from "@chakra-ui/react"
+import { useDisclosure } from "@chakra-ui/hooks"
+import { Box, chakra, Flex, Icon, List, useToken } from "@chakra-ui/react"
 
 import type { ToCItem } from "@/lib/types"
 
@@ -29,8 +20,8 @@ const Mobile = ({ items, maxDepth }: TableOfContentsMobileProps) => {
   // TODO: Replace with direct token implementation after UI migration is completed
   const lgBp = useToken("breakpoints", "lg")
 
-  const { getButtonProps, getDisclosureProps, isOpen } = useDisclosure({
-    defaultIsOpen: false,
+  const { getButtonProps, getDisclosureProps, open } = useDisclosure({
+    defaultOpen: false,
   })
   if (!items) {
     return null
@@ -59,24 +50,20 @@ const Mobile = ({ items, maxDepth }: TableOfContentsMobileProps) => {
         </chakra.span>
         <Icon
           as={MdExpandMore}
-          transform={isOpen ? "rotate(0)" : "rotate(-90deg)"}
-          boxSize={6}
+          transform={open ? "rotate(0)" : "rotate(-90deg)"}
+          boxSize="6"
           transition="transform .4s"
         />
       </Flex>
-      <Fade
-        in={isOpen}
-        {...getDisclosureProps()}
-        transition={{ enter: { duration: 0.6 } }}
-      >
-        <List {...outerListProps}>
+      <Box hidden={!open} {...getDisclosureProps()} animation="fade-in 0.6s">
+        <List.Root {...outerListProps}>
           <ItemsList
             items={items}
             depth={0}
             maxDepth={maxDepth ? maxDepth : 1}
           />
-        </List>
-      </Fade>
+        </List.Root>
+      </Box>
     </Box>
   )
 }

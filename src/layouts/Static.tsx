@@ -131,7 +131,7 @@ export const StaticLayout = ({
             as={MainArticle}
             maxW="container.md"
             w="full"
-            sx={{
+            css={{
               ".citation": {
                 p: {
                   color: "text200",

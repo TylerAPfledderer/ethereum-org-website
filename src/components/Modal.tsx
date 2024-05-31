@@ -1,38 +1,31 @@
 import React from "react"
-import {
-  Modal as ChakraModal,
-  ModalCloseButton,
-  ModalContent,
-  type ModalContentProps,
-  ModalOverlay,
-  type ModalProps as ChakraModalProps,
-} from "@chakra-ui/react"
+import { Dialog } from "@chakra-ui/react"
 
-export type ModalProps = ModalContentProps &
-  Pick<ChakraModalProps, "size"> & {
+export type ModalProps = Dialog.ContentProps &
+  Pick<Dialog.RootProps, "size"> & {
     children?: React.ReactNode
-    isOpen: boolean
+    open: boolean
     setIsOpen: (isOpen: boolean) => void
   }
 
 const Modal = ({
   children,
-  isOpen,
+  open,
   setIsOpen,
   size,
   ...restProps
 }: ModalProps) => {
   return (
-    <ChakraModal
-      isOpen={isOpen}
-      onClose={() => setIsOpen(false)}
-      isCentered
+    <Dialog.Root
+      open={open}
+      onOpenChange={() => setIsOpen(false)}
+      centered
       size={size ?? "xl"}
       scrollBehavior="inside"
     >
-      <ModalOverlay bgColor="blackAlpha.700" />
+      <Dialog.Backdrop bgColor="blackAlpha.700" />
 
-      <ModalContent
+      <Dialog.Content
         p={8}
         shadow="md"
         border="1px"
@@ -40,10 +33,10 @@ const Modal = ({
         borderRadius="md"
         {...restProps}
       >
-        <ModalCloseButton />
+        <Dialog.CloseTrigger />
         {children}
-      </ModalContent>
-    </ChakraModal>
+      </Dialog.Content>
+    </Dialog.Root>
   )
 }
 

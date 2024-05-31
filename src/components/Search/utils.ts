@@ -1,4 +1,4 @@
-import { ButtonProps, SystemStyleObject } from "@chakra-ui/react"
+import { type ButtonProps, SystemStyleObject } from "@chakra-ui/react"
 
 const commonBtnStateStyles: SystemStyleObject = {
   boxShadow: "none",
@@ -21,14 +21,14 @@ export const getSearchButtonStyles = (): ButtonProps => ({
   px: 3,
   _hover: {
     ...commonBtnStateStyles,
-    ".DocSearch-Button-Keys kbd": {
+    "& .DocSearch-Button-Keys kbd": {
       color: "disabled",
       borderColor: "disabled",
     },
   },
   _focus: commonBtnStateStyles,
   _active: commonBtnStateStyles,
-  sx: {
+  css: {
     "--docsearch-searchbox-shadow": `inset 0 0 0 1px var(--eth-colors-primary-highContrast)`,
     ".DocSearch-Button-Container svg": {
       boxSize: 3.5,
@@ -75,50 +75,50 @@ export const getSearchModalStyles = (): SystemStyleObject => ({
   "--docsearch-modal-width": "650px",
   "--docsearch-hit-height": "fit-content",
 
-  ".DocSearch.DocSearch-Container": {
+  "& .DocSearch.DocSearch-Container": {
     position: "fixed",
     inset: 0,
   },
 
-  ".DocSearch-SearchBar": {
+  "& .DocSearch-SearchBar": {
     p: { base: 4, md: 8 },
     pb: 4,
-    form: {
+    "& form": {
       "--docsearch-searchbox-shadow": `inset 0 0 0 1px var(--eth-colors-primary-highContrast)`,
       bg: "neutral",
       py: 3,
     },
-    "label, input": {
+    "& label, & input": {
       color: "primary.highContrast",
     },
 
-    label: {
-      boxSize: 4,
+    "& label": {
+      boxSize: "4",
     },
-    input: {
+    "& input": {
       fontSize: { base: "md", md: "xl" },
       p: 0,
       ps: 2,
     },
   },
 
-  ".DocSearch-Cancel": {
+  "& .DocSearch-Cancel": {
     color: { base: "primary.base", md: "primary.highContrast" },
     _hover: {
       color: "primary.base",
     },
   },
 
-  ".DocSearch-Container.DocSearch[aria-expanded='true']": {
+  "& .DocSearch-Container.DocSearch[aria-expanded='true']": {
     zIndex: "modal",
   },
 
-  ".DocSearch-Container--Stalled .DocSearch-MagnifierLabel, .DocSearch-Container--Stalled .DocSearch-LoadingIndicator":
+  "& .DocSearch-Container--Stalled .DocSearch-MagnifierLabel, & .DocSearch-Container--Stalled .DocSearch-LoadingIndicator":
     {
       color: "primary.highContrast",
     },
 
-  ".DocSearch-Dropdown": {
+  "& .DocSearch-Dropdown": {
     ps: { base: 4, md: 8 },
     pe: { base: 2, md: 4 },
     maxH: {
@@ -128,15 +128,15 @@ export const getSearchModalStyles = (): SystemStyleObject => ({
     overflowY: { base: "scroll", md: "auto" },
   },
 
-  ".DocSearch-Hit-source": {
+  "& .DocSearch-Hit-source": {
     color: "body.base",
     lineHeight: 6,
     pb: 0.5,
   },
 
-  ".DocSearch-Hit": {
+  "& .DocSearch-Hit": {
     pb: 0,
-    a: {
+    "& a": {
       "--docsearch-hit-shadow": "none",
       borderRadius: 0,
       borderBottom: "1px",
@@ -152,19 +152,19 @@ export const getSearchModalStyles = (): SystemStyleObject => ({
     },
   },
 
-  ".DocSearch-Hit-content-wrapper": {
+  "& .DocSearch-Hit-content-wrapper": {
     whiteSpace: "normal",
   },
 
-  ".DocSearch-Hit-icon": {
+  "& .DocSearch-Hit-icon": {
     color: "body.base",
   },
 
-  ".DocSearch-Hit-Select-Icon:focus, .DocSearch-Hit-Select-Icon:hover": {
+  "& .DocSearch-Hit-Select-Icon:focus, & .DocSearch-Hit-Select-Icon:hover": {
     color: "switchBackground", // TODO: Remove? Causing low contrast in dark mode
   },
 
-  ".DocSearch-Footer": {
+  "& .DocSearch-Footer": {
     "--docsearch-footer-height": "space.10",
     "--docsearch-logo-color": "colors.body.light",
     "--docsearch-footer-shadow": "none",
@@ -173,25 +173,25 @@ export const getSearchModalStyles = (): SystemStyleObject => ({
     borderColor: "primary.base",
   },
 
-  ".DocSearch-Commands": {
+  "& .DocSearch-Commands": {
     gap: 4,
-    li: {
+    "& li": {
       margin: 0,
     },
   },
 
-  ".DocSearch-Label": {
+  "& .DocSearch-Label": {
     color: "body.base",
     textTransform: "lowercase",
   },
 
-  ".DocSearch-Commands-Key": {
+  "& .DocSearch-Commands-Key": {
     bg: "background.base",
     border: "1px",
     borderColor: "primary.base",
     color: "primary.base",
     boxShadow: "none",
-    boxSize: 4,
+    boxSize: "4",
     padding: 0,
     display: "grid",
     placeItems: "center",
@@ -200,24 +200,24 @@ export const getSearchModalStyles = (): SystemStyleObject => ({
     me: 1.5,
   },
 
-  ".DocSearch-Logo": {
-    ".DocSearch-Label": {
+  "& .DocSearch-Logo": {
+    "& .DocSearch-Label": {
       color: "body.medium",
       textTransform: "uppercase",
     },
   },
 
-  "svg[aria-label='Algolia']": {
+  "& svg[aria-label='Algolia']": {
     ml: "unset",
     ms: 2,
   },
 
-  "svg[aria-label='Algolia'] *": {
+  "& svg[aria-label='Algolia'] *": {
     fill: "body.medium",
   },
 
   "@media (max-width: 768px)": {
-    ".DocSearch-Modal": {
+    "& .DocSearch-Modal": {
       "--inset": "space.4",
       borderRadius: "base",
       inset: "var(--inset)",

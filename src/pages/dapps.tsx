@@ -14,12 +14,12 @@ import {
   Box,
   Button,
   type ButtonProps,
-  Divider as ChakraDivider,
-  type DividerProps,
   Flex,
   type FlexProps,
   Heading,
   type HeadingProps,
+  Separator,
+  type SeparatorProps,
   SimpleGrid,
   useToken,
 } from "@chakra-ui/react"
@@ -135,8 +135,8 @@ const Page = (props: ChildOnlyProp & FlexProps) => (
   />
 )
 
-const Divider = (props: DividerProps) => (
-  <ChakraDivider
+const Divider = (props: SeparatorProps) => (
+  <Separator
     opacity={1}
     my={16}
     w="10%"
@@ -298,7 +298,7 @@ const StyledH3 = (props: ChildOnlyProp) => (
     fontWeight="bold"
     mb={2}
     mt={6}
-    sx={{
+    css={{
       a: {
         dispalay: "none",
       },
@@ -1820,7 +1820,7 @@ const DappsPage = () => {
         <ImageContainer id="what-are-dapps">
           <GhostCard
             mt={2}
-            sx={{
+            css={{
               ".ghost-card-base": {
                 display: "flex",
                 justifyContent: "center",

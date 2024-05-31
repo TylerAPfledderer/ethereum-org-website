@@ -10,7 +10,7 @@ export const Banner = ({ children }: ChildOnlyProp) => {
       background="bannerGridGradient"
       direction={{ base: "column", lg: "row" }}
       wrap="nowrap"
-      sx={{
+      css={{
         h2: {
           mt: 0,
         },

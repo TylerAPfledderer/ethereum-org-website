@@ -105,7 +105,7 @@ const ComparisonGrid = (props: ChildOnlyProp) => {
       gridAutoRows="minmax(64px, auto)"
       gridTemplateColumns={{ base: "1fr", xl: "repeat(3, 1fr)" }}
       gridTemplateAreas={gridAreas}
-      sx={{
+      css={{
         h4: {
           color: "#787878",
         },
@@ -160,7 +160,7 @@ const StyledCard = (props: {
     emoji={props.emoji}
     key={props.key}
     description={props.description}
-    sx={{
+    css={{
       justifyContent: "flex-start",
       h3: {
         fontWeight: "700",

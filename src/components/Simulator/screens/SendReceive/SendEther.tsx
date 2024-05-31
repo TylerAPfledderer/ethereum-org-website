@@ -77,7 +77,9 @@ export const SendEther = ({
         <NotificationPopover
           title="Example walkthrough"
           content="Choose a value below"
-          placement="top"
+          positioning={{
+            placement: "top",
+          }}
         >
           <Flex
             alignItems="top"
@@ -93,7 +95,9 @@ export const SendEther = ({
         {/* Right side */}
         <Flex direction="column" alignItems="end">
           <NotificationPopover
-            placement="top"
+            positioning={{
+              placement: "top",
+            }}
             title="Example walkthrough"
             content="In this walkthrough you can only send ETH, but in real wallet you can send different tokens as well"
           >
@@ -106,7 +110,9 @@ export const SendEther = ({
               bg="body.light"
               alignItems="center"
             >
-              <Icon as={EthTokenIcon} fontSize="xl" me={1.5} />
+              <Icon fontSize="xl" me={1.5} asChild>
+                <EthTokenIcon />
+              </Icon>
               <Text fontWeight="bold" m={0} color="body.base">
                 ETH
               </Text>

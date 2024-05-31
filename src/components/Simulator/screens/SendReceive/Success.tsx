@@ -72,55 +72,59 @@ export const Success = ({
         </motion.div>
       ) : (
         <Flex
-          animate={{ opacity: [0, 1] }}
-          exit={{ opacity: 0 }}
-          key="success-fade-out"
-          as={motion.div}
-          justify="center"
-          h="full"
-          bg="background.highlight"
-          pt={{ base: 24, md: 0 }}
           alignItems={{ base: "start", md: "center" }}
+          bg="background.highlight"
+          h="full"
+          justify="center"
+          pt={{ base: 24, md: 0 }}
+          asChild
         >
-          <Flex direction="column" alignItems="center" pt={8} gap={4}>
-            {txPending ? (
-              <motion.div
-                key="spinner"
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.5 }}
-              >
-                <Spinner w={ICON_SIZE} h={ICON_SIZE} />
-              </motion.div>
-            ) : (
-              <motion.div
-                key="checkmark"
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                transition={{ type: "spring", delay: 0.25 }}
-              >
-                <Icon
-                  as={PiCheckThin}
-                  w={ICON_SIZE}
-                  h={ICON_SIZE}
-                  transform="rotate(-10deg)"
-                />
-              </motion.div>
-            )}
-            <Text textAlign="center" px={{ base: 4, md: 8 }}>
+          {/* TODO: can this be replaced with a keyframe? */}
+          <motion.div
+            key="success-fade-out"
+            animate={{ opacity: [0, 1] }}
+            exit={{ opacity: 0 }}
+          >
+            <Flex direction="column" alignItems="center" pt={8} gap={4}>
               {txPending ? (
-                "Sending transaction"
+                <motion.div
+                  key="spinner"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
+                  <Spinner w={ICON_SIZE} h={ICON_SIZE} />
+                </motion.div>
               ) : (
-                <Text as="span">
-                  You sent{" "}
-                  <strong>
-                    <>{sentEthValue} ETH</>
-                  </strong>{" "}
-                  ({usdValue}) to <strong>{recipient}</strong>
-                </Text>
+                <motion.div
+                  key="checkmark"
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  transition={{ type: "spring", delay: 0.25 }}
+                >
+                  <Icon
+                    as={PiCheckThin}
+                    w={ICON_SIZE}
+                    h={ICON_SIZE}
+                    transform="rotate(-10deg)"
+                  />
+                </motion.div>
               )}
-            </Text>
-          </Flex>
+              <Text textAlign="center" px={{ base: 4, md: 8 }}>
+                {txPending ? (
+                  "Sending transaction"
+                ) : (
+                  <Text as="span">
+                    You sent{" "}
+                    <strong>
+                      <>{sentEthValue} ETH</>
+                    </strong>{" "}
+                    ({usdValue}) to <strong>{recipient}</strong>
+                  </Text>
+                )}
+              </Text>
+            </Flex>
+          </motion.div>
         </Flex>
       )}
     </AnimatePresence>

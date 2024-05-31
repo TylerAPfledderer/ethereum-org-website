@@ -10,9 +10,8 @@ import {
   Flex,
   GridItem,
   HeadingProps,
-  ListItem,
+  List,
   SimpleGrid,
-  UnorderedList,
 } from "@chakra-ui/react"
 
 import type {
@@ -379,20 +378,19 @@ const Layer2Page = () => {
         >
           {layer2Cards.map(({ emoji, title, description }, idx) => (
             <GridItem
-              as={Card}
-              description={description}
-              title={title}
-              emoji={emoji}
               key={idx}
               _hover={{
                 transition: "0.1s",
                 transform: "scale(1.01)",
-                img: {
+                "& img": {
                   transition: "0.1s",
                   transform: "scale(1.1)",
                 },
               }}
-            />
+              asChild
+            >
+              <Card description={description} title={title} emoji={emoji} />
+            </GridItem>
           ))}
         </SimpleGrid>
       </ContentBox>
@@ -581,18 +579,18 @@ const Layer2Page = () => {
               <Translation id="page-layer-2:layer-2-sidechains-1" />
             </Text>
             <Text>{t("layer-2-sidechains-2")}</Text>
-            <UnorderedList>
-              <ListItem>
+            <List.Root>
+              <List.Item>
                 <InlineLink href="/developers/docs/scaling/sidechains/">
                   {t("layer-2-more-on-sidechains")}
                 </InlineLink>
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <InlineLink href="/developers/docs/scaling/validium/">
                   {t("layer-2-more-on-validiums")}
                 </InlineLink>
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
           <Box flex="50%">
             <Text>{t("layer-2-sidechains-4")}</Text>
@@ -679,38 +677,38 @@ const Layer2Page = () => {
       {/* Layer 2 Further Reading Section */}
       <ContentBox>
         <SectionHeading>{t("layer-2-further-reading-title")}</SectionHeading>
-        <UnorderedList ms="1.45rem" mb="1.45rem">
-          <ListItem>
+        <List.Root ms="1.45rem" mb="1.45rem">
+          <List.Item>
             <InlineLink href="https://ethereum-magicians.org/t/a-rollup-centric-ethereum-roadmap/4698">
               {t("a-rollup-centric-ethereum-roadmap")}
             </InlineLink>{" "}
             <i>- Vitalik Buterin </i>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <InlineLink href="https://vitalik.eth.limo/general/2021/01/05/rollup.html">
               {t("an-incomplete-guide-to-rollups")}
             </InlineLink>{" "}
             <i>- Vitalik Buterin</i>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <InlineLink href="https://www.youtube.com/watch?v=DyNbmgkyxJI">
               {t("polygon-sidechain-vs-ethereum-rollups")}
             </InlineLink>{" "}
             <i>- Lex Clips</i>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <InlineLink href="https://www.youtube.com/watch?v=7pWxCklcNsU">
               {t("rollups-the-ultimate-ethereum-scaling-strategy")}
             </InlineLink>{" "}
             <i>- Finematics</i>
-          </ListItem>
-          <ListItem>
+          </List.Item>
+          <List.Item>
             <InlineLink href="https://barnabe.substack.com/p/understanding-rollup-economics-from?s=r">
               {t("understanding-rollup-economics-from-first-principals")}
             </InlineLink>{" "}
             <i>- Barnabé Monnot</i>
-          </ListItem>
-        </UnorderedList>
+          </List.Item>
+        </List.Root>
       </ContentBox>
       {/* Layer 2 Quiz Section */}
       <StandaloneQuizWidget quizKey="layer-2" />

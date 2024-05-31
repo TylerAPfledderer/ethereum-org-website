@@ -1,6 +1,6 @@
 // Libraries
 import React, { useEffect, useState } from "react"
-import { Center, CloseButton } from "@chakra-ui/react"
+import { Center, CloseTrigger } from "@chakra-ui/react"
 
 // Components
 import BannerNotification from "../BannerNotification"
@@ -30,7 +30,7 @@ const DismissableBanner = ({
   return (
     <BannerNotification shouldShow={show}>
       <Center paddingEnd={8}>{children}</Center>
-      <CloseButton onClick={onClose} aria-label="Close Banner" />
+      <CloseTrigger onClick={onClose} aria-label="Close Banner" />
     </BannerNotification>
   )
 }

@@ -48,7 +48,7 @@ const SelectContainer = <
       data-expanded={menuIsOpen}
       {...innerProps}
       id="react-select-container"
-      sx={styles.container}
+      css={styles.container}
     >
       {children}
     </Box>
@@ -67,6 +67,7 @@ const Control = <
   const styles = useSelectStyles()
   return (
     <HStack
+      // @ts-expect-error TS thinks string is being passed here
       ref={innerRef}
       data-expanded={menuIsOpen}
       sx={styles.control}
@@ -91,7 +92,7 @@ const DropdownIndicator = <
     <Center
       {...innerProps}
       id="react-select-dropdown-indicator"
-      sx={styles.indicatorIcon}
+      css={styles.indicatorIcon}
     >
       <Icon as={FaChevronDown} />
     </Center>
@@ -111,7 +112,7 @@ const MenuList = <
       ref={innerRef}
       {...innerProps}
       id="react-select-menu-list"
-      sx={styles.menuList}
+      css={styles.menuList}
     >
       {children}
     </Box>
@@ -135,7 +136,7 @@ const Option = <
       data-active={isSelected}
       {...innerProps}
       id="react-select-option"
-      sx={styles.option}
+      css={styles.option}
     >
       {children}
     </Box>
@@ -173,7 +174,7 @@ const Group = <
   return (
     <Box id={PARENT_ID} p={2} {...notFirstGroupStyles}>
       <Box fontSize="sm">
-        <Box id={headingProps.id} sx={styles.groupHeading}>
+        <Box id={headingProps.id} css={styles.groupHeading}>
           {label}
         </Box>
       </Box>

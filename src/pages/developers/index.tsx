@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import { GetStaticProps } from "next"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
+import { useTheme } from "next-themes"
 import {
   Box,
   chakra,
@@ -10,7 +11,6 @@ import {
   SimpleGrid,
   Stack,
   TextProps,
-  useColorModeValue,
 } from "@chakra-ui/react"
 
 import { BasePageProps, ChildOnlyProp } from "@/lib/types"
@@ -114,7 +114,9 @@ const IntroColumn = (props: ChildOnlyProp) => (
 )
 
 const StyledCard = (props: CardProps) => {
-  const tableBoxShadow = useColorModeValue("tableBox.light", "tableBox.dark")
+  const { theme } = useTheme()
+
+  const tableBoxShadow = theme === "light" ? "tableBox.light" : "tableBox.dark"
 
   return (
     <Card
@@ -134,7 +136,7 @@ const StyledCard = (props: CardProps) => {
 }
 
 const StyledCallout = chakra(Callout, {
-  baseStyle: {
+  base: {
     flex: { base: "auto", md: "1 1 416px" },
   },
 })
@@ -158,7 +160,7 @@ const SpeedRunEthereumBanner = ({
       }}
     />
     <Stack
-      spacing={{ base: "3", md: "4" }}
+      gap={{ base: "3", md: "4" }}
       p={{ base: "6", lg: "8" }}
       position="absolute"
       insetInlineStart={{ md: "8" }}
@@ -167,9 +169,7 @@ const SpeedRunEthereumBanner = ({
       wordBreak="break-word"
       alignItems="flex-start"
     >
-      <Heading>
-        {title}
-      </Heading>
+      <Heading>{title}</Heading>
       <ButtonLink href="https://speedrunethereum.com/">{linkLabel}</ButtonLink>
     </Stack>
   </Box>

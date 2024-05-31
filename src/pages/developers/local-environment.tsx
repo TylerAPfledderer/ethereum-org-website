@@ -1,13 +1,7 @@
 import { GetStaticProps, InferGetStaticPropsType } from "next"
 import { useTranslation } from "next-i18next"
 import { serverSideTranslations } from "next-i18next/serverSideTranslations"
-import {
-  Box,
-  Flex,
-  ListItem,
-  SimpleGrid,
-  UnorderedList,
-} from "@chakra-ui/react"
+import { Box, Flex, List, SimpleGrid } from "@chakra-ui/react"
 
 import { BasePageProps, ChildOnlyProp } from "@/lib/types"
 import { Framework } from "@/lib/interfaces"
@@ -148,23 +142,23 @@ const LocalEnvironmentPage = ({
             <Text>
               <Translation id="page-developers-local-environment:page-local-environment-framework-features" />
             </Text>
-            <UnorderedList>
-              <ListItem>
+            <List.Root>
+              <List.Item>
                 <Translation id="page-developers-local-environment:page-local-environment-framework-feature-1" />
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Translation id="page-developers-local-environment:page-local-environment-framework-feature-2" />
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Translation id="page-developers-local-environment:page-local-environment-framework-feature-3" />
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Translation id="page-developers-local-environment:page-local-environment-framework-feature-4" />
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <Translation id="page-developers-local-environment:page-local-environment-framework-feature-5" />
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Column>
           <Column>
             <Image
@@ -177,7 +171,7 @@ const LocalEnvironmentPage = ({
             />
           </Column>
         </Flex>
-        <SimpleGrid minChildWidth="min(100%, 280px)" spacing={8}>
+        <SimpleGrid minChildWidth="min(100%, 280px)" gap={8}>
           {frameworksList.map((framework, idx) => (
             <ProductCard
               key={idx}

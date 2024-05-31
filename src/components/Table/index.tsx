@@ -1,14 +1,5 @@
 import * as React from "react"
-import {
-  Table as ChakraTable,
-  TableContainer,
-  Tbody,
-  Td,
-  Th,
-  Thead,
-  ThemingProps,
-  Tr,
-} from "@chakra-ui/react"
+import { Table as ChakraTable } from "@chakra-ui/react"
 
 /*
  * TODO: Currently, there are cell spacing issues with some table content.
@@ -23,19 +14,21 @@ interface TableProps extends ThemingProps<"Table"> {
 const Table = (props: TableProps) => {
   const { variant, ...rest } = props
   return (
-    <TableContainer whiteSpace="normal" position="relative">
-      <ChakraTable variant={variant} {...rest} />
-    </TableContainer>
+    <ChakraTable.Overflow whiteSpace="normal" position="relative">
+      <ChakraTable.Root variant={variant} {...rest} />
+    </ChakraTable.Overflow>
   )
 }
 
 export const mdxTableComponents = {
   table: Table,
-  th: ({ align, ...rest }) => <Th textAlign={align} {...rest} />,
-  td: ({ align, ...rest }) => <Td textAlign={align} {...rest} />,
-  tr: (props) => <Tr {...props} />,
-  tbody: (props) => <Tbody {...props} />,
-  thead: (props) => <Thead {...props} />,
+  th: ({ align, ...rest }) => (
+    <ChakraTable.ColumnHeader textAlign={align} {...rest} />
+  ),
+  td: ({ align, ...rest }) => <ChakraTable.Cell textAlign={align} {...rest} />,
+  tr: (props) => <ChakraTable.Row {...props} />,
+  tbody: (props) => <ChakraTable.Body {...props} />,
+  thead: (props) => <ChakraTable.Header {...props} />,
 }
 
 export default Table

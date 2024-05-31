@@ -1,13 +1,6 @@
 import { useTranslation } from "next-i18next"
 import { MdInfoOutline } from "react-icons/md"
-import {
-  Box,
-  Heading,
-  Icon,
-  ListIcon,
-  ListItem,
-  UnorderedList,
-} from "@chakra-ui/react"
+import { Box, Heading, Icon, List } from "@chakra-ui/react"
 
 import { DropdownOption } from "@/lib/types"
 
@@ -43,7 +36,7 @@ export const WalletMoreInfoCategory = ({
       </Heading>
 
       {/* Supported features */}
-      <UnorderedList m={0}>
+      <List.Root m={0}>
         {orderedFeatureDropdownItems.map((feature) => {
           const featureColor = wallet[feature.filterKey!] ? "text" : "secondary"
           const FeatureIcon = () => (
@@ -60,14 +53,14 @@ export const WalletMoreInfoCategory = ({
 
           if (feature.category === sectionName)
             return (
-              <ListItem
+              <List.Item
                 key={feature.label}
                 fontSize="0.9rem"
                 listStyleType="none"
                 display="flex"
                 mb={2}
                 width={{ base: "auto", xl: "full" }}
-                sx={{
+                css={{
                   p: {
                     color: featureColor,
                     mb: 0,
@@ -84,7 +77,9 @@ export const WalletMoreInfoCategory = ({
                   },
                 }}
               >
-                <ListIcon as={FeatureIcon}></ListIcon>
+                <List.Icon asChild>
+                  <FeatureIcon />
+                </List.Icon>
 
                 <Text px={1} lineHeight={1}>
                   {feature.label}
@@ -98,13 +93,15 @@ export const WalletMoreInfoCategory = ({
                   }
                 >
                   <Box as="span">
-                    <Icon as={MdInfoOutline} color={featureColor} />
+                    <Icon color={featureColor} asChild>
+                      <MdInfoOutline />
+                    </Icon>
                   </Box>
                 </Tooltip>
-              </ListItem>
+              </List.Item>
             )
         })}
-      </UnorderedList>
+      </List.Root>
     </Box>
   )
 }

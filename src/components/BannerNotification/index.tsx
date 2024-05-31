@@ -1,9 +1,10 @@
 import React from "react"
-import { Center, FlexProps, useMediaQuery } from "@chakra-ui/react"
+import { useMediaQuery } from "@chakra-ui/hooks"
+import { Center, type CenterProps } from "@chakra-ui/react"
 
 import { lightTheme as oldTheme } from "../../theme"
 
-export type BannerNotificationProps = FlexProps & {
+export type BannerNotificationProps = CenterProps & {
   shouldShow?: boolean
 }
 
@@ -12,7 +13,10 @@ const BannerNotification = ({
   shouldShow = false,
   ...props
 }: BannerNotificationProps) => {
-  const [isLGScreen] = useMediaQuery(`min-width: ${oldTheme.breakpoints.l}`)
+  const [isLGScreen] = useMediaQuery(
+    [`min-width: ${oldTheme.breakpoints.l}`],
+    {}
+  )
   return (
     <>
       {shouldShow && (
@@ -24,7 +28,7 @@ const BannerNotification = ({
           px="8"
           bg="primary.base"
           color="background.base"
-          sx={{
+          css={{
             a: {
               color: "background.base",
             },

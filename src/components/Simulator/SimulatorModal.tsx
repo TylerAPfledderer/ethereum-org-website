@@ -1,39 +1,32 @@
 import React from "react"
-import {
-  Modal as ChakraModal,
-  ModalCloseButton,
-  ModalContent,
-  type ModalContentProps,
-  ModalOverlay,
-  type ModalProps,
-  UseDisclosureReturn,
-} from "@chakra-ui/react"
+import type { UseDisclosureReturn } from "@chakra-ui/hooks"
+import { Dialog } from "@chakra-ui/react"
 
-type SimulatorModalProps = ModalContentProps &
-  Pick<ModalProps, "size"> & {
-    isOpen: UseDisclosureReturn["isOpen"]
+type SimulatorModalProps = Dialog.ContentProps &
+  Pick<Dialog.RootProps, "size"> & {
+    open: UseDisclosureReturn["open"]
     onClose: UseDisclosureReturn["onClose"]
     children?: React.ReactNode
   }
 
 export const SimulatorModal = ({
-  isOpen,
+  open,
   onClose,
   children,
   size,
   ...restProps
 }: SimulatorModalProps) => {
   return (
-    <ChakraModal
-      isOpen={isOpen}
-      onClose={onClose}
-      isCentered
+    <Dialog.Root
+      open={open}
+      centered
       size="full"
       scrollBehavior="inside"
+      onOpenChange={onClose}
     >
-      <ModalOverlay bgColor="blackAlpha.700" />
+      <Dialog.Backdrop bgColor="blackAlpha.700" />
 
-      <ModalContent
+      <Dialog.Content
         py={8}
         px={{ base: 4, sm: 8 }}
         shadow="md"
@@ -54,9 +47,9 @@ export const SimulatorModal = ({
         }}
         {...restProps}
       >
-        <ModalCloseButton />
+        <Dialog.CloseTrigger />
         {children}
-      </ModalContent>
-    </ChakraModal>
+      </Dialog.Content>
+    </Dialog.Root>
   )
 }

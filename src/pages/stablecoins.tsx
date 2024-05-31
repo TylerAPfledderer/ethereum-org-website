@@ -506,7 +506,7 @@ const StablecoinsPage = ({ markets, marketsHasError }) => {
             {t("page-stablecoins-editors-choice")}
           </H3>
           <Text>{t("page-stablecoins-editors-choice-intro")}</Text>
-          <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={16}>
+          <SimpleGrid columns={{ base: 1, lg: 2 }} gap={16}>
             <EditorsChoice boxShadow="gridYellowBoxShadow">
               <Box
                 display="flex"
@@ -526,7 +526,11 @@ const StablecoinsPage = ({ markets, marketsHasError }) => {
                   </Text>
                   <Flex direction="column">
                     <Box>
-                      <ButtonLink mb={4} me={4} href="https://matcha.xyz/tokens/ethereum/0x6b175474e89094c44da98b954eedeac495271d0f?sellChain=1&sellAddress=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee">
+                      <ButtonLink
+                        mb={4}
+                        me={4}
+                        href="https://matcha.xyz/tokens/ethereum/0x6b175474e89094c44da98b954eedeac495271d0f?sellChain=1&sellAddress=0xeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"
+                      >
                         {t("page-stablecoins-dai-banner-swap-button")}
                       </ButtonLink>
                     </Box>
@@ -608,7 +612,7 @@ const StablecoinsPage = ({ markets, marketsHasError }) => {
           <H3>
             {t("page-stablecoins-top-coins")}
             <Tooltip content={tooltipContent}>
-              <Icon ms={2} fill="'text" name="info" boxSize={4} />
+              <Icon ms={2} fill="'text" name="info" boxSize="4" />
             </Tooltip>
           </H3>
           <InfoBanner emoji="⚠️" isWarning mb="4">

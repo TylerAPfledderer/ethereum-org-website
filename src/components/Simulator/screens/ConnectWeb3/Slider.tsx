@@ -14,16 +14,19 @@ export const Slider = ({ isConnected, displayUrl, children }: SliderProps) => {
   return (
     <>
       <Box
-        key="backdrop"
-        as={motion.div}
-        position="absolute"
-        inset={0}
-        bg="blackAlpha.300"
         backdropFilter="blur(2px)"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-      />
+        bg="blackAlpha.300"
+        inset={0}
+        position="absolute"
+        asChild
+      >
+        <motion.div
+          key="backdrop"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+        />
+      </Box>
       <motion.div
         key="slider"
         style={{ position: "absolute", height: "360px", width: "100%" }}

@@ -1,13 +1,5 @@
 import { useTranslation } from "next-i18next"
-import {
-  ListItem,
-  Tab,
-  TabList,
-  TabPanel,
-  TabPanels,
-  Tabs,
-  UnorderedList,
-} from "@chakra-ui/react"
+import { List, Tabs } from "@chakra-ui/react"
 
 import { ButtonLink } from "@/components/Buttons"
 import OldHeading from "@/components/OldHeading"
@@ -27,52 +19,61 @@ const WithdrawalsTabComparison = () => {
     })
   }
 
-  return (
-    <Tabs>
-      <TabList>
-        <Tab onClick={() => handleMatomoEvent("Current stakers")}>
-          {t("comp-withdrawal-comparison-current-title")}
-        </Tab>
-        <Tab onClick={() => handleMatomoEvent("New stakers")}>
-          {t("comp-withdrawal-comparison-new-title")}
-        </Tab>
-      </TabList>
+  const CURRENT_STAKERS_TAB = "current-stakers"
+  const NEW_STAKERS_TAB = "new-stakers"
 
-      <TabPanels>
-        <TabPanel>
+  return (
+    <Tabs.Root>
+      <Tabs.List>
+        <Tabs.Trigger
+          value={CURRENT_STAKERS_TAB}
+          onClick={() => handleMatomoEvent("Current stakers")}
+        >
+          {t("comp-withdrawal-comparison-current-title")}
+        </Tabs.Trigger>
+        <Tabs.Trigger
+          value={NEW_STAKERS_TAB}
+          onClick={() => handleMatomoEvent("New stakers")}
+        >
+          {t("comp-withdrawal-comparison-new-title")}
+        </Tabs.Trigger>
+      </Tabs.List>
+
+      <Tabs.ContentGroup>
+        <Tabs.Content value={CURRENT_STAKERS_TAB}>
           <OldHeading as="h3">
             {t("comp-withdrawal-comparison-current-title")}
           </OldHeading>
-          <UnorderedList>
-            <ListItem>
+          <List.Root>
+            <List.Item>
               <Translation id="page-staking:comp-withdrawal-comparison-current-li-1" />{" "}
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               <Translation id="page-staking:comp-withdrawal-comparison-current-li-2" />
-            </ListItem>
-          </UnorderedList>
+            </List.Item>
+          </List.Root>
           <Text fontWeight="bold">
             <Translation id="page-staking:comp-withdrawal-comparison-current-p" />
           </Text>
 
           <WithdrawalCredentials />
-        </TabPanel>
+        </Tabs.Content>
 
-        <TabPanel>
+        <Tabs.Content value={NEW_STAKERS_TAB}>
           <OldHeading as="h3">
             {t("comp-withdrawal-comparison-new-title")}
           </OldHeading>
-          <UnorderedList>
-            <ListItem>{t("comp-withdrawal-comparison-new-li-1")}</ListItem>
-            <ListItem>{t("comp-withdrawal-comparison-new-li-2")}</ListItem>
-          </UnorderedList>
+          <List.Root>
+            <List.Item>{t("comp-withdrawal-comparison-new-li-1")}</List.Item>
+            <List.Item>{t("comp-withdrawal-comparison-new-li-2")}</List.Item>
+          </List.Root>
           <Text fontWeight="bold">{t("comp-withdrawal-comparison-new-p")}</Text>
           <ButtonLink to="https://launchpad.ethereum.org/" hideArrow>
             {t("comp-withdrawal-comparison-new-link")}
           </ButtonLink>
-        </TabPanel>
-      </TabPanels>
-    </Tabs>
+        </Tabs.Content>
+      </Tabs.ContentGroup>
+    </Tabs.Root>
   )
 }
 

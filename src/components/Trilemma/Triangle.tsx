@@ -1,5 +1,6 @@
+import { forwardRef } from "react"
 import { useTranslation } from "next-i18next"
-import { chakra, forwardRef, HTMLChakraProps } from "@chakra-ui/react"
+import { chakra, HTMLChakraProps } from "@chakra-ui/react"
 
 import { HandleClickParam } from "./useTrilemma"
 
@@ -34,18 +35,22 @@ export const TriangleSVG = ({
     />
   )
 
-  const CircleSelect = forwardRef((props, ref) => (
-    <chakra.g
-      ref={ref}
-      cursor="pointer"
-      sx={{
-        "circle:first-of-type": {
-          fill: "white",
-        },
-      }}
-      {...props}
-    />
-  ))
+  const CircleSelect = forwardRef<"g", HTMLChakraProps<"g">>(
+    function CircleSelect(props, ref) {
+      return (
+        <chakra.g
+          ref={ref}
+          cursor="pointer"
+          css={{
+            "circle:first-of-type": {
+              fill: "white",
+            },
+          }}
+          {...props}
+        />
+      )
+    }
+  )
 
   const FillCircle = ({ isEthereum = false, isActive, ...rest }) => {
     return (

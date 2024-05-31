@@ -113,14 +113,14 @@ const ProductCard = ({
         boxShadow="inset 0px -1px 0px rgba(0, 0, 0, 0.1)"
         minH="200px"
       >
-        <Image
-          src={image}
-          alt={alt}
-          height="100"
+        <Box
           alignSelf="center"
           maxW={{ base: "311px", sm: "372px" }}
           maxH="257px"
-        />
+          asChild
+        >
+          <Image src={image} alt={alt} height="100" />
+        </Box>
       </Center>
       <Flex flexDirection="column" p={6} textAlign="start" height="100%">
         {githubRepoStars > 0 && (
@@ -142,7 +142,7 @@ const ProductCard = ({
         {note.length > 0 && <Text {...DESCRIPTION_STYLES}>Note: {note}</Text>}
         {children && <Box mt={4}>{children}</Box>}
       </Flex>
-      <HStack mt={5} mb={2} px={6} spacing={3}>
+      <HStack mt={5} mb={2} px={6} gap="3">
         {subjects &&
           subjects.map((subject, idx) => (
             <SubjectBadge key={idx} subject={subject}>

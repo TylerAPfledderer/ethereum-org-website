@@ -5,13 +5,12 @@ import { serverSideTranslations } from "next-i18next/serverSideTranslations"
 import type { ComponentPropsWithRef } from "react"
 import {
   Box,
-  Divider,
   Flex,
   type FlexProps,
   Heading,
   type HeadingProps,
   List,
-  ListItem,
+  Separator,
   useToken,
 } from "@chakra-ui/react"
 
@@ -50,7 +49,7 @@ const Page = (props: ChildOnlyProp) => (
 )
 
 const PageDivider = () => (
-  <Divider
+  <Separator
     my={16}
     w="10%"
     borderBottomWidth="0.25rem"
@@ -172,33 +171,33 @@ const VisionPage = () => {
           <Text>{t("page-roadmap-vision-upgrade-needs-desc")}</Text>
           <Text>{t("page-roadmap-vision-upgrade-needs-desc-2")}</Text>
           <Text>{t("page-roadmap-vision-upgrade-needs-desc-3")} </Text>
-          <List listStyleType="disc">
-            <ListItem>
+          <List.Root listStyleType="disc">
+            <List.Item>
               <InlineLink href="https://members.delphidigital.io/reports/the-hitchhikers-guide-to-ethereum">
                 {t("page-roadmap-vision-2022")}
               </InlineLink>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               <InlineLink href="https://trent.mirror.xyz/82eyq_NXZzzqFmCNXiKJgSdayf6omCW7BgDQIneyPoA">
                 {t("page-roadmap-vision-2021-updates")}
               </InlineLink>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               <InlineLink href="https://tim.mirror.xyz/CHQtTJb1NDxCK41JpULL-zAJe7YOtw-m4UDw6KDju6c">
                 {t("page-roadmap-vision-2021")}
               </InlineLink>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               <InlineLink href="https://blog.ethereum.org/2015/03/03/ethereum-launch-process/">
                 {t("page-roadmap-vision-upgrade-needs-serenity")}
               </InlineLink>
-            </ListItem>
-            <ListItem>
+            </List.Item>
+            <List.Item>
               <InlineLink href="https://blog.ethereum.org/2014/01/15/slasher-a-punitive-proof-of-stake-algorithm/">
                 {t("page-roadmap-vision-2014")}
               </InlineLink>
-            </ListItem>
-          </List>
+            </List.Item>
+          </List.Root>
           <Text>{t("page-roadmap-vision-upgrade-needs-desc-5")}</Text>
           <Text>{t("page-roadmap-vision-upgrade-needs-desc-6")}</Text>
         </CentralContent>

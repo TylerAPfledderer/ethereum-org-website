@@ -33,8 +33,6 @@ export const SendFromContacts = ({
         >
           <Button
             variant="outline"
-            leftIcon={<Icon as={PiMagnifyingGlass} />}
-            rightIcon={<Icon as={QrCodeIcon} />}
             color="disabled"
             py={4}
             w="full"
@@ -44,9 +42,15 @@ export const SendFromContacts = ({
             }}
             cursor="auto"
           >
+            <Icon asChild>
+              <PiMagnifyingGlass />
+            </Icon>
             <Text as="span" me="auto">
               Address or contacts
             </Text>
+            <Icon asChild>
+              <QrCodeIcon />
+            </Icon>
           </Button>
         </NotificationPopover>
       </Box>
@@ -60,15 +64,7 @@ export const SendFromContacts = ({
           {CONTACTS.map(({ name, lastAction }, i) => (
             <Button
               key={name + i}
-              leftIcon={
-                <Icon
-                  as={EthTokenIconGrayscale}
-                  fill="black"
-                  w="30px"
-                  h="30px"
-                />
-              }
-              isDisabled={i > 0}
+              disabled={i > 0}
               gap={2}
               _disabled={{
                 color: "body.base",
@@ -78,6 +74,9 @@ export const SendFromContacts = ({
               data-group
               onClick={() => handleSelection(name)}
             >
+              <Icon fill="black" w="30px" h="30px" asChild>
+                <EthTokenIconGrayscale />
+              </Icon>
               <Box as="span" flex={1}>
                 <Text
                   as="span"

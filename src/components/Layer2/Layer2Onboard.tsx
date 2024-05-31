@@ -1,15 +1,7 @@
 import { useState } from "react"
 import { StaticImageData } from "next/image"
 import { useTranslation } from "next-i18next"
-import {
-  Box,
-  chakra,
-  Flex,
-  ListItem,
-  SimpleGrid,
-  Stack,
-  UnorderedList,
-} from "@chakra-ui/react"
+import { Box, Flex, List, SimpleGrid } from "@chakra-ui/react"
 
 import type { ChildOnlyProp } from "@/lib/types"
 
@@ -304,19 +296,19 @@ const Layer2Onboard = ({
               <TwoColumnContent>
                 <Flex50>
                   <H3>{t("layer-2-deposits")}</H3>
-                  <UnorderedList>
+                  <List.Root>
                     {selectedExchange.supports_deposits.map((l2) => (
-                      <ListItem key={l2}>{l2}</ListItem>
+                      <List.Item key={l2}>{l2}</List.Item>
                     ))}
-                  </UnorderedList>
+                  </List.Root>
                 </Flex50>
                 <Flex50>
                   <H3>{t("layer-2-withdrawals")}</H3>
-                  <UnorderedList>
+                  <List.Root>
                     {selectedExchange.supports_withdrawals.map((l2) => (
-                      <ListItem key={l2}>{l2}</ListItem>
+                      <List.Item key={l2}>{l2}</List.Item>
                     ))}
-                  </UnorderedList>
+                  </List.Root>
                 </Flex50>
               </TwoColumnContent>
               <ButtonLink to={selectedExchange.url}>

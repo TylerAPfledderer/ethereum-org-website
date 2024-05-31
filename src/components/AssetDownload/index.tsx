@@ -6,7 +6,7 @@ import { Box, Flex, type FlexProps } from "@chakra-ui/react"
 
 import AssetDownloadArtist from "@/components/AssetDownload/AssetDownloadArtist"
 import AssetDownloadImage from "@/components/AssetDownload/AssetDownloadImage"
-import { ButtonLink } from "@/components/Buttons"
+import ButtonLink from "@/components/Buttons/ButtonLink"
 import type { ImageProps } from "@/components/Image"
 import OldHeading from "@/components/OldHeading"
 

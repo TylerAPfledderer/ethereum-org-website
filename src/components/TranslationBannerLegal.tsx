@@ -1,13 +1,8 @@
 import React, { useEffect, useState } from "react"
-import {
-  Box,
-  Button,
-  CloseButton,
-  Flex,
-  Heading,
-  useToken,
-} from "@chakra-ui/react"
+import { MdClose } from "react-icons/md"
+import { Box, Button, Flex, Heading, useToken } from "@chakra-ui/react"
 
+import IconButton from "./Buttons/IconButton"
 import Emoji from "./Emoji"
 import Text from "./OldText"
 import Translation from "./Translation"
@@ -23,7 +18,7 @@ const TranslationBannerLegal = ({
 }: TranslationBannerLegalProps) => {
   // Default to isOpen being false, and let the useEffect set this.
   const [isOpen, setIsOpen] = useState(false)
-  const [cardBoxShadow, text] = useToken("colors", ["cardBoxShadow", "text"])
+  const [text] = useToken("colors", ["text"])
 
   useEffect(() => {
     if (
@@ -101,7 +96,7 @@ const TranslationBannerLegal = ({
             </Button>
           </Flex>
         </Flex>
-        <CloseButton
+        <IconButton
           position="absolute"
           top={0}
           insetInlineEnd="0"
@@ -111,7 +106,9 @@ const TranslationBannerLegal = ({
             color: "primary.base",
           }}
           onClick={() => setIsOpen(false)}
-        />
+        >
+          <MdClose />
+        </IconButton>
       </Flex>
     </Box>
   )

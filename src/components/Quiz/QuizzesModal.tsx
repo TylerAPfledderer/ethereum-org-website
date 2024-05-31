@@ -1,16 +1,11 @@
-import {
-  Center,
-  Modal as ChakraModal,
-  ModalCloseButton,
-  ModalContent,
-  ModalContentProps,
-  ModalOverlay,
-  ModalProps,
-} from "@chakra-ui/react"
+import { Center, Dialog } from "@chakra-ui/react"
 
 import { QuizStatus } from "@/lib/types"
 
-type QuizzesModalProps = Omit<ModalProps, "isCentered" | "scrollBehavior"> & {
+type QuizzesModalProps = Omit<
+  Dialog.RootProps,
+  "isCentered" | "scrollBehavior"
+> & {
   children: React.ReactNode
   quizStatus: QuizStatus
 }
@@ -20,7 +15,7 @@ const QuizzesModal = ({
   quizStatus,
   ...props
 }: QuizzesModalProps) => {
-  const getStatusColor = (): ModalContentProps["bg"] => {
+  const getStatusColor = (): Dialog.ContentProps["bg"] => {
     if (quizStatus === "neutral") {
       return "neutral"
     }
@@ -31,19 +26,21 @@ const QuizzesModal = ({
   }
 
   return (
-    <ChakraModal
+    <Dialog.Root
       isCentered
       size={{ base: "full", md: "xl" }}
       scrollBehavior="inside"
       {...props}
     >
-      <ModalOverlay bg="blackAlpha.700" />
+      <Dialog.Backdrop bg="blackAlpha.700" />
 
-      <Center as={ModalContent} m={0} bg={getStatusColor()} py="16">
-        <ModalCloseButton size="lg" p="6" zIndex="1"/>
-        {children}
+      <Center m={0} bg={getStatusColor()} py="16" asChild>
+        <Dialog.Content>
+          <Dialog.CloseTrigger size="lg" p="6" zIndex="1" />
+          {children}
+        </Dialog.Content>
       </Center>
-    </ChakraModal>
+    </Dialog.Root>
   )
 }
 

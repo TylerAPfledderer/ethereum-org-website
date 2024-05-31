@@ -87,29 +87,36 @@ export const ReceivedEther = ({
         {showToast && !hidden && (
           <Flex
             key="toast"
-            position="absolute"
-            inset={4}
-            top="auto"
-            bottom={32}
-            borderRadius="base"
-            h="fit-content"
-            bg="primary300"
-            gap={3}
-            fontSize="md"
             align="center"
-            p={4}
+            bg="primary300"
+            borderRadius="base"
+            bottom="32"
             color="background.base"
-            as={motion.div}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
+            fontSize="md"
+            gap="3"
+            h="fit-content"
+            inset="4"
+            p="4"
+            position="absolute"
+            top="auto"
+            asChild
           >
-            <Icon as={MdInfo} fontSize="xl" />
-            <Text m={0} fontWeight="bold" fontSize="xs">
-              You received {displayEth} ETH ({displayUsd})
-              {sender ? ` from ${sender}` : ""}!
-            </Text>
-            <Icon as={MdClose} fontSize="xl" onClick={() => setHidden(true)} />
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <Icon fontSize="xl" asChild>
+                <MdInfo />
+              </Icon>
+              <Text m={0} fontWeight="bold" fontSize="xs">
+                You received {displayEth} ETH ({displayUsd})
+                {sender ? ` from ${sender}` : ""}!
+              </Text>
+              <Icon fontSize="xl" onClick={() => setHidden(true)} asChild>
+                <MdClose />
+              </Icon>
+            </motion.div>
           </Flex>
         )}
       </AnimatePresence>

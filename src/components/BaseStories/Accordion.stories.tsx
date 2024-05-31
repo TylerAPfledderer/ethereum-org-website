@@ -1,18 +1,11 @@
-import {
-  Accordion,
-  AccordionButton,
-  AccordionIcon,
-  AccordionItem,
-  AccordionPanel,
-  Box,
-} from "@chakra-ui/react"
+import { Accordion, Box } from "@chakra-ui/react"
 import { Meta, StoryObj } from "@storybook/react"
 
-type AccordionType = typeof Accordion
+type AccordionType = typeof Accordion.Root
 
 const meta: Meta<AccordionType> = {
   title: "Molecules / Disclosure Content / Accordions",
-  component: Accordion,
+  component: Accordion.Root,
   decorators: [
     (Story) => (
       <Box width="300px">
@@ -28,39 +21,39 @@ type Story = StoryObj<AccordionType>
 
 export const Basic: Story = {
   render: () => (
-    <Accordion allowToggle defaultIndex={0}>
-      <AccordionItem>
+    <Accordion.Root collapsible defaultValue={["accordion-1"]}>
+      <Accordion.Item value="accordion-1">
         <h2>
-          <AccordionButton>
+          <Accordion.ItemTrigger>
             <Box as="span" flex="1" textAlign="left">
               Label text of the accordion
             </Box>
-            <AccordionIcon />
-          </AccordionButton>
+            <Accordion.ItemIndicator />
+          </Accordion.ItemTrigger>
         </h2>
-        <AccordionPanel>
+        <Accordion.ItemContent>
           Ethereum is open access to digital money and data-friendly services
           for everyone – no matter your background or location. It&apos;s a
           community-built technology behind the cryptocurrency ether (ETH) and
           thousands of applications you can use today.
-        </AccordionPanel>
-      </AccordionItem>
-      <AccordionItem>
+        </Accordion.ItemContent>
+      </Accordion.Item>
+      <Accordion.Item value="accordion-2">
         <h2>
-          <AccordionButton>
+          <Accordion.ItemTrigger>
             <Box as="span" flex="1" textAlign="left">
               Label text of the accordion
             </Box>
-            <AccordionIcon />
-          </AccordionButton>
+            <Accordion.ItemTrigger />
+          </Accordion.ItemTrigger>
         </h2>
-        <AccordionPanel>
+        <Accordion.ItemContent>
           Ethereum is open access to digital money and data-friendly services
           for everyone – no matter your background or location. It&apos;s a
           community-built technology behind the cryptocurrency ether (ETH) and
           thousands of applications you can use today.
-        </AccordionPanel>
-      </AccordionItem>
-    </Accordion>
+        </Accordion.ItemContent>
+      </Accordion.Item>
+    </Accordion.Root>
   ),
 }

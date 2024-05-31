@@ -1,11 +1,6 @@
 import React from "react"
 import { motion } from "framer-motion"
-import {
-  Grid,
-  type GridProps,
-  type ListProps,
-  OrderedList,
-} from "@chakra-ui/react"
+import { Grid, type GridProps, List } from "@chakra-ui/react"
 
 import {
   DELAY_MULTIPLIER_MS,
@@ -37,7 +32,7 @@ export const WordList = ({ words, wordsSelected }: WordListProps) => {
 
   const variantStyles: GridProps =
     styleVariants[typeof wordsSelected === "undefined" ? "initial" : ""] ?? {}
-  const styles = { ...sharedStyles, ...variantStyles } as ListProps
+  const styles = { ...sharedStyles, ...variantStyles } as List.RootProps
   const splitIndex = Math.floor(words.length / 2)
 
   const wordMapping = (word: string, index: number): React.ReactElement => {
@@ -112,12 +107,20 @@ export const WordList = ({ words, wordsSelected }: WordListProps) => {
       px={{ base: 4, md: 8 }}
       bg="background.base"
     >
-      <OrderedList {...styles} start={1}>
+      <List.Root
+        as="ol"
+        {...styles}
+        // start={1}
+      >
         {words.map(wordMapping).slice(0, splitIndex)}
-      </OrderedList>
-      <OrderedList {...styles} start={splitIndex + 1}>
+      </List.Root>
+      <List.Root
+        as="ol"
+        {...styles}
+        // start={splitIndex + 1}
+      >
         {words.map(wordMapping).slice(splitIndex)}
-      </OrderedList>
+      </List.Root>
     </Grid>
   )
 }

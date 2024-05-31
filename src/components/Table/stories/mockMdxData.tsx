@@ -1,10 +1,10 @@
 import * as React from "react"
-import { Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
+import { Table } from "@chakra-ui/react"
 
 /*
  * Note on the Chakra Table components:
  *
- * Only the `Td`, `Th`, `Tr`, `Tbody`, and `Thead` components are used because those are the
+ * Only the `Td`, `Th`, `Tr`, `Table.Body`, and `Table.Header` components are used because those are the
  * only table elements we are defining styles with and sending to the MDX provider
  *
  * The use of `textAlign` is a mock for the `align` prop from the MDX parsing going to
@@ -13,58 +13,62 @@ import { Tbody, Td, Th, Thead, Tr } from "@chakra-ui/react"
 
 export const MdxDemoData = () => (
   <>
-    <Thead>
-      <Tr>
-        <Th>Column head</Th>
-        <Th>Column head</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr>
-        <Td>Twitter can censor any account or tweet</Td>
-        <Td>
+    <Table.Header>
+      <Table.Row>
+        <Table.ColumnHeader>Column head</Table.ColumnHeader>
+        <Table.ColumnHeader>Column head</Table.ColumnHeader>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Twitter can censor any account or tweet</Table.Cell>
+        <Table.Cell>
           Web3 tweets would be uncensorable because control is decentralized
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
           Payment service may decide to not allow payments for certain types of
           work
-        </Td>
-        <Td>
+        </Table.Cell>
+        <Table.Cell>
           Web3 payment apps require no personal data and can&apos;t prevent
           payments
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
           Servers for gig-economy apps could go down and affect worker income
-        </Td>
-        <Td>
+        </Table.Cell>
+        <Table.Cell>
           Web3 servers can&apos;t go down &ndash; they use Ethereum, a
           decentralized network of 1000s of computers as their backend
-        </Td>
-      </Tr>
-    </Tbody>
+        </Table.Cell>
+      </Table.Row>
+    </Table.Body>
   </>
 )
 
 export const MdxEnergyConsumpData = () => (
   <>
-    <Thead>
-      <Tr>
-        <Th></Th>
-        <Th textAlign="end">Annualized energy consumption (TWh)</Th>
-        <Th textAlign="end">Comparison to PoS Ethereum</Th>
-        <Th>Source</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr>
-        <Td>Global data centers</Td>
-        <Td textAlign="end">200</Td>
-        <Td textAlign="end">77,000x</Td>
-        <Td>
+    <Table.Header>
+      <Table.Row>
+        <Table.ColumnHeader></Table.ColumnHeader>
+        <Table.ColumnHeader textAlign="end">
+          Annualized energy consumption (TWh)
+        </Table.ColumnHeader>
+        <Table.ColumnHeader textAlign="end">
+          Comparison to PoS Ethereum
+        </Table.ColumnHeader>
+        <Table.ColumnHeader>Source</Table.ColumnHeader>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>Global data centers</Table.Cell>
+        <Table.Cell textAlign="end">200</Table.Cell>
+        <Table.Cell textAlign="end">77,000x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -74,13 +78,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>Gold mining</Td>
-        <Td textAlign="end">131</Td>
-        <Td textAlign="end">50,000x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Gold mining</Table.Cell>
+        <Table.Cell textAlign="end">131</Table.Cell>
+        <Table.Cell textAlign="end">50,000x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -90,13 +94,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>Bitcoin</Td>
-        <Td textAlign="end">131</Td>
-        <Td textAlign="end">50,000x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Bitcoin</Table.Cell>
+        <Table.Cell textAlign="end">131</Table.Cell>
+        <Table.Cell textAlign="end">50,000x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -106,13 +110,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>PoW Ethereum</Td>
-        <Td textAlign="end">78</Td>
-        <Td textAlign="end">30,000x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>PoW Ethereum</Table.Cell>
+        <Table.Cell textAlign="end">78</Table.Cell>
+        <Table.Cell textAlign="end">30,000x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -122,13 +126,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>Youtube (direct only)</Td>
-        <Td textAlign="end">12</Td>
-        <Td textAlign="end">4600x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Youtube (direct only)</Table.Cell>
+        <Table.Cell textAlign="end">12</Table.Cell>
+        <Table.Cell textAlign="end">4600x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -138,13 +142,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>Gaming in USA</Td>
-        <Td textAlign="end">34</Td>
-        <Td textAlign="end">13,000x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Gaming in USA</Table.Cell>
+        <Table.Cell textAlign="end">34</Table.Cell>
+        <Table.Cell textAlign="end">13,000x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -154,13 +158,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>Netflix</Td>
-        <Td textAlign="end">0.451</Td>
-        <Td textAlign="end">173x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>Netflix</Table.Cell>
+        <Table.Cell textAlign="end">0.451</Table.Cell>
+        <Table.Cell textAlign="end">173x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -170,13 +174,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>PayPal</Td>
-        <Td textAlign="end">0.26</Td>
-        <Td textAlign="end">100x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>PayPal</Table.Cell>
+        <Table.Cell textAlign="end">0.26</Table.Cell>
+        <Table.Cell textAlign="end">100x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -186,13 +190,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>AirBnB</Td>
-        <Td textAlign="end">0.02</Td>
-        <Td textAlign="end">8x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>AirBnB</Table.Cell>
+        <Table.Cell textAlign="end">0.02</Table.Cell>
+        <Table.Cell textAlign="end">8x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -202,13 +206,13 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>PoS Ethereum</Td>
-        <Td textAlign="end">0.0026</Td>
-        <Td textAlign="end">1x</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>PoS Ethereum</Table.Cell>
+        <Table.Cell textAlign="end">0.0026</Table.Cell>
+        <Table.Cell textAlign="end">1x</Table.Cell>
+        <Table.Cell>
           <a
             target="_blank"
             rel="noopener"
@@ -218,46 +222,50 @@ export const MdxEnergyConsumpData = () => (
             source
             <span aria-hidden="true">↗</span>
           </a>
-        </Td>
-      </Tr>
-    </Tbody>
+        </Table.Cell>
+      </Table.Row>
+    </Table.Body>
   </>
 )
 
 export const MdxTypesOfBridgesData = () => (
   <>
-    <Thead>
-      <Tr>
-        <Th>Trusted Bridges</Th>
-        <Th>Trustless Bridges</Th>
-      </Tr>
-    </Thead>
-    <Tbody>
-      <Tr>
-        <Td>
+    <Table.Header>
+      <Table.Row>
+        <Table.ColumnHeader>Trusted Bridges</Table.ColumnHeader>
+        <Table.ColumnHeader>Trustless Bridges</Table.ColumnHeader>
+      </Table.Row>
+    </Table.Header>
+    <Table.Body>
+      <Table.Row>
+        <Table.Cell>
           Trusted bridges depend upon a central entity or system for their
           operations.
-        </Td>
-        <Td>Trustless bridges operate using smart contracts and algorithms.</Td>
-      </Tr>
-      <Tr>
-        <Td>
+        </Table.Cell>
+        <Table.Cell>
+          Trustless bridges operate using smart contracts and algorithms.
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
           They have trust assumptions with respect to the custody of funds and
           the security of the bridge. Users mostly rely on the bridge
           operator&apos;s reputation.
-        </Td>
-        <Td>
+        </Table.Cell>
+        <Table.Cell>
           They are trustless, i.e., the security of the bridge is the same as
           that of the underlying blockchain.
-        </Td>
-      </Tr>
-      <Tr>
-        <Td>Users need to give up control of their crypto assets.</Td>
-        <Td>
+        </Table.Cell>
+      </Table.Row>
+      <Table.Row>
+        <Table.Cell>
+          Users need to give up control of their crypto assets.
+        </Table.Cell>
+        <Table.Cell>
           Through smart contracts, trustless bridges enable users to remain in
           control of their funds.
-        </Td>
-      </Tr>
-    </Tbody>
+        </Table.Cell>
+      </Table.Row>
+    </Table.Body>
   </>
 )

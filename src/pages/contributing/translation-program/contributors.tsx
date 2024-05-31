@@ -7,15 +7,11 @@ import {
   BoxProps,
   Flex,
   HeadingProps,
-  ListItem,
+  List,
   SimpleGrid,
-  UnorderedList,
 } from "@chakra-ui/react"
 
-import {
-  BasePageProps,
-  CostLeaderboardData,
-} from "@/lib/types"
+import { BasePageProps, CostLeaderboardData } from "@/lib/types"
 
 import Breadcrumbs from "@/components/Breadcrumbs"
 import FeedbackCard from "@/components/FeedbackCard"
@@ -127,16 +123,18 @@ const Contributors = () => {
         >
           {t("page-contributing-translation-program-contributors-thank-you")}
         </ContentHeading>
-        <SimpleGrid as={UnorderedList} columns={[1, 2, 3, 4, 6]} ms="1.45rem">
-          {translators
-            .sort((user1, user2) =>
-              user1.toLowerCase().localeCompare(user2.toLowerCase())
-            )
-            .map((user) => (
-              <ListItem key={user} color="text300">
-                {user}
-              </ListItem>
-            ))}
+        <SimpleGrid columns={[1, 2, 3, 4, 6]} ms="1.45rem" asChild>
+          <List.Root>
+            {translators
+              .sort((user1, user2) =>
+                user1.toLowerCase().localeCompare(user2.toLowerCase())
+              )
+              .map((user) => (
+                <List.Item key={user} color="text300">
+                  {user}
+                </List.Item>
+              ))}
+          </List.Root>
         </SimpleGrid>
         <Text>
           {t("common:page-languages-interested")}{" "}

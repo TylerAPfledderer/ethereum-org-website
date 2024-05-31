@@ -1,57 +1,48 @@
 import React, { useState } from "react"
 import { motion } from "framer-motion"
 import { MdInfoOutline } from "react-icons/md"
-import {
-  Button,
-  Icon,
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  type PopoverBodyProps,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
-  PopoverTrigger,
-} from "@chakra-ui/react"
+import { Button, Icon, Popover } from "@chakra-ui/react"
 
 import { PulseAnimation } from "./PulseAnimation"
 
 const MotionButton = motion(Button)
 
-type MoreInfoPopover = Pick<PopoverBodyProps, "children"> & {
+type MoreInfoPopover = Pick<Popover.BodyProps, "children"> & {
   isFirstStep: boolean
 }
 export const MoreInfoPopover = ({ isFirstStep, children }: MoreInfoPopover) => {
   const [clicked, setClicked] = useState(false)
   return (
-    <Popover>
-      <PopoverTrigger>
+    <Popover.Root>
+      <Popover.Trigger>
         <MotionButton
-          rightIcon={<Icon as={MdInfoOutline} size={24} />}
           variant="ghost"
-          sx={{ paddingInlineStart: 0 }}
+          css={{ paddingInlineStart: 0 }}
           color="body.medium"
           fontSize="sm"
           p={0}
           onClick={() => setClicked(true)}
           position="relative"
         >
+          <Icon asChild>
+            <MdInfoOutline size="24" />
+          </Icon>
           More info
           {isFirstStep && !clicked && <PulseAnimation type="narrow-button" />}
         </MotionButton>
-      </PopoverTrigger>
-      <PopoverContent
+      </Popover.Trigger>
+      <Popover.Content
         px={4}
         py={6}
         insetStart={{ base: 4, sm: 8 }}
         w={{ base: "calc(100vw - 3rem)", sm: "calc(100vw - 5rem)" }}
       >
-        <PopoverArrow />
-        <PopoverCloseButton ms="auto" />
-        <PopoverBody sx={{ "p:last-of-type": { mb: 2 } }}>
+        <Popover.Arrow />
+        <Popover.CloseTrigger ms="auto" />
+        <Popover.Body css={{ "p:last-of-type": { mb: "2" } }}>
           {children}
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
+        </Popover.Body>
+      </Popover.Content>
+    </Popover.Root>
   )
 }

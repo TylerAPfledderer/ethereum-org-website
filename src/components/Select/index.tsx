@@ -21,6 +21,8 @@ export type SelectOnChange<Option> = (
 ) => void
 
 /**
+ * TODO: Replace this with new Chakra Select component
+ *
  * Custom Built Version of the `react-select` single-select component.
  *
  * A styles provider wraps the original `Select` to send Chakra styles straight to the

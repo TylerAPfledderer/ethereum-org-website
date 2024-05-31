@@ -1,18 +1,11 @@
 import React, { ReactNode, useEffect } from "react"
+import { useDisclosure } from "@chakra-ui/hooks"
 import {
-  Popover,
-  PopoverArrow,
-  PopoverBody,
-  PopoverContent,
-  PopoverProps,
-  PopoverTrigger,
-  Portal,
-  useDisclosure,
+  type PopoverRootProps,
+  Tooltip as ChakraTooltip,
 } from "@chakra-ui/react"
 
-import { isMobile } from "@/lib/utils/isMobile"
-
-export interface TooltipProps extends PopoverProps {
+export interface TooltipProps extends PopoverRootProps {
   content: ReactNode
   children?: ReactNode
   onBeforeOpen?: () => void
@@ -24,11 +17,12 @@ const Tooltip = ({
   onBeforeOpen,
   ...rest
 }: TooltipProps) => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+  const { open, onOpen, onClose } = useDisclosure()
 
-  // Close the popover when the user scrolls.
-  // This is useful for mobile devices where the popover is open by clicking the
+  // Close the tooltip when the user scrolls.
+  // This is useful for mobile devices where the tooltip is open by clicking the
   // trigger, not hovering.
+  // TODO: Is this still needed or is this breaking?
   useEffect(() => {
     let originalPosition = 0
 
@@ -36,13 +30,13 @@ const Tooltip = ({
       const delta = window.scrollY - originalPosition
 
       // Close the popover if the user scrolls more than 80px
-      if (isOpen && Math.abs(delta) > 80) {
+      if (open && Math.abs(delta) > 80) {
         onClose()
       }
     }
 
     // Add event listener when the popover is open
-    if (isOpen) {
+    if (open) {
       window.addEventListener("scroll", handleScroll)
       originalPosition = window.scrollY
     }
@@ -50,7 +44,7 @@ const Tooltip = ({
     return () => {
       window.removeEventListener("scroll", handleScroll)
     }
-  }, [isOpen, onClose])
+  }, [open, onClose])
 
   const handleOpen = () => {
     onBeforeOpen?.()
@@ -58,23 +52,26 @@ const Tooltip = ({
   }
 
   return (
-    <Popover
-      isOpen={isOpen}
-      onOpen={handleOpen}
-      onClose={onClose}
-      placement="top"
-      trigger={isMobile() ? "click" : "hover"}
-      gutter={8}
+    <ChakraTooltip.Root
+      open={open}
+      onOpenChange={({ open }) => {
+        open ? onClose() : handleOpen()
+      }}
+      positioning={{
+        placement: "top",
+        gutter: 8,
+      }}
+      interactive
       {...rest}
     >
-      <PopoverTrigger>{children}</PopoverTrigger>
-      <Portal>
-        <PopoverContent>
-          <PopoverArrow />
-          <PopoverBody>{content}</PopoverBody>
-        </PopoverContent>
-      </Portal>
-    </Popover>
+      <ChakraTooltip.Trigger asChild>{children}</ChakraTooltip.Trigger>
+      <ChakraTooltip.Positioner>
+        <ChakraTooltip.Content>
+          <ChakraTooltip.Arrow />
+          <ChakraTooltip.Content>{content}</ChakraTooltip.Content>
+        </ChakraTooltip.Content>
+      </ChakraTooltip.Positioner>
+    </ChakraTooltip.Root>
   )
 }
 

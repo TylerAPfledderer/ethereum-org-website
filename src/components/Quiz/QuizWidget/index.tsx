@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef } from "react"
 import {
-  calc,
   Center,
   Heading,
   Spinner,
@@ -114,7 +113,7 @@ const QuizWidget = ({
   }
 
   return (
-    <VStack spacing="12" width="full" maxW="600px">
+    <VStack gap="12" width="full" maxW="600px">
       <Stack
         w="full"
         gap="8"
@@ -134,12 +133,12 @@ const QuizWidget = ({
           top={{ base: 2, md: 0 }}
           insetInlineStart={{ md: "50%" }}
           transform="auto"
-          translateX={{ md: calc.multiply("50%", isRtl ? 1 : -1) }}
+          translateX={{ md: `calc(50% * ${isRtl ? 1 : -1})` }}
           translateY={{ md: "-50%" }}
         >
           <AnswerIcon answerStatus={answerStatus} />
         </Center>
-        <Stack spacing="8" justifyContent="space-between">
+        <Stack gap="8" justifyContent="space-between">
           {!!quizData ? (
             <QuizWidgetProvider
               value={{
@@ -193,7 +192,7 @@ export const StandaloneQuizWidget = (
 ) => {
   const [_, updateUserStats] = useLocalQuizData()
   return (
-    <VStack spacing="12" my="16">
+    <VStack gap="12" my="16">
       <Heading
         as="h2"
         textAlign="center"

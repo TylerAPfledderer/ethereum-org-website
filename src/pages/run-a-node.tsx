@@ -66,7 +66,7 @@ const GappedPage = (props: ChildOnlyProp) => (
     my="0"
     mx="auto"
     gap={{ base: 12, lg: 16 }}
-    sx={{
+    css={{
       "*": {
         scrollMarginTop: "5.5rem",
       },
@@ -128,7 +128,7 @@ const SoftwareHighlight = (props: CenterProps) => (
     flexDirection={{ base: "column", md: "row" }}
     position="relative"
     isolation="isolate"
-    sx={{
+    css={{
       "&::after": {
         content: '""',
         position: "absolute",
@@ -146,7 +146,7 @@ const ColumnFill = (props: ChildOnlyProp) => (
   <Box
     flex={1}
     lineHeight="taller"
-    sx={{ ul: { listStyle: "none" } }}
+    css={{ ul: { listStyle: "none" } }}
     {...props}
   />
 )
@@ -192,7 +192,7 @@ const BuildBox = (props: ComponentProps<typeof Container>) => (
     bg="preBackground"
     flex={1}
     p="8"
-    sx={{
+    css={{
       "& > p:last-of-type": {
         mb: 8,
       },
@@ -228,7 +228,7 @@ const FullyLoaded = (props: ChildOnlyProp) => (
       transform: "scale(1.02)",
       transition: "transform 0.1s",
     }}
-    sx={{
+    css={{
       p: {
         fontSize: "110%",
       },

@@ -8,8 +8,7 @@ import {
   type FlexProps,
   Heading,
   type HeadingProps,
-  ListItem,
-  UnorderedList,
+  List,
 } from "@chakra-ui/react"
 
 import type { BasePageProps, ChildOnlyProp } from "@/lib/types"
@@ -244,7 +243,7 @@ const CentralActionCard = (props: ComponentProps<typeof ActionCard>) => (
     flex="none"
     my={8}
     mx={0}
-    sx={{
+    css={{
       ".action-card-image-wrapper": {
         p: 4,
         minW: { sm: "260px" },
@@ -477,32 +476,32 @@ const EthPage = () => {
             <H4>{t("page-eth-uses")}</H4>
             <Text>{t("page-eth-uses-desc")}</Text>
             <Text>{t("page-eth-uses-desc-2")} </Text>
-            <UnorderedList>
-              <ListItem>
+            <List.Root>
+              <List.Item>
                 <InlineLink href="https://sablier.com">
                   {t("page-eth-stream-link")}
                 </InlineLink>{" "}
                 – {t("page-eth-uses-desc-3")}
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <InlineLink href="/get-eth/#dex">
                   {t("page-eth-trade-link-2")}
                 </InlineLink>{" "}
                 – {t("page-eth-uses-desc-4")}
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <InlineLink href="https://app.compound.finance/">
                   {t("page-eth-earn-interest-link")}
                 </InlineLink>{" "}
                 – {t("page-eth-uses-desc-5")}
-              </ListItem>
-              <ListItem>
+              </List.Item>
+              <List.Item>
                 <InlineLink href="/stablecoins/">
                   {t("page-eth-stablecoins-link")}
                 </InlineLink>{" "}
                 – {t("page-eth-uses-desc-6")}
-              </ListItem>
-            </UnorderedList>
+              </List.Item>
+            </List.Root>
           </Box>
           <Divider />
         </CentralColumn>

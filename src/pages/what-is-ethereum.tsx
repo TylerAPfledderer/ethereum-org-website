@@ -12,8 +12,7 @@ import {
   Heading,
   type HeadingProps,
   Icon,
-  ListItem,
-  UnorderedList,
+  List,
 } from "@chakra-ui/react"
 
 import type {
@@ -733,15 +732,15 @@ const WhatIsEthereumPage = ({
                   {t("page-what-is-ethereum-criminal-activity-desc-3")}
                 </Text>
               </Text>
-              <UnorderedList>
-                <ListItem>
+              <List.Root>
+                <List.Item>
                   <InlineLink href="https://www.europol.europa.eu/publications-events/publications/cryptocurrencies-tracing-evolution-of-criminal-finances#downloads">
                     Europol Spotlight - Cryptocurrencies - Tracing the evolution
                     of criminal finances.pdf
                   </InlineLink>{" "}
                   EN (1.4 MB)
-                </ListItem>
-              </UnorderedList>
+                </List.Item>
+              </List.Root>
             </Width60>
           </TwoColumnContent>
         </Section>
