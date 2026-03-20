@@ -330,17 +330,6 @@ const chains = [
     chain: "ETH",
   },
   {
-    name: "Fraxtal",
-    infoURL: "https://mainnet.frax.com",
-    chainId: 252,
-    nativeCurrency: {
-      name: "Frax Ether",
-      symbol: "frxETH",
-      decimals: 18,
-    },
-    chain: "FRAX",
-  },
-  {
     name: "Swan Chain Mainnet",
     infoURL: "https://swanchain.io/",
     chainId: 254,
@@ -449,6 +438,17 @@ const chains = [
       decimals: 18,
     },
     chain: "ETH",
+  },
+  {
+    name: "zkXPLA Mainnet",
+    infoURL: "https://xpla.io",
+    chainId: 375,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "zkXPLA",
   },
   {
     name: "Lisinski",
@@ -935,6 +935,28 @@ const chains = [
     chain: "ETH",
   },
   {
+    name: "Alpha Chain Mainnet",
+    infoURL: "https://docs.alphatoken.com/AlphaChain/about-alpha-chain",
+    chainId: 3111,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "Alpha Chain",
+  },
+  {
+    name: "Edge",
+    infoURL: "https://www.edgex.exchange",
+    chainId: 3343,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
     name: "Astar zkEVM",
     infoURL: "https://astar.network",
     chainId: 3776,
@@ -979,6 +1001,28 @@ const chains = [
     chain: "Muster",
   },
   {
+    name: "RISE",
+    infoURL: "https://risechain.com",
+    chainId: 4153,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
+    name: "MegaETH Mainnet",
+    infoURL: "https://megaeth.com",
+    chainId: 4326,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
     name: "OEV Network",
     infoURL: "https://api3.org/oev/",
     chainId: 4913,
@@ -1021,17 +1065,6 @@ const chains = [
       decimals: 18,
     },
     chain: "Ham",
-  },
-  {
-    name: "Seismic devnet",
-    infoURL: "https://seismic.systems",
-    chainId: 5124,
-    nativeCurrency: {
-      name: "Seismic Ether",
-      symbol: "ETH",
-      decimals: 18,
-    },
-    chain: "Seismic",
   },
   {
     name: "Superseed",
@@ -1309,6 +1342,17 @@ const chains = [
     chain: "Everclear Mainnet",
   },
   {
+    name: "Horizen Mainnet",
+    infoURL: "https://horizen.hub.caldera.xyz",
+    chainId: 26514,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "horizen",
+  },
+  {
     name: "Vizing Mainnet",
     infoURL: "https://vizing.com",
     chainId: 28518,
@@ -1318,6 +1362,17 @@ const chains = [
       decimals: 18,
     },
     chain: "Vizing Mainnet",
+  },
+  {
+    name: "Ethiq",
+    infoURL: "https://www.ethiq.network",
+    chainId: 30303,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
   },
   {
     name: "Ethersocial Network",
@@ -1419,6 +1474,17 @@ const chains = [
     chain: "ETH",
   },
   {
+    name: "Billions",
+    infoURL: "https://billions.network",
+    chainId: 45056,
+    nativeCurrency: {
+      name: "ETHER",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "Billions",
+  },
+  {
     name: "Blessnet",
     infoURL: "https://blessnet.io",
     chainId: 45513,
@@ -1461,6 +1527,17 @@ const chains = [
       decimals: 18,
     },
     chain: "ETH",
+  },
+  {
+    name: "Memento Mainnet",
+    infoURL: "",
+    chainId: 51888,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "Memento",
   },
   {
     name: "BirdLayer",
@@ -1639,9 +1716,31 @@ const chains = [
     chain: "ETH",
   },
   {
+    name: "Codex",
+    infoURL: "https://www.codex.xyz/",
+    chainId: 81224,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
     name: "Blast",
     infoURL: "https://blast.io/",
     chainId: 81457,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
+    name: "Cycle Network Mainnet Frigate",
+    infoURL: "https://www.cyclenetwork.io/",
+    chainId: 88688,
     nativeCurrency: {
       name: "Ether",
       symbol: "ETH",
@@ -1694,6 +1793,39 @@ const chains = [
     chain: "ETH",
   },
   {
+    name: "Doma",
+    infoURL: "https://doma.xyz",
+    chainId: 97477,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
+    name: "Nillion Network",
+    infoURL: "https://nillion.com/",
+    chainId: 98875,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
+    name: "Sova",
+    infoURL: "https://sova.io",
+    chainId: 100021,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
     name: "re.al",
     infoURL: "https://re.al",
     chainId: 111188,
@@ -1703,6 +1835,17 @@ const chains = [
       decimals: 18,
     },
     chain: "re.al",
+  },
+  {
+    name: "Ethernova Mainnet",
+    infoURL: "https://ethnova.net",
+    chainId: 121525,
+    nativeCurrency: {
+      name: "Ethernova",
+      symbol: "NOVA",
+      decimals: 18,
+    },
+    chain: "NOVA",
   },
   {
     name: "Eventum Mainnet",
@@ -1727,9 +1870,20 @@ const chains = [
     chain: "ETH",
   },
   {
-    name: "Taiko Hekla",
+    name: "Taiko Hoodi",
     infoURL: "https://taiko.xyz",
-    chainId: 167009,
+    chainId: 167013,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
+    name: "HPP Mainnet",
+    infoURL: "https://www.hpp.io",
+    chainId: 190415,
     nativeCurrency: {
       name: "Ether",
       symbol: "ETH",
@@ -1838,6 +1992,17 @@ const chains = [
     chain: "ETH",
   },
   {
+    name: "Silent Data Mainnet",
+    infoURL: "https://www.silentdata.com",
+    chainId: 380929,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "Silent Data",
+  },
+  {
     name: "Infinaeon",
     infoURL: "hhttps://rpc.infinaeon.com",
     chainId: 420000,
@@ -1915,6 +2080,17 @@ const chains = [
     chain: "Zether",
   },
   {
+    name: "bokuto",
+    infoURL: "https://katana.network",
+    chainId: 737373,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "bokuto",
+  },
+  {
     name: "katana",
     infoURL: "https://katana.network",
     chainId: 747474,
@@ -1929,6 +2105,17 @@ const chains = [
     name: "zkLink Nova Mainnet",
     infoURL: "https://zklink.io",
     chainId: 810180,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
+  },
+  {
+    name: "Testethiq",
+    infoURL: "https://www.ethiq.network",
+    chainId: 853211,
     nativeCurrency: {
       name: "Ether",
       symbol: "ETH",
@@ -2023,6 +2210,17 @@ const chains = [
       decimals: 18,
     },
     chain: "WCal",
+  },
+  {
+    name: "Jovay Mainnet",
+    infoURL: "https://jovay.io",
+    chainId: 5734951,
+    nativeCurrency: {
+      name: "Ether",
+      symbol: "ETH",
+      decimals: 18,
+    },
+    chain: "ETH",
   },
   {
     name: "Astar zKyoto",
